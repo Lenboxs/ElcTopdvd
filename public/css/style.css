@@ -1,0 +1,126 @@
+.header{
+  background: #333;
+  padding: 14px;
+  color: #eee;
+  text-align: center;
+}
+
+.header .navbar-default {
+  background-color: #333;
+  border-color: #d3e0e9;
+  border: 0px;
+  margin-bottom: 0px;
+}
+
+.header .navbar-default .navbar-nav li  a{
+  color: #01b50f;
+}
+
+.header .navbar-default .navbar-brand {
+    color: #FFEB3B;
+}
+
+.register{
+  background: #01b50f;
+  color: #ffffff !important;
+  border-radius: 5px;
+}
+
+.navigation .navbar-default {
+  background-color: #222;
+  border-color: #d3e0e9;
+  border: 0px;
+  margin-bottom: 0px;
+}
+
+.navbar-default .navbar-nav>li>a, .navbar-default .navbar-text {
+    color: #fff;
+}
+
+.navbar-default .navbar-nav>li>a:hover, .navbar-default .navbar-text {
+    color: #ff0;
+}
+
+.content{
+  position: relative;
+}
+
+.content-background {
+  background: url(../img/background-two.jpg);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+.content-overlay {
+  background: #01d0ff54;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+.main-content {
+  position: relative;
+  z-index: 100;
+}
+
+.dvd {
+
+}
+
+.dvd a{
+
+  text-decoration: none;
+}
+.dvd a:hover{
+  color: #ff0;
+  text-decoration: none;
+}
+
+.dvd-name{
+  color: #fff;
+  text-align: center;
+}
+
+.dvd-img{
+  margin: auto;
+  width: 200px;
+  height: 290px;
+}
+
+h1{
+  text-align: center;
+}
+
+.heading{
+  color:#FFEB3B;
+  font-size: 60px;
+  font-family: 'Erica One', cursive;
+}
+
+.footer{
+  background: #333;
+  padding: 20px 0px;
+  color: #eee;
+  text-align: center;
+}
+
+.footer a{
+  color: #01b50f;
+}
+
+.stripes-wrapper {
+  padding: 1rem;
+  margin: 0;
+}
+
+.stripes {
+  color: white;
+  background: repeating-linear-gradient(-26deg, #FFEB3B, #FFEB3B 15px, #4CAF50 15px, #4CAF50 30px);
+}
