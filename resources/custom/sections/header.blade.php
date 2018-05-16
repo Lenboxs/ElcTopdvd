@@ -14,7 +14,7 @@
 
                     <!-- Branding Image -->
                     <a class="navbar-brand" href="{{ url('/') }}">
-                        Top DVD
+                        <img src="{{ asset( 'img/logo.jpg' ) }}" class="logo img-responsive">
                     </a>
                 </div>
 

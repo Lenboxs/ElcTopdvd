@@ -3,6 +3,7 @@
   padding: 14px;
   color: #eee;
   text-align: center;
+  height: 100px;
 }
 
 .header .navbar-default {
@@ -17,7 +18,15 @@
 }
 
 .header .navbar-default .navbar-brand {
-    color: #FFEB3B;
+  color: #FFEB3B;
+}
+
+.navbar-brand {
+    padding: 0px !important;
+}
+
+.logo {
+  max-width: 200px;
 }
 
 .register{

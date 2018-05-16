@@ -31,6 +31,8 @@ Route::get( '/privacy-policy', 'PageController@policy' )->name( 'privacy-policy'
 
 Route::get( '/terms-and-conditions', 'PageController@terms' )->name( 'terms-and-conditions' );
 
+Route::post( '/contact', 'ContactUsController@index' )->name( 'contact' );
+
 Route::get( '/home', function () {
 	return redirect( 'admin' );
 });
