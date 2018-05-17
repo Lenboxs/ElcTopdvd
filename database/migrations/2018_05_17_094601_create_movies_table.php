@@ -13,7 +13,23 @@ class CreateMoviesTable extends Migration
      */
     public function up()
     {
-        //
+      Schema::create('movies', function (Blueprint $table) {
+          $table->increments('id');
+          $table->integer('active')->unsigned();
+          $table->integer('new')->unsigned();
+          $table->string('name')->nullable();
+          $table->text('description');
+          $table->string('image')->nullable();
+          $table->string('trailerLink')->nullable();
+
+          $table->timestamps();
+      });
+
+      Schema::table('movies', function ($table) {
+
+          $table->foreign('active' , 'movie_active_id')->references('id')->on('statuses')->onDelete('cascade')->onUpdate('cascade');
+          $table->foreign('new' , 'movie_new_id')->references('id')->on('statuses')->onDelete('cascade')->onUpdate('cascade');
+      });
     }
 
     /**
@@ -23,6 +39,6 @@ class CreateMoviesTable extends Migration
      */
     public function down()
     {
-        //
+          Schema::dropIfExists('movies');
     }
 }

@@ -13,7 +13,12 @@ class CreateTopHeadlinePageTable extends Migration
      */
     public function up()
     {
-        //
+      Schema::create('top_headline_page', function (Blueprint $table) {
+          $table->increments('id');
+          $table->string('name');
+
+          $table->timestamps();
+      });
     }
 
     /**
@@ -23,6 +28,6 @@ class CreateTopHeadlinePageTable extends Migration
      */
     public function down()
     {
-        //
+          Schema::dropIfExists('top_headline_page');
     }
 }

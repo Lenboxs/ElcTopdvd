@@ -13,7 +13,12 @@ class CreateTopTenPageTable extends Migration
      */
     public function up()
     {
-        //
+      Schema::create('top_ten_page', function (Blueprint $table) {
+          $table->increments('id');
+          $table->string('name');
+
+          $table->timestamps();
+      });
     }
 
     /**
@@ -23,6 +28,6 @@ class CreateTopTenPageTable extends Migration
      */
     public function down()
     {
-        //
+          Schema::dropIfExists('top_ten_page');
     }
 }

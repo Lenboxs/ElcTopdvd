@@ -13,7 +13,14 @@ class CreateStatusesTable extends Migration
      */
     public function up()
     {
-        //
+      Schema::create('statuses', function (Blueprint $table) {
+          $table->increments('id');
+          $table->string('status')->nullable();
+          $table->string('type')->nullable();
+          $table->string('label')->nullable();
+          $table->string('additional')->nullable();
+          $table->timestamps();
+      });
     }
 
     /**
@@ -23,6 +30,6 @@ class CreateStatusesTable extends Migration
      */
     public function down()
     {
-        //
+          Schema::dropIfExists('statuses');
     }
 }

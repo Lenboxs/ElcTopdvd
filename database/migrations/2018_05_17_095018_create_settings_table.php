@@ -13,7 +13,13 @@ class CreateSettingsTable extends Migration
      */
     public function up()
     {
-        //
+      Schema::create('settings', function (Blueprint $table) {
+          $table->increments('id');
+          $table->string('logo');
+
+          $table->timestamps();
+      });
+
     }
 
     /**
@@ -23,6 +29,6 @@ class CreateSettingsTable extends Migration
      */
     public function down()
     {
-        //
+          Schema::dropIfExists('settings');
     }
 }
