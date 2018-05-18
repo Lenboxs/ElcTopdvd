@@ -1,78 +1,67 @@
 <div class="header">
+		<nav class="navbar navbar-default navbar-static-top">
+        <div class="container">
 
-	<nav class="navbar navbar-default navbar-static-top">
-            <div class="container">
-                <div class="navbar-header">
+					<div class="row">
 
-                    <!-- Collapsed Hamburger -->
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
-                        <span class="sr-only">Toggle Navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
+						<div class="col-md-4">
 
-                    <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">
-                        <img src="{{ asset( 'img/logo.jpg' ) }}" class="logo img-responsive">
-                    </a>
-                </div>
+            <div class="navbar-header">
 
-                <div class="collapse navbar-collapse" id="app-navbar-collapse">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="nav navbar-nav">
-                        &nbsp;
-                    </ul>
+                <!-- Collapsed Hamburger -->
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
+                    <span class="sr-only">Toggle Navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
 
-									 <ul class="nav navbar-nav navbar-right">
-												<div class="col-md-3">
-													<form method="get" action="{{ url( 'search' ) }}">
-
-															<div class = "input-group">
-								               <input type="text" name="search" id="search" class="search form-control" />
-
-								               <span class = "input-group-btn">
-								                  <input type="submit" name="submit" value="Search" class="btn btn-primary">
-								               </span>
-
-								            </div><!-- /input-group -->
-
-													</form>
-
-	                  </ul>
-
-
-										{{--
-                    <!-- Right Side Of Navbar -->
-                    <ul class="nav navbar-nav navbar-right">
-                        <!-- Authentication Links -->
-                        @if (Auth::guest())
-                            <li><a href="{{ route('login') }}">Login</a></li>
-                            <li><a href="{{ route('register') }}" class="register">Register</a></li>
-                        @else
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
-
-                                <ul class="dropdown-menu" role="menu">
-                                    <li>
-                                        <a href="{{ route('logout') }}"
-                                            onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                            Logout
-                                        </a>
-
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                            {{ csrf_field() }}
-                                        </form>
-                                    </li>
-                                </ul>
-                            </li>
-                        @endif
-                    </ul>
-										 --}}
-                </div>
+                <!-- Branding Image -->
+                <a class="navbar-brand" href="{{ url('/') }}">
+                    <img src="{{ asset( 'img/logo.jpg' ) }}" class="logo img-responsive" />
+                </a>
             </div>
-        </nav>
+
+					</div>
+
+					<div class="col-md-4">
+
+            <div class="collapse navbar-collapse" id="app-navbar-collapse">
+
+							 <ul class="nav navbar-nav navbar-right">
+										<form method="get" action="{{ url( 'search' ) }}">
+
+												<div class = "input-group">
+					               <input type="text" name="search" id="search" class="search form-control" />
+
+					               <span class = "input-group-btn">
+					                  <input type="submit" name="submit" value="Search" class="btn btn-primary search-btn">
+					               </span>
+
+					            </div><!-- /input-group -->
+
+										</form>
+                </ul>
+
+            </div>
+
+						</div>
+
+						<div class="col-md-4">
+
+							<div class="collapse navbar-collapse" id="app-navbar-collapse">
+
+								 <ul class="nav navbar-nav navbar-right">
+											<!-- Authentication Links -->
+											<li><a href="{{ route('login') }}">Login</a></li>
+											<li><a href="{{ route('register') }}" class="register">Register</a></li>
+									</ul>
+
+							</div>
+
+							</div>
+
+						</div>
+        </div>
+		</nav>
 </div>

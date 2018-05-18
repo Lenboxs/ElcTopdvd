@@ -53,7 +53,9 @@ class PageController extends Controller
      */
 	  public function movie( $name )
     {
-        return view( 'pages.movie' );
+        $title = str_replace( "-", " ", title_case( $name ) );
+
+        return view( 'pages.movie' )->withTitle( $title )->withName( $title );
     }
 
     /**
