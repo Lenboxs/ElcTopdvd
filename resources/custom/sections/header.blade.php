@@ -24,6 +24,25 @@
                         &nbsp;
                     </ul>
 
+									 <ul class="nav navbar-nav navbar-right">
+												<div class="col-md-3">
+													<form method="get" action="{{ url( 'search' ) }}">
+
+															<div class = "input-group">
+								               <input type="text" name="search" id="search" class="search form-control" />
+
+								               <span class = "input-group-btn">
+								                  <input type="submit" name="submit" value="Search" class="btn btn-primary">
+								               </span>
+
+								            </div><!-- /input-group -->
+
+													</form>
+
+	                  </ul>
+
+
+										{{--
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
@@ -52,6 +71,7 @@
                             </li>
                         @endif
                     </ul>
+										 --}}
                 </div>
             </div>
         </nav>

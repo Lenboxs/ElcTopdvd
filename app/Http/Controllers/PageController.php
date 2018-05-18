@@ -16,37 +16,57 @@ class PageController extends Controller
 
     }
 
-	/**
+	  /**
      * Show the new releases.
      *
      * @return \Illuminate\Http\Response
      */
-	public function top()
+	  public function top()
     {
         return view( 'pages.top-10' );
     }
 
-	/**
+	  /**
      * Show the new releases.
      *
      * @return \Illuminate\Http\Response
      */
-	public function headlines()
+	  public function headlines()
     {
         return view( 'pages.top-headlines' );
     }
 
-	/**
-     * Show the new releases.
+    /**
+      * Show movies page.
+      *
+      * @return \Illuminate\Http\Response
+      */
+ 	  public function movies()
+     {
+         return view( 'pages.movies' );
+     }
+
+	 /**
+     * Show movie page.
      *
      * @return \Illuminate\Http\Response
      */
-	public function newreleases()
+	  public function movie( $name )
     {
-        return view( 'pages.new-releases' );
+        return view( 'pages.movie' );
     }
 
-	/**
+    /**
+      * Show series page.
+      *
+      * @return \Illuminate\Http\Response
+      */
+     public function series( $name )
+     {
+         return view( 'pages.series' );
+     }
+
+	  /**
      * Show the contact us page.
      *
      * @return \Illuminate\Http\Response
@@ -60,7 +80,7 @@ class PageController extends Controller
     {
         return view( 'pages.terms' );
     }
-    
+
     public function policy()
     {
         return view( 'pages.policy' );
