@@ -17,6 +17,8 @@ Auth::routes();
 
 Route::get( '/admin', 'Admin\HomeController@index' )->name( 'admin' );
 
+Route::get( '/admin/home-page', 'Admin\HomeController@homePage' )->name( 'home-page' );
+
 Route::get( '/admin/add-movie', 'Admin\HomeController@addMovie' )->name( 'add-movie' );
 
 Route::get( '/admin/movies', 'Admin\HomeController@movies' )->name( 'movies' );
@@ -24,6 +26,10 @@ Route::get( '/admin/movies', 'Admin\HomeController@movies' )->name( 'movies' );
 Route::get( '/admin/add-series', 'Admin\HomeController@addSeries' )->name( 'add-series' );
 
 Route::get( '/admin/series', 'Admin\HomeController@series' )->name( 'series' );
+
+Route::get( '/admin/users', 'Admin\HomeController@users' )->name( 'users' );
+
+Route::get( '/admin/edit-user/{id}', 'Admin\HomeController@editUser' )->name( 'edit-user' );
 
 Route::get( '/admin/settings', 'Admin\HomeController@settings' )->name( 'settings' );
 

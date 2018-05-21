@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Collection;
+
+use App\User;
 
 class HomeController extends Controller
 {
@@ -26,7 +29,43 @@ class HomeController extends Controller
     {
         $title = "Admin Dashboard";
 
-        return view( 'admin.index' )->withTitle( $title );
+        $users = User::all();
+
+        $admins = new Collection();
+
+        foreach( $users as $user )
+        {
+           if( $user->isAdmin() )
+           {
+              $admins->concat($user);
+           }
+        }
+
+        return view( 'admin.index' )->withTitle( $title )->withUsers( $users )->withAdmins( $admins );
+    }
+
+    /**
+     * Edit home page.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function homePage()
+    {
+        $title = "Manage Home Page";
+
+        return view( 'admin.pages.home' )->withTitle( $title );
+    }
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function addMovie()
+    {
+        $title = "Add New Movie";
+
+        return view( 'admin.movies.add' )->withTitle( $title );
     }
 
     /**
@@ -39,6 +78,18 @@ class HomeController extends Controller
         $title = "Manage Movies";
 
         return view( 'admin.movies.movies' )->withTitle( $title );
+    }
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function addSeries()
+    {
+        $title = "Add New Series";
+
+        return view( 'admin.series.add' )->withTitle( $title );
     }
 
     /**
@@ -75,6 +126,34 @@ class HomeController extends Controller
         $title = "Manage Branches";
 
         return view( 'admin.branches.branches' )->withTitle( $title );
+    }
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function users()
+    {
+        $title = "Manage Users";
+
+        $users = User::all();
+
+        return view( 'admin.users.users' )->withTitle( $title )->withUsers( $users );
+    }
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function editUser( $id )
+    {
+        $title = "Edit User";
+
+        $user = User::find( $id );
+
+        return view( 'admin.users.edit' )->withTitle( $title )->withUser( $user );
     }
 
     /**

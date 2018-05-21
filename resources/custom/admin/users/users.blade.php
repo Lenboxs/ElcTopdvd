@@ -18,44 +18,31 @@
 
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">All Series</h3>
+              <h3 class="box-title">All Users</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                  <th>Active</th>
                   <th>Name</th>
-                  <th>Season</th>
+                  <th>Email</th>
                   <th>Action</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                  <td><h4><span class="label label-success">Active</span></h4></td>
-                  <td>Game of Thrones</td>
-                  <td>4</td>
-                  <td>
-                    <a href="{{ url( 'admin/edit-series' ) }}" class="btn btn-warning btn-sm">Edit</a>
-                    <a href="{{ url( 'admin/delete-series/1' ) }}" class="btn btn-sm btn-danger">Delete</a>
-                  </td>
-                </tr>
-                <tr>
-                  <td><h4><span class="label label-danger">Not Active</span></h4></td>
-                  <td>Game of Thrones</td>
-                  <td>3</td>
-                  <td>
-                    <a href="{{ url( 'admin/edit-series' ) }}" class="btn btn-warning btn-sm">Edit</a>
-                    <a href="{{ url( 'admin/delete-series/1' ) }}" class="btn btn-sm btn-danger">Delete</a>
-                  </td>
-                </tr>
+                  @foreach( $users as $user )
+                    <tr>
+                      <td>@if( !empty( $user ) && !empty( $user->name ) ) {{ $user->name }} @endif</td>
+                      <td>@if( !empty( $user ) && !empty( $user->email ) ) {{ $user->email }} @endif</td>
+                      <td><a href="{{ url( 'admin/edit-user/' . $user->id ) }}" class="btn btn-warning btn-sm">Edit</a> <a href="{{ url( 'admin/delete-user/' . $user->id ) }}" class="btn btn-sm btn-danger">Delete</a></td>
+                    </tr>
+                  @endforeach
                 </tbody>
                 <tfoot>
                 <tr>
-                  <th>Active</th>
                   <th>Name</th>
-                  <th>Season</th>
+                  <th>Email</th>
                   <th>Action</th>
                 </tr>
                 </tfoot>
