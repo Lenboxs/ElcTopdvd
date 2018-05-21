@@ -17,7 +17,7 @@
 
     <div class="box box-primary">
       <div class="box-header with-border">
-        <h3 class="box-title"> <i class="fa fa-cog"></i> Settings</h3>
+        <h3 class="box-title"> <i class="fa fa-cog"></i> Manage Home Page</h3>
       </div>
       <!-- /.box-header -->
       <!-- form start -->

@@ -19,9 +19,36 @@
             <!-- /.box-header -->
             <div class="box-body">
               <form role="form" method="POST" enctype="multipart/form-data">
+
+                <div class="form-group {{ $errors->has( 'active' ) ? ' has-error' : '' }}">
+                   <label for="active" class="control-label">Active</label>
+                   <div class="switch" data-toggle="switch">
+                       <label>Off <input type="checkbox" name="active" class="active" id="active" /><span class="toggle"></span> On</label>
+                   </div>
+
+                   @if ( $errors->has( 'active' ) )
+                       <span class="help-block">
+                           <strong>{{ $errors->first( 'active' ) }}</strong>
+                       </span>
+                   @endif
+                </div>
+
+                <div class="form-group {{ $errors->has( 'new' ) ? ' has-error' : '' }}">
+                   <label for="new" class="control-label">New</label>
+                   <div class="switch" data-toggle="switch">
+                       <label>Off <input type="checkbox" name="new" class="new" id="new" /><span class="toggle"></span> On</label>
+                   </div>
+
+                   @if ( $errors->has( 'new' ) )
+                       <span class="help-block">
+                           <strong>{{ $errors->first( 'new' ) }}</strong>
+                       </span>
+                   @endif
+                </div>
+
                 <!-- text input -->
                 <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                    <label for="name" class="control-label">Name</label>
+                    <label for="name" class="control-label">Name:</label>
 
                     <input id="name" type="name" class="form-control" name="name" required>
 
@@ -32,49 +59,49 @@
                     @endif
                 </div>
 
-                <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                    <label for="email" class="control-label">Email:</label>
+                <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
+                    <label for="description" class="control-label">Description:</label>
 
-                    <input id="email" type="email" class="form-control" name="email" required>
+                    <textarea id="description" class="form-control" rows="5" name="description"></textarea>
 
-                    @if ($errors->has('email'))
+                    @if ($errors->has('description'))
                         <span class="help-block">
-                            <strong>{{ $errors->first('email') }}</strong>
+                            <strong>{{ $errors->first('description') }}</strong>
                         </span>
                     @endif
                 </div>
 
-                <div class="form-group{{ $errors->has('contact-number') ? ' has-error' : '' }}">
-                    <label for="contact-number" class="control-label">Contact Number:</label>
+                <div class="form-group{{ $errors->has('image') ? ' has-error' : '' }}">
+                    <label for="image" class="control-label">Image:</label>
 
-                    <input id="contact-number" type="text" class="form-control" name="contact-number" required>
+                    <div class="file"><input class="form-control" type="file" name="image" id="image" /></div>
 
-                    @if ($errors->has('contact-number'))
+                    @if ($errors->has('image'))
                         <span class="help-block">
-                            <strong>{{ $errors->first('contact-number') }}</strong>
+                            <strong>{{ $errors->first('image') }}</strong>
                         </span>
                     @endif
                 </div>
 
-                <div class="form-group{{ $errors->has('address') ? ' has-error' : '' }}">
-                    <label for="address" class="control-label">Physical Address:</label>
+                <div class="form-group{{ $errors->has('trailerLink') ? ' has-error' : '' }}">
+                    <label for="trailerLink" class="control-label">Trailer Link:</label>
 
-                    <textarea id="address" class="form-control" rows="5" name="address"></textarea>
+                    <input type="text" id="trailerLink" class="form-control" rows="5" name="trailerLink" />
 
-                    @if ($errors->has('address'))
+                    @if ($errors->has('trailerLink'))
                         <span class="help-block">
-                            <strong>{{ $errors->first('address') }}</strong>
+                            <strong>{{ $errors->first('trailerLink') }}</strong>
                         </span>
                     @endif
                 </div>
 
-              </form>
             </div>
             <!-- /.box-body -->
             <div class="box-footer">
                 <button type="submit" class="btn btn-info">Save</button>
               </div>
           </div>
+          </form>
           <!-- /.box -->
         </div>
         <!-- /.col -->

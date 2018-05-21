@@ -19,6 +19,10 @@ Route::get( '/admin', 'Admin\HomeController@index' )->name( 'admin' );
 
 Route::get( '/admin/home-page', 'Admin\HomeController@homePage' )->name( 'home-page' );
 
+Route::get( '/admin/top-ten', 'Admin\HomeController@topTen' )->name( 'top-ten' );
+
+Route::get( '/admin/top-rated', 'Admin\HomeController@topRated' )->name( 'top-rated' );
+
 Route::get( '/admin/add-movie', 'Admin\HomeController@addMovie' )->name( 'add-movie' );
 
 Route::get( '/admin/movies', 'Admin\HomeController@movies' )->name( 'movies' );

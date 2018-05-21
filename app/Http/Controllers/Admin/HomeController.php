@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Collection;
 
+use App\Role;
 use App\User;
 
 class HomeController extends Controller
@@ -54,6 +55,30 @@ class HomeController extends Controller
         $title = "Manage Home Page";
 
         return view( 'admin.pages.home' )->withTitle( $title );
+    }
+
+    /**
+     * Edit home page.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function topTen()
+    {
+        $title = "Manage Top Ten Page";
+
+        return view( 'admin.pages.top-ten' )->withTitle( $title );
+    }
+
+    /**
+     * Edit home page.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function topRated()
+    {
+        $title = "Manage Top Rated Page";
+
+        return view( 'admin.pages.top-rated' )->withTitle( $title );
     }
 
     /**
@@ -153,7 +178,9 @@ class HomeController extends Controller
 
         $user = User::find( $id );
 
-        return view( 'admin.users.edit' )->withTitle( $title )->withUser( $user );
+        $roles = Role::all();
+
+        return view( 'admin.users.edit' )->withTitle( $title )->withUser( $user )->withRoles( $roles );
     }
 
     /**
