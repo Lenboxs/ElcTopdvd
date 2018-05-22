@@ -41,15 +41,33 @@ Route::get( '/admin/delete-movie', 'Admin\MovieController@destroy' )->name( 'del
 
 //adminseries
 
-Route::get( '/admin/add-series', 'Admin\HomeController@addSeries' )->name( 'add-series' );
+Route::get( '/admin/series', 'Admin\SeriesController@index' )->name( 'series' );
 
-Route::get( '/admin/series', 'Admin\HomeController@series' )->name( 'series' );
+Route::get( '/admin/add-series', 'Admin\SeriesController@create' )->name( 'add-series' );
+
+Route::post('/admin/store-series','Admin\SeriesController@store')->name('store-series');
+
+Route::get( '/admin/edit-series', 'Admin\SeriesController@edit' )->name( 'edit-series' );
+
+Route::post('/admin/update-series','Admin\SeriesController@update')->name('update-series');
+
+Route::get( '/admin/delete-series', 'Admin\SeriesController@destroy' )->name( 'delete-series' );
 
 //adminusers
 
-Route::get( '/admin/users', 'Admin\HomeController@users' )->name( 'users' );
+Route::get( '/admin/users', 'Admin\UserController@index' )->name( 'users' );
 
-Route::get( '/admin/edit-user/{id}', 'Admin\HomeController@editUser' )->name( 'edit-user' );
+Route::get( '/admin/add-user', 'Admin\UserController@create' )->name( 'add-user' );
+
+Route::post('/admin/store-user','Admin\UserController@store')->name('store-user');
+
+Route::get( '/admin/edit-user', 'Admin\UserController@edit' )->name( 'edit-user' );
+
+Route::post('/admin/update-user','Admin\UserController@update')->name('update-user');
+
+Route::get( '/admin/delete-user', 'Admin\UserController@destroy' )->name( 'delete-user' );
+
+
 
 //adminsettings
 
@@ -57,10 +75,19 @@ Route::get( '/admin/settings', 'Admin\HomeController@settings' )->name( 'setting
 
 //adminbracnhs
 
-Route::get( '/admin/add-branch', 'Admin\HomeController@addBranch' )->name( 'add-branch' );
+Route::get( '/admin/branches', 'Admin\BranchController@index' )->name( 'branches' );
 
-Route::get( '/admin/branches', 'Admin\HomeController@branches' )->name( 'branches' );
+Route::get( '/admin/add-branch', 'Admin\BranchController@create' )->name( 'add-branch' );
 
+Route::post('/admin/store-branch','Admin\BranchController@store')->name('store-branch');
+
+Route::get( '/admin/edit-branch', 'Admin\BranchController@edit' )->name( 'edit-branch' );
+
+Route::post('/admin/update-branch','Admin\BranchController@update')->name('update-branch');
+
+Route::get( '/admin/delete-branch', 'Admin\BranchController@destroy' )->name( 'delete-branch' );
+
+//-----------------------------------------------------------------------------------------------------------------------------------------
 //homepage
 
 Route::get( '/', 'HomeController@index' )->name( 'home' );
