@@ -31,22 +31,28 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                  <td><h4><span class="label label-success">Active</span></h4></td>
-                  <td>Black Panther</td>
-                  <td>
-                    <a href="{{ url( 'admin/edit-movie' ) }}" class="btn btn-warning btn-sm">Edit</a>
-                    <a href="{{ url( 'admin/delete-movie/1' ) }}" class="btn btn-sm btn-danger">Delete</a>
-                  </td>
-                </tr>
-                <tr>
-                  <td><h4><span class="label label-danger">Not Active</span></h4></td>
-                  <td>The Hils Have Eyes</td>
-                  <td>
-                    <a href="{{ url( 'admin/edit-movie' ) }}" class="btn btn-warning btn-sm">Edit</a>
-                    <a href="{{ url( 'admin/delete-movie/1' ) }}" class="btn btn-sm btn-danger">Delete</a>
-                  </td>
-                </tr>
+
+                  @if( !empty( $movies ) )
+                    @foreach( $movies as $movie )
+
+                      <tr>
+                        <td><h4>
+                          @if( !empty( $movie ) && !empty( $movie->active ) && $movie->active == 1 )
+                              <span class="label label-success">Active</span>
+                          @else
+                              <span class="label label-danger">Not Active</span>
+                          @endif
+                        </h4></td>
+                        <td>{{ ( !empty( $movie ) && !empty( $movie->name ) ) ? $movie->name : '' }}</td>
+                        <td>
+                          <a href="{{ url( 'admin/edit-movie' ) }}" class="btn btn-warning btn-sm">Edit</a>
+                          <a href="{{ url( 'admin/delete-movie/1' ) }}" class="btn btn-sm btn-danger">Delete</a>
+                        </td>
+                      </tr>
+
+                    @endforeach
+                  @endif
+
                 </tbody>
                 <tfoot>
                 <tr>

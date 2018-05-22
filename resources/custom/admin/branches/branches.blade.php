@@ -18,7 +18,7 @@
 
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">All Branches</h3>
+              <h3 class="box-title">{{ !empty( $title ) ? $title : 'All Branches' }}</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -32,24 +32,23 @@
                 </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>Courtenay St</td>
-                    <td>info@topdvd.co.za</td>
-                    <td>083 410 1808</td>
-                    <td><a href="{{ url( 'admin/edit-branch' ) }}" class="btn btn-warning btn-sm">Edit</a> <a href="{{ url( 'admin/delete-branch/1' ) }}" class="btn btn-sm btn-danger">Delete</a></td>
-                  </tr>
-                  <tr>
-                    <td>St. Georges Sq</td>
-                    <td>info@topdvd.co.za</td>
-                    <td>083 296 7545</td>
-                    <td><a href="{{ url( 'admin/edit-branch' ) }}" class="btn btn-warning btn-sm">Edit</a> <a href="{{ url( 'admin/delete-branch/1' ) }}" class="btn btn-sm btn-danger">Delete</a></td>
-                  </tr>
-                  <tr>
-                    <td>Heather Park</td>
-                    <td>info@topdvd.co.za</td>
-                    <td>079 527 2717</td>
-                    <td><a href="{{ url( 'admin/edit-branch' ) }}" class="btn btn-warning btn-sm">Edit</a> <a href="{{ url( 'admin/delete-branch/1' ) }}" class="btn btn-sm btn-danger">Delete</a></td>
-                  </tr>
+
+                  @if( !empty( branches ) )
+                    @foreach( branches as branch )
+
+                      <tr>
+                        <td>{{ ( !empty( $branch ) && !empty($branch->name ) ) ? $branch->name : '' }}</td>
+                        <td>{{ ( !empty( $branch ) && !empty($branch->email ) ) ? $branch->email : '' }}</td>
+                        <td>{{ ( !empty( $branch ) && !empty($branch->contact_number ) ) ? $branch->contact_number : '' }}</td>
+                        <td>
+                          <a href="{{ url( 'admin/edit-branch' ) }}" class="btn btn-warning btn-sm">Edit</a>
+                          <a href="{{ url( 'admin/delete-branch/' . $branch->id ) }}" class="btn btn-sm btn-danger">Delete</a>
+                        </td>
+                      </tr>
+
+                    @endforeach
+                  @endif
+
                 </tbody>
                 <tfoot>
                 <tr>

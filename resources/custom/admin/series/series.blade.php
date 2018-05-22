@@ -18,7 +18,7 @@
 
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">All Series</h3>
+              <h3 class="box-title">{{ !empty( $title ) ? $title : 'All Series' }}</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -32,24 +32,29 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                  <td><h4><span class="label label-success">Active</span></h4></td>
-                  <td>Game of Thrones</td>
-                  <td>4</td>
-                  <td>
-                    <a href="{{ url( 'admin/edit-series' ) }}" class="btn btn-warning btn-sm">Edit</a>
-                    <a href="{{ url( 'admin/delete-series/1' ) }}" class="btn btn-sm btn-danger">Delete</a>
-                  </td>
-                </tr>
-                <tr>
-                  <td><h4><span class="label label-danger">Not Active</span></h4></td>
-                  <td>Game of Thrones</td>
-                  <td>3</td>
-                  <td>
-                    <a href="{{ url( 'admin/edit-series' ) }}" class="btn btn-warning btn-sm">Edit</a>
-                    <a href="{{ url( 'admin/delete-series/1' ) }}" class="btn btn-sm btn-danger">Delete</a>
-                  </td>
-                </tr>
+
+                  @if( !empty( series ) )
+                    @foreach( $series as $serie )
+
+                      <tr>
+                        <td><h4>
+                          @if( !empty( $serie ) && !empty( $serie->active ) && $serie->active == 1 )
+                              <span class="label label-success">Active</span>
+                          @else
+                              <span class="label label-danger">Not Active</span>
+                          @endif
+                        </h4></td>
+                        <td>{{ ( !empty( $serie ) && !empty( $serie->name ) ) ? $serie->name : '' }}</td>
+                        <td>{{ ( !empty( $serie ) && !empty( $serie->season ) ) ? $serie->season : '' }}</td>
+                        <td>
+                          <a href="{{ url( 'admin/edit-series' ) }}" class="btn btn-warning btn-sm">Edit</a>
+                          <a href="{{ url( 'admin/delete-series/' . $serie->id ) }}" class="btn btn-sm btn-danger">Delete</a>
+                        </td>
+                      </tr>
+
+                    @endforeach
+                  @endif
+
                 </tbody>
                 <tfoot>
                 <tr>

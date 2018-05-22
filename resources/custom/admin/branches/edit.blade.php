@@ -14,19 +14,21 @@
           <!-- general form elements disabled -->
           <div class="box box-warning">
             <div class="box-header with-border">
-              <h3 class="box-title">{{ !empty( $title ) ? $title : 'Add New Branch' }}</h3>
+              <h3 class="box-title">{{ !empty( $title ) ? $title : 'Edit Branch' }}</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-              <form role="form" method="POST" action="{{ url( '/admin/store-branch' ) }}">
+              <form role="form" method="POST" action="{{ url( '/admin/update-branch' ) }}">
                 <!-- text input -->
 
                 <input type="hidden" name="_token" value="{{ csrf_token() }}" />
 
+                <input type="hidden" name="id" value="{{ ( !empty( $branch ) && !empty( $branch->id ) ) ? $branch->id : '' }}" />
+
                 <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                     <label for="name" class="control-label">Name</label>
 
-                    <input id="name" type="name" class="form-control" name="name" required>
+                    <input id="name" type="name" class="form-control" name="name" value="{{ ( !empty( $branch ) && !empty( $branch->name ) ) ? $branch->name : '' }}" required>
 
                     @if ($errors->has('name'))
                         <span class="help-block">
@@ -38,7 +40,7 @@
                 <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                     <label for="email" class="control-label">Email:</label>
 
-                    <input id="email" type="email" class="form-control" name="email" required>
+                    <input id="email" type="email" class="form-control" name="email" value="{{ ( !empty( $branch ) && !empty( $branch->email ) ) ? $branch->email : '' }}" required>
 
                     @if ($errors->has('email'))
                         <span class="help-block">
@@ -50,7 +52,7 @@
                 <div class="form-group{{ $errors->has('contact_number') ? ' has-error' : '' }}">
                     <label for="contact_number" class="control-label">Contact Number:</label>
 
-                    <input id="contact_number" type="text" class="form-control" name="contact_number" required>
+                    <input id="contact_number" type="text" class="form-control" name="contact_number" value="{{ ( !empty( $branch ) && !empty( $branch->contact_number ) ) ? $branch->contact_number : '' }}" required>
 
                     @if ($errors->has('contact_number'))
                         <span class="help-block">
@@ -62,7 +64,7 @@
                 <div class="form-group{{ $errors->has('address') ? ' has-error' : '' }}">
                     <label for="address" class="control-label">Physical Address:</label>
 
-                    <textarea id="address" class="form-control" rows="5" name="address"></textarea>
+                    <textarea id="address" class="form-control" rows="5" name="address">{{ ( !empty( $branch ) && !empty( $branch->address ) ) ? $branch->address : '' }}</textarea>
 
                     @if ($errors->has('address'))
                         <span class="help-block">
@@ -71,13 +73,12 @@
                     @endif
                 </div>
 
-
+              </form>
             </div>
             <!-- /.box-body -->
             <div class="box-footer">
                 <button type="submit" class="btn btn-info">Save</button>
-            </div>
-            </form>
+              </div>
           </div>
           <!-- /.box -->
         </div>

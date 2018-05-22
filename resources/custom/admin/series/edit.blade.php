@@ -14,13 +14,15 @@
           <!-- general form elements disabled -->
           <div class="box box-warning">
             <div class="box-header with-border">
-              <h3 class="box-title">{{ !empty( $title ) ? $title : 'Add New Movie' }}</h3>
+              <h3 class="box-title">{{ !empty( $title ) ? $title : 'Edit Series' }}</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-              <form role="form" method="POST" action="{{ url( '/admin/store-movie' ) }}" enctype="multipart/form-data">
+              <form role="form" method="POST" action="{{ url( '/admin/update-series' ) }}" enctype="multipart/form-data">
 
                 <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+
+                <input type="hidden" name="id" value="{{ ( !empty( $series ) && !empty( $series->id ) ) ? $series->id : '' }}" />
 
                 <div class="form-group {{ $errors->has( 'active' ) ? ' has-error' : '' }}">
                    <label for="active" class="control-label">Active</label>
@@ -52,7 +54,7 @@
                 <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                     <label for="name" class="control-label">Name:</label>
 
-                    <input id="name" type="name" class="form-control" name="name" required>
+                    <input id="name" type="name" class="form-control" name="name" value="{{ ( !empty( $series ) && !empty( $series->name ) ) ? $series->name : '' }}" required>
 
                     @if ($errors->has('name'))
                         <span class="help-block">
@@ -64,7 +66,7 @@
                 <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
                     <label for="description" class="control-label">Description:</label>
 
-                    <textarea id="description" class="form-control" rows="5" name="description"></textarea>
+                    <textarea id="description" class="form-control" rows="5" name="description">{{ ( !empty( $series ) && !empty( $series->description ) ) ? $series->description : '' }}</textarea>
 
                     @if ($errors->has('description'))
                         <span class="help-block">
@@ -88,11 +90,28 @@
                 <div class="form-group{{ $errors->has('trailerLink') ? ' has-error' : '' }}">
                     <label for="trailerLink" class="control-label">Trailer Link:</label>
 
-                    <input type="text" id="trailerLink" class="form-control" rows="5" name="trailerLink" />
+                    <input type="text" id="trailerLink" class="form-control" rows="5" value="{{ ( !empty( $series ) && !empty( $series->trailerLink ) ) ? $series->trailerLink : '' }}" name="trailerLink" />
 
                     @if ($errors->has('trailerLink'))
                         <span class="help-block">
                             <strong>{{ $errors->first('trailerLink') }}</strong>
+                        </span>
+                    @endif
+                </div>
+
+                <div class="form-group{{ $errors->has('season') ? ' has-error' : '' }}">
+                    <label for="season" class="control-label">Season:</label>
+
+                    <select id="season" class="form-control" rows="5" name="season" required>
+                      <option value="">Select a Season</option>
+                      @for( $i=1; $i<=30; $i++ )
+                        <option value="{{ $i }}" {{ ( !empty( $series ) && !empty( $series->season ) && $series->season == $i ) ? 'selected' : '' }}>{{ $i }}</option>
+                      @endfor
+                    </select>
+
+                    @if ($errors->has('season'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('season') }}</strong>
                         </span>
                     @endif
                 </div>
