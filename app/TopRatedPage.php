@@ -4,15 +4,15 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class TopHeadlinesPage extends Model
+class TopRatedPage extends Model
 {
   /**
    * The table associated with the model.
    *
    * @var string
    */
-  protected $table = 'top_headline_page';
-  
+  protected $table = 'top_rated_page';
+
   public function movies()
     {
         return $this->hasMany('App\Movie');

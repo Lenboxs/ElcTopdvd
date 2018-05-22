@@ -18,8 +18,8 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-              <form role="form" method="POST" enctype="multipart/form-data">
-
+              <form role="form" method="POST" action="{{ url( '/admin/store-movie' ) }}" enctype="multipart/form-data">
+                <input type="hidden" name="_token" value="{{ csrf_token() }}" />
                 <div class="form-group {{ $errors->has( 'active' ) ? ' has-error' : '' }}">
                    <label for="active" class="control-label">Active</label>
                    <div class="switch" data-toggle="switch">

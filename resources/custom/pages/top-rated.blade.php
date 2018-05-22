@@ -2,6 +2,8 @@
 
 @section( 'content' )
 
-<h1>Top Headlines</h1>
+<h1>Top Rated</h1>
+
+{{ $title }}
 
 @endsection

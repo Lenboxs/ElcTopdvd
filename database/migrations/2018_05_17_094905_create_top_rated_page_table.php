@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTopHeadlinePageTable extends Migration
+class CreateTopRatedPageTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateTopHeadlinePageTable extends Migration
      */
     public function up()
     {
-      Schema::create('top_headline_page', function (Blueprint $table) {
+      Schema::create('top_rated_page', function (Blueprint $table) {
           $table->increments('id');
           $table->string('name');
 
@@ -28,6 +28,6 @@ class CreateTopHeadlinePageTable extends Migration
      */
     public function down()
     {
-          Schema::dropIfExists('top_headline_page');
+          Schema::dropIfExists('top_rated_page');
     }
 }
