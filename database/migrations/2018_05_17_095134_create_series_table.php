@@ -17,7 +17,8 @@ class CreateSeriesTable extends Migration
         $table->increments('id');
         $table->integer('active')->unsigned();
         $table->integer('new')->unsigned();
-        $table->string('name');
+        $table->string('name')->nullable();
+        $table->string('slug')->nullable();
         $table->text('description');
         $table->string('image');
         $table->string('trailerLink');

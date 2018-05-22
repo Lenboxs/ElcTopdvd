@@ -18,6 +18,7 @@ class CreateMoviesTable extends Migration
           $table->integer('active')->unsigned();
           $table->integer('new')->unsigned();
           $table->string('name')->nullable();
+          $table->string('slug')->nullable();
           $table->text('description');
           $table->string('image')->nullable();
           $table->string('trailerLink')->nullable();

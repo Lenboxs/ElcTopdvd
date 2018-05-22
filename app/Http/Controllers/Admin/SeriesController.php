@@ -45,6 +45,7 @@ class SeriesController extends Controller
       $series->active= !empty($request->input('active')) ? 1 : 2;
       $series->new = !empty($request->input('new')) ? 1 : 2;
       $series->name = !empty($request->input('name')) ? $request->input('name') : '';
+      $series->slug = !empty($request->input('name')) ? slug($request->input('name')) : '';
       $series->description = !empty($request->input('description')) ? $request->input('description') : '';
       $series->image = !empty($request->input('image')) ? $request->input('image') : '';
       $series->trailerLink = !empty($request->input('trailerLink')) ? $request->input('trailerLink') : '';
@@ -93,6 +94,7 @@ class SeriesController extends Controller
       $series->active= !empty($request->input('active')) ? 1 : 2;
       $series->new = !empty($request->input('new')) ? 1 : 2;
       $series->name = !empty($request->input('name')) ? $request->input('name') : '';
+      $series->slug = !empty($request->input('name')) ? slug($request->input('name')) : '';
       $series->description = !empty($request->input('description')) ? $request->input('description') : '';
       $series->image = !empty($request->input('image')) ? $request->input('image') : '';
       $series->trailerLink = !empty($request->input('trailerLink')) ? $request->input('trailerLink') : '';
