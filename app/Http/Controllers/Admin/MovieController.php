@@ -86,9 +86,9 @@ class MovieController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-      $movie = Movie::find($id);
+      $movie = Movie::find($request->input('id'));
 
       $movie->active= !empty($request->input('active')) ? 1 : 2;
       $movie->new = !empty($request->input('new')) ? 1 : 2;

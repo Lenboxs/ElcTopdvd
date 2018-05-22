@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Series;
 
 class SeriesController extends Controller
 {
@@ -14,7 +15,9 @@ class SeriesController extends Controller
      */
     public function index()
     {
-        //
+      $series = Series::all();
+      $title = 'Manage Series';
+      return view('admin.series.series')->withSeries($series)->withTitle($title);
     }
 
     /**
@@ -24,7 +27,9 @@ class SeriesController extends Controller
      */
     public function create()
     {
-        //
+      $title = "Add New Series";
+
+      return view( 'admin.series.add' )->withTitle( $title );
     }
 
     /**
@@ -35,7 +40,19 @@ class SeriesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      $series = new Series();
+
+      $series->active= !empty($request->input('active')) ? 1 : 2;
+      $series->new = !empty($request->input('new')) ? 1 : 2;
+      $series->name = !empty($request->input('name')) ? $request->input('name') : '';
+      $series->description = !empty($request->input('description')) ? $request->input('description') : '';
+      $series->image = !empty($request->input('image')) ? $request->input('image') : '';
+      $series->trailerLink = !empty($request->input('trailerLink')) ? $request->input('trailerLink') : '';
+      $series->season = !empty($request->input('season')) ? $request->input('season') : '';
+
+      $series->save();
+
+      return redirect('admin/add-series');
     }
 
     /**
@@ -57,7 +74,9 @@ class SeriesController extends Controller
      */
     public function edit($id)
     {
-        //
+      $title = "Edit Series";
+
+      return view( 'admin.series.edit' )->withTitle( $title );
     }
 
     /**
@@ -67,9 +86,21 @@ class SeriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+      $series = Series::find($request->input('id'));
+
+      $series->active= !empty($request->input('active')) ? 1 : 2;
+      $series->new = !empty($request->input('new')) ? 1 : 2;
+      $series->name = !empty($request->input('name')) ? $request->input('name') : '';
+      $series->description = !empty($request->input('description')) ? $request->input('description') : '';
+      $series->image = !empty($request->input('image')) ? $request->input('image') : '';
+      $series->trailerLink = !empty($request->input('trailerLink')) ? $request->input('trailerLink') : '';
+      $series->season = !empty($request->input('season')) ? $request->input('season') : '';
+
+      $series->save();
+
+      return redirect('admin/series');
     }
 
     /**
@@ -80,6 +111,10 @@ class SeriesController extends Controller
      */
     public function destroy($id)
     {
-        //
+      $series = Series::find($id);
+
+      $series->delete();
+
+      return redirect('admin/series');
     }
 }
