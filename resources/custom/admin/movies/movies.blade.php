@@ -45,8 +45,8 @@
                         </h4></td>
                         <td>{{ ( !empty( $movie ) && !empty( $movie->name ) ) ? $movie->name : '' }}</td>
                         <td>
-                          <a href="{{ url( 'admin/edit-movie' ) }}" class="btn btn-warning btn-sm">Edit</a>
-                          <a href="{{ url( 'admin/delete-movie/1' ) }}" class="btn btn-sm btn-danger">Delete</a>
+                          <a href="{{ url( 'admin/edit-movie/' . $movie->id ) }}" class="btn btn-warning btn-sm">Edit</a>
+                          <a href="{{ url( 'admin/delete-movie/' . $movie->id ) }}" class="btn btn-sm btn-danger">Delete</a>
                         </td>
                       </tr>
 

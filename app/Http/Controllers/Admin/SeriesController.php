@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Helpers\UploadService;
+
 use App\Series;
 
 class SeriesController extends Controller
@@ -38,15 +40,16 @@ class SeriesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store( Request $request, UploadService $uploadService )
     {
       $series = new Series();
 
       $series->active= !empty($request->input('active')) ? 1 : 2;
       $series->new = !empty($request->input('new')) ? 1 : 2;
       $series->name = !empty($request->input('name')) ? $request->input('name') : '';
+      $series->slug = !empty($request->input('name')) ? str_slug( $request->input('name') ) : '';
       $series->description = !empty($request->input('description')) ? $request->input('description') : '';
-      $series->image = !empty($request->input('image')) ? $request->input('image') : '';
+      $series->image = $this->upload( 'image', $request, $uploadService );
       $series->trailerLink = !empty($request->input('trailerLink')) ? $request->input('trailerLink') : '';
       $series->season = !empty($request->input('season')) ? $request->input('season') : '';
 
@@ -86,15 +89,16 @@ class SeriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request, UploadService $uploadService )
     {
       $series = Series::find($request->input('id'));
 
       $series->active= !empty($request->input('active')) ? 1 : 2;
       $series->new = !empty($request->input('new')) ? 1 : 2;
       $series->name = !empty($request->input('name')) ? $request->input('name') : '';
+      $series->slug = !empty($request->input('name')) ? str_slug( $request->input('name') ) : '';
       $series->description = !empty($request->input('description')) ? $request->input('description') : '';
-      $series->image = !empty($request->input('image')) ? $request->input('image') : '';
+      $series->image = $this->upload( 'image', $request, $uploadService );
       $series->trailerLink = !empty($request->input('trailerLink')) ? $request->input('trailerLink') : '';
       $series->season = !empty($request->input('season')) ? $request->input('season') : '';
 
@@ -116,5 +120,22 @@ class SeriesController extends Controller
       $series->delete();
 
       return redirect('admin/series');
+    }
+
+    public function upload( $input, $request, $uploadService )
+    {
+        if( !empty( $request->file( $input ) ) )
+        {
+            if( $uploadService->setRequest( $request )->setFilename( $input )->setUploadDirectory( 'img/series' )->move() )
+            {
+              return $uploadService->getTargetFile();
+            }
+
+            $this->status = $this->status && $uploadService->successful();
+        }
+        elseif( $request->input( 'remove_' . $input ) == 'true' )
+        {
+             return '';
+        }
     }
 }

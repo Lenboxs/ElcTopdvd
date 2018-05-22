@@ -33,11 +33,11 @@ Route::get( '/admin/add-movie', 'Admin\MovieController@create' )->name( 'add-mov
 
 Route::post('/admin/store-movie','Admin\MovieController@store')->name('store-movie');
 
-Route::get( '/admin/edit-movie', 'Admin\MovieController@edit' )->name( 'edit-movie' );
+Route::get( '/admin/edit-movie/{id}', 'Admin\MovieController@edit' )->name( 'edit-movie' );
 
 Route::post('/admin/update-movie','Admin\MovieController@update')->name('update-movie');
 
-Route::get( '/admin/delete-movie', 'Admin\MovieController@destroy' )->name( 'delete-movie' );
+Route::get( '/admin/delete-movie/{id}', 'Admin\MovieController@destroy' )->name( 'delete-movie' );
 
 //adminseries
 
@@ -47,11 +47,11 @@ Route::get( '/admin/add-series', 'Admin\SeriesController@create' )->name( 'add-s
 
 Route::post('/admin/store-series','Admin\SeriesController@store')->name('store-series');
 
-Route::get( '/admin/edit-series', 'Admin\SeriesController@edit' )->name( 'edit-series' );
+Route::get( '/admin/edit-series/{id}', 'Admin\SeriesController@edit' )->name( 'edit-series' );
 
 Route::post('/admin/update-series','Admin\SeriesController@update')->name('update-series');
 
-Route::get( '/admin/delete-series', 'Admin\SeriesController@destroy' )->name( 'delete-series' );
+Route::get( '/admin/delete-series/{id}', 'Admin\SeriesController@destroy' )->name( 'delete-series' );
 
 //adminusers
 
@@ -61,11 +61,11 @@ Route::get( '/admin/add-user', 'Admin\UserController@create' )->name( 'add-user'
 
 Route::post('/admin/store-user','Admin\UserController@store')->name('store-user');
 
-Route::get( '/admin/edit-user', 'Admin\UserController@edit' )->name( 'edit-user' );
+Route::get( '/admin/edit-user/{id}', 'Admin\UserController@edit' )->name( 'edit-user' );
 
 Route::post('/admin/update-user','Admin\UserController@update')->name('update-user');
 
-Route::get( '/admin/delete-user', 'Admin\UserController@destroy' )->name( 'delete-user' );
+Route::get( '/admin/delete-user/{id}', 'Admin\UserController@destroy' )->name( 'delete-user' );
 
 
 

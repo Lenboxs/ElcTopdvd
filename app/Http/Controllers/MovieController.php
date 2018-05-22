@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Movie;
+
 class MovieController extends Controller
 {
       public function movies()
@@ -11,10 +13,10 @@ class MovieController extends Controller
            return view( 'pages.movies' );
        }
 
-     public function movie( $name )
+     public function movie( $slug )
       {
-          $title = str_replace( "-", " ", title_case( $name ) );
+          $movie = Movie::where( 'slug', $slug )->orderBy( 'id', 'desc' )->first();
 
-          return view( 'pages.movie' )->withTitle( $title )->withName( $title );
+          return view( 'pages.movie' )->withMovie( $movie );
       }
 }

@@ -27,7 +27,7 @@
                 <div class="form-group {{ $errors->has( 'active' ) ? ' has-error' : '' }}">
                    <label for="active" class="control-label">Active</label>
                    <div class="switch" data-toggle="switch">
-                       <label>Off <input type="checkbox" name="active" class="active" id="active" /><span class="toggle"></span> On</label>
+                       <label>Off <input type="checkbox" name="active" class="active" id="active" {{ ( !empty( $movie ) && !empty( $movie->active ) && ( $movie->active == 1 ) ) ? 'checked' : '' }} /><span class="toggle"></span> On</label>
                    </div>
 
                    @if ( $errors->has( 'active' ) )
@@ -40,7 +40,7 @@
                 <div class="form-group {{ $errors->has( 'new' ) ? ' has-error' : '' }}">
                    <label for="new" class="control-label">New</label>
                    <div class="switch" data-toggle="switch">
-                       <label>Off <input type="checkbox" name="new" class="new" id="new" /><span class="toggle"></span> On</label>
+                       <label>Off <input type="checkbox" name="new" class="new" id="new" {{ ( !empty( $movie ) && !empty( $movie->new ) && ( $movie->new == 1 ) ) ? 'checked' : '' }} /><span class="toggle"></span> On</label>
                    </div>
 
                    @if ( $errors->has( 'new' ) )
