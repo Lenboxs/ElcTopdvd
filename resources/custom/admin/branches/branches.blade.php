@@ -33,8 +33,8 @@
                 </thead>
                 <tbody>
 
-                  @if( !empty( branches ) )
-                    @foreach( branches as branch )
+                  @if( !empty( $branches ) )
+                    @foreach( $branches as $branch )
 
                       <tr>
                         <td>{{ ( !empty( $branch ) && !empty($branch->name ) ) ? $branch->name : '' }}</td>

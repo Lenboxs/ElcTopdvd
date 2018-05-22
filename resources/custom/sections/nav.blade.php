@@ -23,15 +23,11 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav">
                         <!-- Authentication Links -->
-                        @if (Auth::guest())
-                            <li><a href="{{ route( 'home' ) }}">Home</a></li>
-							              <li><a href="{{ route( 'top-10' ) }}">Top 10 Movies</a></li>
-							              <li><a href="{{ route( 'top-rated' ) }}">Top Rated</a></li>
-                            <li><a href="{{ route( 'movies' ) }}">DVD</a></li>
-							              <li><a href="{{ route( 'contact-us' ) }}">Contact Us</a></li>
-                        @else
-
-                        @endif
+                        <li><a href="{{ route( 'home' ) }}">Home</a></li>
+					              <li><a href="{{ route( 'top-10' ) }}">Top 10 Movies</a></li>
+					              <li><a href="{{ route( 'top-rated' ) }}">Top Rated</a></li>
+                        <li><a href="{{ route( 'movies' ) }}">DVD</a></li>
+					              <li><a href="{{ route( 'contact-us' ) }}">Contact Us</a></li>
                     </ul>
                 </div>
             </div>

@@ -33,7 +33,7 @@
                 </thead>
                 <tbody>
 
-                  @if( !empty( series ) )
+                  @if( !empty( $series ) )
                     @foreach( $series as $serie )
 
                       <tr>
