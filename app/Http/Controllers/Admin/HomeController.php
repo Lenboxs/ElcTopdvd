@@ -10,6 +10,7 @@ use App\Role;
 use App\User;
 use App\Movie;
 use App\Series;
+use App\HomePage;
 
 class HomeController extends Controller
 {
@@ -58,24 +59,10 @@ class HomeController extends Controller
      */
     public function homePage()
     {
-        $title = "Admin Dashboard";
+      $title = "Manage Home Page";
 
-        $movies = Movie::all();
+      $homepage = HomePage::orderBy( 'id', 'desc' )->first();
 
-        $series = Series::all();
-
-        $users = User::all();
-
-        $admins = new Collection();
-
-        foreach( $users as $user )
-        {
-           if( $user->isAdmin() )
-           {
-              $admins->concat($user);
-           }
-        }
-
-        return view( 'admin.index' )->withTitle( $title )->withUsers( $users )->withAdmins( $admins )->withSeries( $series )->withMovies( $movies );
+      return view( 'admin.pages.home' )->withTitle( $title )->withHomePage( $homepage );
     }
 }

@@ -30,13 +30,13 @@ class TopTenController extends Controller
     }
 
     public function edit()
-      {
+    {
         $title = "Edit Top Ten";
 
         $topten = TopTenPage::orderBy( 'id', 'desc' )->first();
 
-        return view( 'admin.toptens.edit' )->withTitle( $title )->withTopten( $topten );
-      }
+        return view( 'admin.pages.top-ten' )->withTitle( $title )->withTopten( $topten );
+    }
 
 
     public function update(Request $request)
