@@ -45,7 +45,7 @@
           <ul class="treeview-menu">
             <li class="@if( Request::is( '*admin/home-page*' ) ) active @endif"><a href="{{ url( 'admin/home-page' ) }}"><i class="fa fa-circle-o"></i> Home Page</a></li>
             <li class="@if( Request::is( '*admin/top-ten*' ) ) active @endif"><a href="{{ url( 'admin/top-ten' ) }}"><i class="fa fa-circle-o"></i> Top Ten</a></li>
-            <li class="@if( Request::is( '*admin/top-rated*' ) ) active @endif"><a href="{{ url( 'admin/top-rated' ) }}"><i class="fa fa-circle-o"></i> Top Rated</a></li>
+            <!--li class="@if( Request::is( '*admin/top-rated*' ) ) active @endif"><a href="{{ url( 'admin/top-rated' ) }}"><i class="fa fa-circle-o"></i> Top Rated</a></li-->
           </ul>
         </li>
         <li class="@if( Request::is( '*movie*' ) ) active @endif treeview">

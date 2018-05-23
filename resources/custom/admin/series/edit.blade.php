@@ -23,6 +23,7 @@
                 <input type="hidden" name="_token" value="{{ csrf_token() }}" />
 
                 <input type="hidden" name="id" value="{{ ( !empty( $series ) && !empty( $series->id ) ) ? $series->id : '' }}" />
+                <input type="hidden" name="remove_image" id="remove_image" value="false" />
 
                 <div class="form-group {{ $errors->has( 'active' ) ? ' has-error' : '' }}">
                    <label for="active" class="control-label">Active</label>
@@ -87,6 +88,24 @@
                     @endif
                 </div>
 
+                <div class="form-group {{ $errors->has( 'image' ) ? ' has-error' : '' }}">
+        					<label for="image" class="control-label">Image</label>
+        					<input class="form-control" type="file" name="image" id="image" />
+        					<br />
+        					@if( !empty( $movie->image ) )
+        						<div id="image_file">
+        							<img class="profile-image img-responsive" src="{{ !empty( $movie->image ) ? url( 'img/movies/' . $movie->image ) : '' }}" width="100" />
+        							<br /><a class="btn btn-danger remove_file" id="image"><i class="fa fa-trash-o"></i> Remove file</a>
+        						</div>
+        					@endif
+
+        					@if ( $errors->has( 'image' ) )
+        						<span class="help-block">
+        							<strong>{{ $errors->first( 'image' ) }}</strong>
+        						</span>
+        					@endif
+        				</div>
+
                 <div class="form-group{{ $errors->has('trailerLink') ? ' has-error' : '' }}">
                     <label for="trailerLink" class="control-label">Trailer Link:</label>
 
@@ -132,3 +151,11 @@
     <!-- /.content -->
 
 @endsection
+@push( 'custom-scripts' )
+<script type="text/javascript" >
+  $( '.remove_file' ).click( function(e) {
+    $( '#remove_' + this.id ).val( 'true' );
+    $( '#' + this.id + '_file' ).hide( "slow" );
+  });
+</script>
+@endpush

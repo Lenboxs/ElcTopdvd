@@ -41,7 +41,7 @@
                         <td>{{ ( !empty( $branch ) && !empty($branch->email ) ) ? $branch->email : '' }}</td>
                         <td>{{ ( !empty( $branch ) && !empty($branch->contact_number ) ) ? $branch->contact_number : '' }}</td>
                         <td>
-                          <a href="{{ url( 'admin/edit-branch' ) }}" class="btn btn-warning btn-sm">Edit</a>
+                          <a href="{{ url( 'admin/edit-branch/' . $branch->id ) }}" class="btn btn-warning btn-sm">Edit</a>
                           <a href="{{ url( 'admin/delete-branch/' . $branch->id ) }}" class="btn btn-sm btn-danger">Delete</a>
                         </td>
                       </tr>

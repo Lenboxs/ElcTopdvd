@@ -49,6 +49,7 @@
                         <td>
                           <a href="{{ url( 'admin/edit-series' ) }}" class="btn btn-warning btn-sm">Edit</a>
                           <a href="{{ url( 'admin/delete-series/' . $serie->id ) }}" class="btn btn-sm btn-danger">Delete</a>
+                          <a href="{{ url( 'admin/series-to-top-ten/' . $serie->id ) }}" class="btn btn-info btn-sm">Add to Top Ten</a>
                         </td>
                       </tr>
 

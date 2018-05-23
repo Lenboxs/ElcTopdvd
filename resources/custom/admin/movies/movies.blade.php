@@ -47,6 +47,7 @@
                         <td>
                           <a href="{{ url( 'admin/edit-movie/' . $movie->id ) }}" class="btn btn-warning btn-sm">Edit</a>
                           <a href="{{ url( 'admin/delete-movie/' . $movie->id ) }}" class="btn btn-sm btn-danger">Delete</a>
+                          <a href="{{ url( 'admin/movie-to-top-ten/' . $movie->id ) }}" class="btn btn-info btn-sm">Add to Top Ten</a>
                         </td>
                       </tr>
 

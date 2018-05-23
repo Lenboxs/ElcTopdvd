@@ -50,7 +50,7 @@ class MovieController extends Controller
         $movie->slug = !empty($request->input('name')) ? str_slug( $request->input('name') ) : '';
         $movie->description = !empty($request->input('description')) ? $request->input('description') : '';
         $movie->image = $this->upload( 'image', $request, $uploadService );
-        $movie->trailerLink = !empty($request->input('trailerLink')) ? $request->input('trailerLink') : '';
+        $movie->trailerLink = $this->getTrailerLink( $request->input( 'trailerLink' ) );
 
         $movie->save();
 
@@ -100,12 +100,32 @@ class MovieController extends Controller
       $movie->name = !empty($request->input('name')) ? $request->input('name') : '';
       $movie->slug = !empty($request->input('name')) ? str_slug( $request->input('name') ) : '';
       $movie->description = !empty($request->input('description')) ? $request->input('description') : '';
-      $movie->image = $this->upload( 'image', $request, $uploadService );
-      $movie->trailerLink = !empty($request->input('trailerLink')) ? $request->input('trailerLink') : '';
 
-      $movie->save();
+      $movie->trailerLink = $this->getTrailerLink( $request->input( 'trailerLink' ) );
 
-      return redirect('admin/movies');
+      $status = true;
+
+  		if( $request->input( 'remove_image' ) == 'true' )
+  		{
+  			   $movie->image = '';
+  		}
+      elseif( !empty( $request->file( 'image' ) ) )
+  		{
+  			   $movie->image = $this->upload( 'image', $request, $uploadService );
+
+  			   $status = $uploadService->successful();
+  		}
+
+  		if( $status )
+  		{
+  			   $movie->save();
+
+  			   return redirect( 'admin/movies' );
+  		}
+  		else
+  		{
+  			   return view( 'admin.movies.edit', [ 'movie' => $movie ] );
+  		}
     }
 
     /**
@@ -138,5 +158,30 @@ class MovieController extends Controller
     		{
     			   return '';
     		}
+    }
+
+    public function getTrailerLink( $trailerLink )
+    {
+        if( empty( $trailerLink ) )
+        {
+           return '';
+        }
+
+        if( strpos( $trailerLink, 'embed' ) !== false )
+        {
+            return $trailerLink;
+        }
+        elseif( strpos( $trailerLink, 'watch' ) !== false )
+        {
+            $url = explode( "?", $trailerLink );
+
+            $video = explode( "=", $url[1] );
+
+            return "https://www.youtube.com/embed/" . $video[1] . "?rel=0&amp;controls=0&amp;showinfo=0";
+        }
+        else
+        {
+           return '';
+        }
     }
 }

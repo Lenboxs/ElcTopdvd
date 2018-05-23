@@ -81,11 +81,11 @@ Route::get( '/admin/add-branch', 'Admin\BranchController@create' )->name( 'add-b
 
 Route::post('/admin/store-branch','Admin\BranchController@store')->name('store-branch');
 
-Route::get( '/admin/edit-branch', 'Admin\BranchController@edit' )->name( 'edit-branch' );
+Route::get( '/admin/edit-branch/{id}', 'Admin\BranchController@edit' )->name( 'edit-branch' );
 
 Route::post('/admin/update-branch','Admin\BranchController@update')->name('update-branch');
 
-Route::get( '/admin/delete-branch', 'Admin\BranchController@destroy' )->name( 'delete-branch' );
+Route::get( '/admin/delete-branch/{id}', 'Admin\BranchController@destroy' )->name( 'delete-branch' );
 
 //-----------------------------------------------------------------------------------------------------------------------------------------
 //homepage

@@ -50,7 +50,7 @@ class SeriesController extends Controller
       $series->slug = !empty($request->input('name')) ? str_slug( $request->input('name') ) : '';
       $series->description = !empty($request->input('description')) ? $request->input('description') : '';
       $series->image = $this->upload( 'image', $request, $uploadService );
-      $series->trailerLink = !empty($request->input('trailerLink')) ? $request->input('trailerLink') : '';
+      $series->trailerLink = $this->getTrailerLink( $request->input( 'trailerLink' ) );
       $series->season = !empty($request->input('season')) ? $request->input('season') : '';
 
       $series->save();
@@ -77,9 +77,11 @@ class SeriesController extends Controller
      */
     public function edit($id)
     {
-      $title = "Edit Series";
+        $title = "Edit Series";
 
-      return view( 'admin.series.edit' )->withTitle( $title );
+        $series = Series::find( $id );
+
+        return view( 'admin.series.edit' )->withTitle( $title )->withSeries( $series );
     }
 
     /**
@@ -98,13 +100,34 @@ class SeriesController extends Controller
       $series->name = !empty($request->input('name')) ? $request->input('name') : '';
       $series->slug = !empty($request->input('name')) ? str_slug( $request->input('name') ) : '';
       $series->description = !empty($request->input('description')) ? $request->input('description') : '';
-      $series->image = $this->upload( 'image', $request, $uploadService );
-      $series->trailerLink = !empty($request->input('trailerLink')) ? $request->input('trailerLink') : '';
+
+      $series->trailerLink = $this->getTrailerLink( $request->input( 'trailerLink' ) );
       $series->season = !empty($request->input('season')) ? $request->input('season') : '';
 
-      $series->save();
+      $status = true;
 
-      return redirect('admin/series');
+      if( $request->input( 'remove_image' ) == 'true' )
+  		{
+  			   $series->image = '';
+  		}
+      elseif( !empty( $request->file( 'image' ) ) )
+  		{
+  			   $series->image = $this->upload( 'image', $request, $uploadService );
+
+  			   $status = $uploadService->successful();
+  		}
+
+  		if( $status )
+  		{
+  			   $series->save();
+
+  			   return redirect( 'admin/series' );
+  		}
+  		else
+  		{
+  			   return view( 'admin.series.edit', [ 'series' => $series ] );
+  		}
+
     }
 
     /**
@@ -136,6 +159,31 @@ class SeriesController extends Controller
         elseif( $request->input( 'remove_' . $input ) == 'true' )
         {
              return '';
+        }
+    }
+
+    public function getTrailerLink( $trailerLink )
+    {
+        if( empty( $trailerLink ) )
+        {
+           return '';
+        }
+
+        if( strpos( $trailerLink, 'embed' ) !== false )
+        {
+            return $trailerLink;
+        }
+        elseif( strpos( $trailerLink, 'watch' ) !== false )
+        {
+            $url = explode( "?", $trailerLink );
+
+            $video = explode( "=", $url[1] );
+
+            return "https://www.youtube.com/embed/" . $video[1] . "?rel=0&amp;controls=0&amp;showinfo=0";
+        }
+        else
+        {
+           return '';
         }
     }
 }

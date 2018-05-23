@@ -8,6 +8,8 @@ use Illuminate\Support\Collection;
 
 use App\Role;
 use App\User;
+use App\Movie;
+use App\Series;
 
 class HomeController extends Controller
 {
@@ -30,6 +32,10 @@ class HomeController extends Controller
     {
         $title = "Admin Dashboard";
 
+        $movies = Movie::all();
+
+        $series = Series::all();
+
         $users = User::all();
 
         $admins = new Collection();
@@ -42,7 +48,7 @@ class HomeController extends Controller
            }
         }
 
-        return view( 'admin.index' )->withTitle( $title )->withUsers( $users )->withAdmins( $admins );
+        return view( 'admin.index' )->withTitle( $title )->withUsers( $users )->withAdmins( $admins )->withSeries( $series )->withMovies( $movies );
     }
 
     /**

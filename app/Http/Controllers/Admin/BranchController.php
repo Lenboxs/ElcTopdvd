@@ -15,9 +15,11 @@ class BranchController extends Controller
      */
     public function index()
     {
-      $branch = Branch::all();
-      $title = 'Manage Branchs';
-      return view('admin.branches.branches')->withBranch($branch)->withTitle($title);
+       $branches = Branch::all();
+
+       $title = 'Manage Branchs';
+
+       return view( 'admin.branches.branches' )->withBranches( $branches )->withTitle( $title );
     }
 
     /**
@@ -69,11 +71,13 @@ class BranchController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit( $id )
     {
       $title = "Edit Branch";
 
-      return view( 'admin.branches.edit' )->withTitle( $title );
+      $branch = Branch::find( $id );
+
+      return view( 'admin.branches.edit' )->withTitle( $title )->withBranch( $branch );
     }
 
     /**
@@ -85,7 +89,7 @@ class BranchController extends Controller
      */
     public function update(Request $request)
     {
-      $branch = Movie::find($request->input('id'));
+      $branch = Branch::find($request->input('id'));
 
       $branch->name = !empty($request->input('name')) ? $request->input('name') : '';
       $branch->email = !empty($request->input('email')) ? $request->input('email') : '';

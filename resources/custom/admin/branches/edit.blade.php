@@ -40,7 +40,7 @@
                 <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                     <label for="email" class="control-label">Email:</label>
 
-                    <input id="email" type="email" class="form-control" name="email" value="{{ ( !empty( $branch ) && !empty( $branch->email ) ) ? $branch->email : '' }}" required>
+                    <input id="email" type="email" class="form-control" name="email" value="{{ ( !empty( $branch ) && !empty( $branch->email ) ) ? $branch->email : '' }}">
 
                     @if ($errors->has('email'))
                         <span class="help-block">
@@ -73,12 +73,14 @@
                     @endif
                 </div>
 
-              </form>
+
             </div>
             <!-- /.box-body -->
             <div class="box-footer">
                 <button type="submit" class="btn btn-info">Save</button>
-              </div>
+            </div>
+
+            </form>
           </div>
           <!-- /.box -->
         </div>
