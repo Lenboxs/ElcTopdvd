@@ -47,11 +47,7 @@ class MovieController extends Controller
         $movie->active= !empty($request->input('active')) ? 1 : 2;
         $movie->new = !empty($request->input('new')) ? 1 : 2;
         $movie->name = !empty($request->input('name')) ? $request->input('name') : '';
-<<<<<<< HEAD
         $movie->slug = !empty($request->input('name')) ? str_slug( $request->input('name') ) : '';
-=======
-        $movie->slug = !empty($request->input('name')) ? slug($request->input('name')) : '';
->>>>>>> deefe8b94c319e838452b3f80e0f203937e5433e
         $movie->description = !empty($request->input('description')) ? $request->input('description') : '';
         $movie->image = $this->upload( 'image', $request, $uploadService );
         $movie->trailerLink = !empty($request->input('trailerLink')) ? $request->input('trailerLink') : '';
@@ -102,11 +98,7 @@ class MovieController extends Controller
       $movie->active= !empty($request->input('active')) ? 1 : 2;
       $movie->new = !empty($request->input('new')) ? 1 : 2;
       $movie->name = !empty($request->input('name')) ? $request->input('name') : '';
-<<<<<<< HEAD
       $movie->slug = !empty($request->input('name')) ? str_slug( $request->input('name') ) : '';
-=======
-      $movie->slug = !empty($request->input('name')) ? slug($request->input('name')) : '';
->>>>>>> deefe8b94c319e838452b3f80e0f203937e5433e
       $movie->description = !empty($request->input('description')) ? $request->input('description') : '';
       $movie->image = $this->upload( 'image', $request, $uploadService );
       $movie->trailerLink = !empty($request->input('trailerLink')) ? $request->input('trailerLink') : '';
