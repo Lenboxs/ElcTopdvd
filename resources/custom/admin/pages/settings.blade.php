@@ -55,6 +55,30 @@
                     @endif
                   </div>
 
+                  <div class="form-group{{ $errors->has('twitter') ? ' has-error' : '' }}">
+                    <label for="name" class="control-label">Twitter:</label>
+
+                    <input id="twitter" type="text" class="form-control" name="twitter" required>
+
+                    @if ($errors->has('twitter'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('twitter') }}</strong>
+                        </span>
+                    @endif
+                  </div>
+
+                  <div class="form-group{{ $errors->has('linkedin') ? ' has-error' : '' }}">
+                    <label for="name" class="control-label">Linked In:</label>
+
+                    <input id="linkedin" type="text" class="form-control" name="linkedin" required>
+
+                    @if ($errors->has('linkedin'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('linkedin') }}</strong>
+                        </span>
+                    @endif
+                  </div>
+
                   <button type="submit" class="btn btn-primary">Save</button>
               </form>
             </div>

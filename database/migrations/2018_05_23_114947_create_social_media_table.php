@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTopTenPageTable extends Migration
+class CreateSocialMediaTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,11 @@ class CreateTopTenPageTable extends Migration
      */
     public function up()
     {
-      Schema::create('top_ten_page', function (Blueprint $table) {
+      Schema::create('social_media', function (Blueprint $table) {
           $table->increments('id');
-          $table->string('heading');
+          $table->string('facebook');
+          $table->string('twitter');
+          $table->string('linkin');
 
           $table->timestamps();
       });
@@ -28,6 +30,6 @@ class CreateTopTenPageTable extends Migration
      */
     public function down()
     {
-          Schema::dropIfExists('top_ten_page');
+        Schema::dropIfExists('social_media');
     }
 }

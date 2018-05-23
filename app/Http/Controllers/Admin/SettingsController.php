@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Setting;
 
 class SettingsController extends Controller
 {
@@ -14,7 +15,9 @@ class SettingsController extends Controller
      */
     public function index()
     {
-        //
+      $setting = Setting::all();
+      $title = 'Manage Settings';
+      return view('admin.settings.settings')->withSettings($setting)->withTitle($title);
     }
 
     /**
@@ -24,7 +27,8 @@ class SettingsController extends Controller
      */
     public function create()
     {
-        //
+      $title = "Add New Setting";
+      return view( 'admin.settings.add' )->withTitle( $title );
     }
 
     /**
@@ -35,7 +39,14 @@ class SettingsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      $setting = new Setting();
+
+      $setting->heading = !empty($request->input('heading')) ? $request->input('heading') : '';
+      $setting->logo = !empty($request->input('logo')) ? $request->input('logo') : '';
+
+      $setting->save();
+
+      return redirect('admin/add-setting');
     }
 
     /**
@@ -57,7 +68,9 @@ class SettingsController extends Controller
      */
     public function edit($id)
     {
-        //
+      $title = "Edit Setting";
+      $setting = Setting::find( $id );
+      return view( 'admin.settings.edit' )->withTitle( $title )->withSetting( $setting );
     }
 
     /**
@@ -67,9 +80,16 @@ class SettingsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+      $setting = Setting::find($request->input('id'));
+
+      $setting->heading = !empty($request->input('heading')) ? $request->input('heading') : '';
+      $setting->logo = !empty($request->input('logo')) ? $request->input('logo') : '';
+
+      $setting->save();
+
+      return redirect('admin/settings');
     }
 
     /**
@@ -80,6 +100,10 @@ class SettingsController extends Controller
      */
     public function destroy($id)
     {
-        //
+      $setting = Setting::find($id);
+
+      $setting->delete();
+
+      return redirect('admin/settings');
     }
 }
