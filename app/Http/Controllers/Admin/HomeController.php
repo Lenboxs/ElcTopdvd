@@ -45,7 +45,7 @@ class HomeController extends Controller
         {
            if( $user->isAdmin() )
            {
-              $admins->concat($user);
+                $admins->push( $user );
            }
         }
 

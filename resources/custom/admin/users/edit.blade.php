@@ -55,7 +55,7 @@
 
               <div class="form-group {{ $errors->has( 'password' ) ? ' has-error' : '' }}">
                   <label for="password" class="control-label">New Password</label>
-                  <input class="form-control" type="password" name="password" id="password" value=""  />
+                  <input class="form-control" type="password" name="password" id="password" value="" />
 
                   @if ( $errors->has( 'password' ) )
                       <span class="help-block">
@@ -66,7 +66,7 @@
 
               <div class="form-group">
                   <label for="password-confirm" class="control-label">Confirm Password</label>
-                  <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
+                  <input id="password-confirm" type="password" class="form-control" name="password_confirmation">
               </div>
 
               <div class="form-group {{ $errors->has( 'roles' ) ? ' has-error' : '' }}">

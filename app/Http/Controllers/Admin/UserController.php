@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+
 use App\User;
+use App\Role;
 
 class UserController extends Controller
 {
@@ -15,9 +17,11 @@ class UserController extends Controller
      */
     public function index()
     {
-      $user = User::all();
-      $title = 'Manage User';
-      return view('admin.users.users')->withUsers($user)->withTitle($title);
+        $user = User::all();
+
+        $title = 'Manage User';
+
+        return view( 'admin.users.users' )->withUsers( $user )->withTitle( $title );
     }
 
     /**
@@ -69,11 +73,15 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit( $id )
     {
-      $title = "Edit User";
+        $title = "Edit User";
 
-      return view( 'admin.users.edit' )->withTitle( $title );
+        $user = User::find( $id );
+
+        $roles = Role::all();
+
+        return view( 'admin.users.edit' )->withTitle( $title )->withUser( $user )->withRoles( $roles );
     }
 
     /**
@@ -83,17 +91,28 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update( Request $request )
     {
-      $user = Movie::find($request->input('id'));
+        $user = User::find($request->input('id'));
 
-      $user->name = !empty($request->input('name')) ? $request->input('name') : '';
-      $user->email = !empty($request->input('email')) ? $request->input('email') : '';
-      $user->password = !empty($request->input('password')) ? $request->input('password') : '';
+        $user->name = !empty($request->input('name')) ? $request->input('name') : '';
+        $user->email = !empty($request->input('email')) ? $request->input('email') : '';
 
-      $user->save();
+        if( $request->exists( 'password' ) )
+        {
+            $user->password = \Hash::make( $request->input( 'password' ) );
+        }
 
-      return redirect('admin/users');
+        $user->save();
+
+        if( $request->exists( 'roles' ) )
+        {
+            $user->roles()->detach();
+
+            $user->roles()->attach( $request->input( 'roles' ) );
+        }
+
+        return redirect('admin/users');
     }
 
     /**

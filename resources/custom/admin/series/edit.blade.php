@@ -28,7 +28,7 @@
                 <div class="form-group {{ $errors->has( 'active' ) ? ' has-error' : '' }}">
                    <label for="active" class="control-label">Active</label>
                    <div class="switch" data-toggle="switch">
-                       <label>Off <input type="checkbox" name="active" class="active" id="active" /><span class="toggle"></span> On</label>
+                       <label>Off <input type="checkbox" name="active" class="active" id="active" {{ ( !empty( $series ) && !empty( $series->active ) && ( $series->active == 1 ) ) ? 'checked' : '' }} /><span class="toggle"></span> On</label>
                    </div>
 
                    @if ( $errors->has( 'active' ) )
@@ -41,7 +41,7 @@
                 <div class="form-group {{ $errors->has( 'new' ) ? ' has-error' : '' }}">
                    <label for="new" class="control-label">New</label>
                    <div class="switch" data-toggle="switch">
-                       <label>Off <input type="checkbox" name="new" class="new" id="new" /><span class="toggle"></span> On</label>
+                       <label>Off <input type="checkbox" name="new" class="new" id="new" {{ ( !empty( $series ) && !empty( $series->new ) && ( $series->new == 1 ) ) ? 'checked' : '' }} /><span class="toggle"></span> On</label>
                    </div>
 
                    @if ( $errors->has( 'new' ) )
@@ -55,7 +55,7 @@
                 <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                     <label for="name" class="control-label">Name:</label>
 
-                    <input id="name" type="name" class="form-control" name="name" value="{{ ( !empty( $series ) && !empty( $series->name ) ) ? $series->name : '' }}" required>
+                    <input id="name" type="text" class="form-control" name="name" value="{{ ( !empty( $series ) && !empty( $series->name ) ) ? $series->name : '' }}" required>
 
                     @if ($errors->has('name'))
                         <span class="help-block">
@@ -76,25 +76,13 @@
                     @endif
                 </div>
 
-                <div class="form-group{{ $errors->has('image') ? ' has-error' : '' }}">
-                    <label for="image" class="control-label">Image:</label>
-
-                    <div class="file"><input class="form-control" type="file" name="image" id="image" /></div>
-
-                    @if ($errors->has('image'))
-                        <span class="help-block">
-                            <strong>{{ $errors->first('image') }}</strong>
-                        </span>
-                    @endif
-                </div>
-
                 <div class="form-group {{ $errors->has( 'image' ) ? ' has-error' : '' }}">
         					<label for="image" class="control-label">Image</label>
         					<input class="form-control" type="file" name="image" id="image" />
         					<br />
-        					@if( !empty( $movie->image ) )
+        					@if( !empty( $series->image ) )
         						<div id="image_file">
-        							<img class="profile-image img-responsive" src="{{ !empty( $movie->image ) ? url( 'img/movies/' . $movie->image ) : '' }}" width="100" />
+        							<img class="profile-image img-responsive" src="{{ !empty( $series->image ) ? url( 'img/series/' . $series->image ) : '' }}" width="100" />
         							<br /><a class="btn btn-danger remove_file" id="image"><i class="fa fa-trash-o"></i> Remove file</a>
         						</div>
         					@endif
