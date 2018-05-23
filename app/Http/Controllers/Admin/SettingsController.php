@@ -43,7 +43,6 @@ class SettingsController extends Controller
 
       $setting->heading = !empty($request->input('heading')) ? $request->input('heading') : '';
       $setting->logo = !empty($request->input('logo')) ? $request->input('logo') : '';
-      $setting->facebook = !empty($request->input('facebook')) ? $request->input('facebook') : '';
 
       $setting->save();
 
@@ -87,7 +86,6 @@ class SettingsController extends Controller
 
       $setting->heading = !empty($request->input('heading')) ? $request->input('heading') : '';
       $setting->logo = !empty($request->input('logo')) ? $request->input('logo') : '';
-      $setting->facebook = !empty($request->input('facebook')) ? $request->input('facebook') : '';
 
       $setting->save();
 

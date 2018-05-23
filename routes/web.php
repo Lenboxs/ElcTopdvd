@@ -73,6 +73,15 @@ Route::get( '/admin/delete-user/{id}', 'Admin\UserController@destroy' )->name( '
 
 Route::get( '/admin/settings', 'Admin\HomeController@index' )->name( 'settings' );
 
+Route::get( '/admin/add-setting', 'Admin\UserController@create' )->name( 'add-setting' );
+
+Route::post('/admin/store-setting','Admin\UserController@store')->name('store-setting');
+
+Route::get( '/admin/edit-setting/{id}', 'Admin\UserController@edit' )->name( 'edit-setting' );
+
+Route::post('/admin/update-setting','Admin\UserController@update')->name('update-setting');
+
+Route::get( '/admin/delete-setting/{id}', 'Admin\UserController@destroy' )->name( 'delete-setting' );
 
 //adminbracnhs
 
@@ -80,13 +89,13 @@ Route::get( '/admin/branches', 'Admin\BranchController@index' )->name( 'branches
 
 Route::get( '/admin/add-branch', 'Admin\BranchController@create' )->name( 'add-branch' );
 
-Route::post('/admin/store-branch','Admin\BranchController@store')->name('store-branch');
+Route::post('/admin/store-branch','Admin\UserController@store')->name('store-branch');
 
-Route::get( '/admin/edit-branch', 'Admin\BranchController@edit' )->name( 'edit-branch' );
+Route::get( '/admin/edit-branch/{id}', 'Admin\UserController@edit' )->name( 'edit-branch' );
 
-Route::post('/admin/update-branch','Admin\BranchController@update')->name('update-branch');
+Route::post('/admin/update-branch','Admin\UserController@update')->name('update-branch');
 
-Route::get( '/admin/delete-branch', 'Admin\BranchController@destroy' )->name( 'delete-branch' );
+Route::get( '/admin/delete-branch/{id}', 'Admin\UserController@destroy' )->name( 'delete-branch' );
 
 //-----------------------------------------------------------------------------------------------------------------------------------------
 //homepage

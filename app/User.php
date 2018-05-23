@@ -32,6 +32,10 @@ class User extends Authenticatable
         return $this->belongsToMany( 'App\Role', 'user_role' );
     }
 
+    public function rating()
+    {
+        return $this->belongsToMany( 'App\Movies', 'rating' );
+    }
     public function isAdmin()
     {
         return ( $this->role == 'admin' ) ? true : false;

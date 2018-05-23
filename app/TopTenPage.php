@@ -15,9 +15,9 @@ class TopTenPage extends Model
 
   public function movies()
     {
-        return $this->hasMany('App\Movie');
+        return $this->hasMany('App\Movie','topten_movie');
     }
-    public function series()
+  public function series()
     {
         return $this->hasMany('App\Series');
     }

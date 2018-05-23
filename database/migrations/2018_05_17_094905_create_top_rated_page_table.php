@@ -15,7 +15,7 @@ class CreateTopRatedPageTable extends Migration
     {
       Schema::create('top_rated_page', function (Blueprint $table) {
           $table->increments('id');
-          $table->string('name');
+          $table->string('heading');
 
           $table->timestamps();
       });

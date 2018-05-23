@@ -15,6 +15,15 @@ class Movie extends Model
 
   public function branches()
     {
-        return $this->hasMany('App\Branch');
+        return $this->hasMany('App\Branch', 'movie_branch');
     }
+
+  public function topTen()
+      {
+          return $this->hasMany('App\TopTenPage', 'topten_movie');
+      }
+  public function rating()
+      {
+              return $this->hasMany('App\User', 'rating');
+      }
 }
