@@ -71,7 +71,8 @@ Route::get( '/admin/delete-user/{id}', 'Admin\UserController@destroy' )->name( '
 
 //adminsettings
 
-Route::get( '/admin/settings', 'Admin\HomeController@settings' )->name( 'settings' );
+Route::get( '/admin/settings', 'Admin\HomeController@index' )->name( 'settings' );
+
 
 //adminbracnhs
 
