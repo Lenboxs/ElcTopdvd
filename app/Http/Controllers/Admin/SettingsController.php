@@ -4,7 +4,11 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Setting;
+
+use App\Helpers\UploadService;
+
+use App\Settings;
+use App\SocialMedia;
 
 class SettingsController extends Controller
 {
@@ -15,9 +19,7 @@ class SettingsController extends Controller
      */
     public function index()
     {
-      $setting = Setting::all();
-      $title = 'Manage Settings';
-      return view('admin.settings.settings')->withSettings($setting)->withTitle($title);
+       //
     }
 
     /**
@@ -27,8 +29,7 @@ class SettingsController extends Controller
      */
     public function create()
     {
-      $title = "Add New Setting";
-      return view( 'admin.settings.add' )->withTitle( $title );
+       //
     }
 
     /**
@@ -37,16 +38,9 @@ class SettingsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store( Request $request )
     {
-      $setting = new Setting();
-
-      $setting->heading = !empty($request->input('heading')) ? $request->input('heading') : '';
-      $setting->logo = !empty($request->input('logo')) ? $request->input('logo') : '';
-
-      $setting->save();
-
-      return redirect('admin/add-setting');
+       //
     }
 
     /**
@@ -55,7 +49,7 @@ class SettingsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show( $id )
     {
         //
     }
@@ -66,11 +60,15 @@ class SettingsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit()
     {
-      $title = "Edit Setting";
-      $setting = Setting::find( $id );
-      return view( 'admin.settings.edit' )->withTitle( $title )->withSetting( $setting );
+        $title = "Manage Settings";
+
+        $settings = Settings::orderBy( 'id', 'desc' )->first();
+
+        $social_media = SocialMedia::orderBy( 'id', 'desc' )->first();
+
+        return view( 'admin.pages.settings' )->withTitle( $title )->withSettings( $settings )->withSocialmedia( $social_media );
     }
 
     /**
@@ -80,16 +78,31 @@ class SettingsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update( Request $request, UploadService $uploadService )
     {
-      $setting = Setting::find($request->input('id'));
+        $setting = Settings::orderBy( 'id', 'desc' )->first();
 
-      $setting->heading = !empty($request->input('heading')) ? $request->input('heading') : '';
-      $setting->logo = !empty($request->input('logo')) ? $request->input('logo') : '';
+        $setting->heading = !empty($request->input('heading')) ? $request->input('heading') : '';
 
-      $setting->save();
+        $status = true;
 
-      return redirect('admin/settings');
+    		if( $request->input( 'remove_logo' ) == 'true' )
+    		{
+    			   $setting->logo = '';
+    		}
+        elseif( !empty( $request->file( 'logo' ) ) )
+    		{
+    			   $setting->logo = $this->upload( 'logo', $request, $uploadService );
+
+    			   $status = $uploadService->successful();
+    		}
+
+    		if( $status )
+    		{
+    			   $setting->save();
+    		}
+
+        return redirect('admin/settings');
     }
 
     /**
@@ -100,10 +113,23 @@ class SettingsController extends Controller
      */
     public function destroy($id)
     {
-      $setting = Setting::find($id);
+       //
+    }
 
-      $setting->delete();
+    public function upload( $input, $request, $uploadService )
+    {
+        if( !empty( $request->file( $input ) ) )
+        {
+            if( $uploadService->setRequest( $request )->setFilename( $input )->setUploadDirectory( 'img/settings' )->move() )
+            {
+              return $uploadService->getTargetFile();
+            }
 
-      return redirect('admin/settings');
+            $this->status = $this->status && $uploadService->successful();
+        }
+        elseif( $request->input( 'remove_' . $input ) == 'true' )
+        {
+             return '';
+        }
     }
 }

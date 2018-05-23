@@ -21,9 +21,7 @@ Route::get( '/admin', 'Admin\HomeController@index' )->name( 'admin' );
 
 Route::get( '/admin/home-page', 'Admin\HomeController@homePage' )->name( 'home-page' );
 
-Route::get( '/admin/top-ten', 'Admin\HomeController@topTen' )->name( 'top-ten' );
-
-Route::get( '/admin/top-rated', 'Admin\HomeController@topRated' )->name( 'top-rated' );
+Route::get( '/admin/top-ten', 'Admin\TopTenController@edit' )->name( 'top-ten' );
 
 //adminmovies
 
@@ -71,17 +69,11 @@ Route::get( '/admin/delete-user/{id}', 'Admin\UserController@destroy' )->name( '
 
 //adminsettings
 
-Route::get( '/admin/settings', 'Admin\HomeController@index' )->name( 'settings' );
+Route::get( '/admin/settings', 'Admin\SettingsController@edit' )->name( 'settings' );
 
-Route::get( '/admin/add-setting', 'Admin\UserController@create' )->name( 'add-setting' );
+Route::post('/admin/update-settings','Admin\SettingsController@update')->name('update-settings');
 
-Route::post('/admin/store-setting','Admin\UserController@store')->name('store-setting');
-
-Route::get( '/admin/edit-setting/{id}', 'Admin\UserController@edit' )->name( 'edit-setting' );
-
-Route::post('/admin/update-setting','Admin\UserController@update')->name('update-setting');
-
-Route::get( '/admin/delete-setting/{id}', 'Admin\UserController@destroy' )->name( 'delete-setting' );
+Route::post('/admin/update-socialmedia','Admin\SocialMediaController@update')->name('update-socialmedia');
 
 //adminbracnhs
 
@@ -89,7 +81,7 @@ Route::get( '/admin/branches', 'Admin\BranchController@index' )->name( 'branches
 
 Route::get( '/admin/add-branch', 'Admin\BranchController@create' )->name( 'add-branch' );
 
-Route::post('/admin/store-branch','Admin\UserController@store')->name('store-branch');
+Route::post('/admin/store-branch','Admin\BranchController@store')->name('store-branch');
 
 Route::get( '/admin/edit-branch/{id}', 'Admin\BranchController@edit' )->name( 'edit-branch' );
 

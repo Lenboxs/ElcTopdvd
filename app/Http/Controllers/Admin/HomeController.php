@@ -52,152 +52,30 @@ class HomeController extends Controller
     }
 
     /**
-     * Edit home page.
+     * Show the application dashboard.
      *
      * @return \Illuminate\Http\Response
      */
     public function homePage()
     {
-        $title = "Manage Home Page";
+        $title = "Admin Dashboard";
 
-        return view( 'admin.pages.home' )->withTitle( $title );
-    }
+        $movies = Movie::all();
 
-    /**
-     * Edit home page.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function topTen()
-    {
-        $title = "Manage Top Ten Page";
-
-        return view( 'admin.pages.top-ten' )->withTitle( $title );
-    }
-
-    /**
-     * Edit home page.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function topRated()
-    {
-        $title = "Manage Top Rated Page";
-
-        return view( 'admin.pages.top-rated' )->withTitle( $title );
-    }
-
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function addMovie()
-    {
-        $title = "Add New Movie";
-
-        return view( 'admin.movies.add' )->withTitle( $title );
-    }
-
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function movies()
-    {
-        $title = "Manage Movies";
-
-        return view( 'admin.movies.movies' )->withTitle( $title );
-    }
-
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function addSeries()
-    {
-        $title = "Add New Series";
-
-        return view( 'admin.series.add' )->withTitle( $title );
-    }
-
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function series()
-    {
-        $title = "Manage Series";
-
-        return view( 'admin.series.series' )->withTitle( $title );
-    }
-
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function addBranch()
-    {
-        $title = "Add New Branch";
-
-        return view( 'admin.branches.add' )->withTitle( $title );
-    }
-
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function branches()
-    {
-        $title = "Manage Branches";
-
-        return view( 'admin.branches.branches' )->withTitle( $title );
-    }
-
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function users()
-    {
-        $title = "Manage Users";
+        $series = Series::all();
 
         $users = User::all();
 
-        return view( 'admin.users.users' )->withTitle( $title )->withUsers( $users );
-    }
+        $admins = new Collection();
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function editUser( $id )
-    {
-        $title = "Edit User";
+        foreach( $users as $user )
+        {
+           if( $user->isAdmin() )
+           {
+              $admins->concat($user);
+           }
+        }
 
-        $user = User::find( $id );
-
-        $roles = Role::all();
-
-        return view( 'admin.users.edit' )->withTitle( $title )->withUser( $user )->withRoles( $roles );
-    }
-
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function settings()
-    {
-        $title = "Settings";
-
-        return view( 'admin.pages.settings' )->withTitle( $title );
+        return view( 'admin.index' )->withTitle( $title )->withUsers( $users )->withAdmins( $admins )->withSeries( $series )->withMovies( $movies );
     }
 }

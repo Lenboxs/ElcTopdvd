@@ -17,7 +17,7 @@ class CreateSocialMediaTable extends Migration
           $table->increments('id');
           $table->string('facebook');
           $table->string('twitter');
-          $table->string('linkin');
+          $table->string('linkedin');
 
           $table->timestamps();
       });
