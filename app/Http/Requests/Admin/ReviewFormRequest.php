@@ -4,7 +4,7 @@ namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class SettingsFormRequest extends FormRequest
+class ReviewFormRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,9 +25,7 @@ class SettingsFormRequest extends FormRequest
     {
         return [
 
-          'logo' => 'required',
-          'heading' => 'required',
-          'favicon' => 'required',
+          'name' => 'required',
 
         ];
     }
@@ -36,9 +34,7 @@ class SettingsFormRequest extends FormRequest
     {
         $input = $this->all();
 
-        $input['logo'] = filter_var( $input['logo'], FILTER_SANITIZE_STRING );
-        $input['heading'] = filter_var( $input['heading'], FILTER_SANITIZE_STRING );
-        $input['favicon'] = filter_var( $input['favicon'], FILTER_SANITIZE_STRING );
+        $input['name'] = filter_var( $input['name'], FILTER_SANITIZE_STRING );
 
         $this->replace( $input );
     }

@@ -4,12 +4,13 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class AgeRestriction extends Model
+class Review extends Model
 {
     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'age_restricton';
+    protected $table = 'review';
+
 }

@@ -20,6 +20,6 @@ class TopTenPage extends Model
 
     public function series()
     {
-        return $this->hasMany( 'App\Series' );
+        return $this->belongsToMany( 'App\Series' );
     }
 }

@@ -93,6 +93,7 @@ class SettingsController extends Controller
         $setting = Settings::orderBy( 'id', 'desc' )->first();
 
         $setting->heading = !empty($request->input('heading')) ? $request->input('heading') : '';
+        $setting->favicon = !empty($request->input('favicon')) ? $request->input('favicon') : '';
 
         $status = true;
 
