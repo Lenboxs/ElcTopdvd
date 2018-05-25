@@ -4,10 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Type;
-use App\Http\Requests\Admin\TypeFormRequest;
+use App\Recaptcha;
 
-class TypeController extends Controller
+
+class RecaptchaController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -26,11 +26,11 @@ class TypeController extends Controller
      */
     public function index()
     {
-       $type = Type::all();
+       $recaptcha = Recaptcha::all();
 
-       $title = 'Manage Types';
+       $title = 'Manage Recaptcha';
 
-       return view( 'admin.types.types' )->withType( $type )->withTitle( $title );
+       return view( 'admin.recaptchas.recaptchas' )->withRecaptcha( $recaptcha )->withTitle( $title );
     }
 
     /**
@@ -40,9 +40,9 @@ class TypeController extends Controller
      */
     public function create()
     {
-      $title = "Add New Type";
+      $title = "Add New Recaptcha";
 
-      return view( 'admin.types.add' )->withTitle( $title );
+      return view( 'admin.recaptchas.add' )->withTitle( $title );
     }
 
     /**
@@ -51,15 +51,15 @@ class TypeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(TypeFormRequest $request)
+    public function store(Request $request)
     {
-      $type = new Type();
+      $recaptcha = new Recaptcha();
 
-      $type->name = !empty($request->input('name')) ? $request->input('name') : '';
+      $recaptcha->name = !empty($request->input('name')) ? $request->input('name') : '';
 
-      $type->save();
+      $recaptcha->save();
 
-      return redirect('admin/add-type');
+      return redirect('admin/add-recaptcha');
     }
 
     /**
@@ -81,11 +81,11 @@ class TypeController extends Controller
      */
     public function edit( $id )
     {
-      $title = "Edit Type";
+      $title = "Edit Recaptcha";
 
-      $type = Type::find( $id );
+      $recaptcha = Type::find( $id );
 
-      return view( 'admin.types.edit' )->withTitle( $title )->withType( $type );
+      return view( 'admin.recaptchas.edit' )->withTitle( $title )->withRecaptcha( $recaptcha );
     }
 
     /**
@@ -95,15 +95,15 @@ class TypeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(TypeFormRequest $request)
+    public function update(Request $request)
     {
-      $type = Type::find($request->input('id'));
+      $recaptcha = Type::find($request->input('id'));
 
-      $type->name = !empty($request->input('name')) ? $request->input('name') : '';
+      $recaptcha->name = !empty($request->input('name')) ? $request->input('name') : '';
 
-      $type->save();
+      $recaptcha->save();
 
-      return redirect('admin/types');
+      return redirect('admin/recaptchas');
     }
 
     /**
@@ -114,11 +114,11 @@ class TypeController extends Controller
      */
     public function destroy($id)
     {
-      $type = Type::find($id);
+      $recaptcha = Recaptcha::find($id);
 
-      $type->delete();
+      $recaptcha->delete();
 
-      return redirect('admin/types');
+      return redirect('admin/recaptchas');
   }
 
 }

@@ -15,11 +15,11 @@ class TopRatedPage extends Model
 
   public function movies()
     {
-        return $this->hasMany('App\Movie');
+        return $this->belongsToMany('App\Movie');
     }
     public function series()
     {
-        return $this->hasMany('App\Series');
+        return $this->belongsToMany('App\Series');
     }
 
 }

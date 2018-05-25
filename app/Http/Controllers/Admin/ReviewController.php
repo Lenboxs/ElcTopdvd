@@ -4,10 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Type;
-use App\Http\Requests\Admin\TypeFormRequest;
+use App\Review;
+use App\Http\Requests\Admin\ReviewFormRequest;
 
-class TypeController extends Controller
+class ReviewController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -26,11 +26,11 @@ class TypeController extends Controller
      */
     public function index()
     {
-       $type = Type::all();
+       $review = Review::all();
 
-       $title = 'Manage Types';
+       $title = 'Manage Reviews';
 
-       return view( 'admin.types.types' )->withType( $type )->withTitle( $title );
+       return view( 'admin.reviews.reviews' )->withReview( $review )->withTitle( $title );
     }
 
     /**
@@ -40,9 +40,9 @@ class TypeController extends Controller
      */
     public function create()
     {
-      $title = "Add New Type";
+      $title = "Add New Review";
 
-      return view( 'admin.types.add' )->withTitle( $title );
+      return view( 'admin.reviews.add' )->withTitle( $title );
     }
 
     /**
@@ -51,15 +51,15 @@ class TypeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(TypeFormRequest $request)
+    public function store(ReviewFormRequest $request)
     {
-      $type = new Type();
+      $review = new Review();
 
-      $type->name = !empty($request->input('name')) ? $request->input('name') : '';
+      $review->name = !empty($request->input('name')) ? $request->input('name') : '';
 
-      $type->save();
+      $review->save();
 
-      return redirect('admin/add-type');
+      return redirect('admin/add-review');
     }
 
     /**
@@ -81,11 +81,11 @@ class TypeController extends Controller
      */
     public function edit( $id )
     {
-      $title = "Edit Type";
+      $title = "Edit Review";
 
-      $type = Type::find( $id );
+      $review = Review::find( $id );
 
-      return view( 'admin.types.edit' )->withTitle( $title )->withType( $type );
+      return view( 'admin.reviews.edit' )->withTitle( $title )->withReview( $review );
     }
 
     /**
@@ -95,15 +95,15 @@ class TypeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(TypeFormRequest $request)
+    public function update(ReviewFormRequest $request)
     {
-      $type = Type::find($request->input('id'));
+      $review = Review::find($request->input('id'));
 
-      $type->name = !empty($request->input('name')) ? $request->input('name') : '';
+      $review->name = !empty($request->input('name')) ? $request->input('name') : '';
 
-      $type->save();
+      $review->save();
 
-      return redirect('admin/types');
+      return redirect('admin/reviews');
     }
 
     /**
@@ -114,11 +114,11 @@ class TypeController extends Controller
      */
     public function destroy($id)
     {
-      $type = Type::find($id);
+      $review = Review::find($id);
 
-      $type->delete();
+      $review->delete();
 
-      return redirect('admin/types');
+      return redirect('admin/reviews');
   }
 
 }

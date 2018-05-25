@@ -1,3 +1,4 @@
+
 <?php
 
 namespace App;
@@ -15,7 +16,7 @@ class Movie extends Model
 
     public function branches()
     {
-        return $this->hasMany( 'App\Branch', 'movie_branch' );
+        return $this->belongsToMany( 'App\Branch', 'movie_branch','movie_id','branch_id' );
     }
 
     public function topTen()
@@ -25,6 +26,6 @@ class Movie extends Model
 
     public function rating()
     {
-        return $this->hasMany( 'App\User', 'rating' );
+        return $this->belongsToMany( 'App\User', 'rating' );
     }
 }

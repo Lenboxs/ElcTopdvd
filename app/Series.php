@@ -15,6 +15,6 @@ class Series extends Model
 
   public function branches()
     {
-        return $this->hasMany('App\Branch');
+        return $this->belongsToMany('App\Branch');
     }
 }

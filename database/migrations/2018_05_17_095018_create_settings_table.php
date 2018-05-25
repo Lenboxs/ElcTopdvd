@@ -17,6 +17,7 @@ class CreateSettingsTable extends Migration
           $table->increments('id');
           $table->string('heading');
           $table->string('logo');
+          $table->string('favicon');
 
           $table->timestamps();
       });
