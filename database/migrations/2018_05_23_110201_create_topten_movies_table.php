@@ -24,7 +24,7 @@ class CreateToptenMoviesTable extends Migration
       Schema::table('topten_movie', function ($table) {
 
           $table->foreign('movie_id' , 'movie_topten_id')->references('id')->on('movies')->onDelete('cascade')->onUpdate('cascade');
-          $table->foreign('topten_id' , 'topten_movie_id')->references('id')->on('topten')->onDelete('cascade')->onUpdate('cascade');
+          $table->foreign('topten_id' , 'topten_movie_id')->references('id')->on('top_ten_page')->onDelete('cascade')->onUpdate('cascade');
       });
     }
 
