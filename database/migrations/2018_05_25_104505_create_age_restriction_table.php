@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAgeRestrictionTable extends Migration
+class CreateAgerestrictionTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateAgeRestrictionTable extends Migration
      */
      public function up()
      {
-       Schema::create('age_restrictions', function (Blueprint $table) {
+       Schema::create('agerestrictions', function (Blueprint $table) {
            $table->increments('id');
            $table->string('name')->nullable();
 
@@ -28,6 +28,6 @@ class CreateAgeRestrictionTable extends Migration
       */
      public function down()
      {
-         Schema::dropIfExists('age_restrictions');
+         Schema::dropIfExists('agerestrictions');
      }
 }

@@ -11,7 +11,5 @@ class AgeRestriction extends Model
      *
      * @var string
      */
-    protected $table = 'age_restricton';
-
-
+    protected $table = 'age_restrictons';
 }

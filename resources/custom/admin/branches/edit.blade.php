@@ -1,23 +1,10 @@
-@extends( 'admin.layouts.admin' )
-
-@section( 'title' )
-{{ $title }}
-@endsection
-
-@section( 'content' )
-
-<!-- Main content -->
+    <!-- Main content -->
     <section class="content">
       <div class="row">
         <div class="col-xs-12">
 
-          <!-- general form elements disabled -->
-          <div class="box box-warning">
-            <div class="box-header with-border">
-              <h3 class="box-title">{{ !empty( $title ) ? $title : 'Edit Branch' }}</h3>
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
+            <div class="well">
+              
               <form role="form" method="POST" action="{{ url( '/admin/update-branch' ) }}">
                 <!-- text input -->
 
@@ -73,21 +60,20 @@
                     @endif
                 </div>
 
+                <div class="well-footer">
+                    <button type="submit" class="btn btn-info">Save</button>
+                    <a href="{{ url( 'admin/settings#branches' ) }}" class="btn btn-info">Back</a>
+                </div>
+
+                </form>
+
 
             </div>
-            <!-- /.box-body -->
-            <div class="box-footer">
-                <button type="submit" class="btn btn-info">Save</button>
-            </div>
+            <!-- /.well -->
 
-            </form>
-          </div>
-          <!-- /.box -->
         </div>
         <!-- /.col -->
       </div>
       <!-- /.row -->
     </section>
     <!-- /.content -->
-
-@endsection
