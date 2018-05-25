@@ -23,17 +23,25 @@ Route::get( '/admin/home-page', 'Admin\HomeController@homePage' )->name( 'home-p
 
 Route::get( '/admin/top-ten', 'Admin\TopTenController@edit' )->name( 'top-ten' );
 
+Route::get( '/admin/movie-to-top-ten/{id}', 'Admin\TopTenController@move' )->name( 'movie-to-top-ten' );
+
+Route::get( '/admin/remove-movie-from-top-ten/{id}', 'Admin\TopTenController@remove' )->name( 'remove-movie-from-top-ten' );
+
+Route::get( '/admin/sort', 'Admin\TopTenController@sort' )->name( 'sort-top-ten-movies' );
+
+Route::post( '/admin/update-topten', 'Admin\TopTenController@update' )->name( 'update-topten' );
+
 //adminmovies
 
 Route::get( '/admin/movies', 'Admin\MovieController@index' )->name( 'movies' );
 
 Route::get( '/admin/add-movie', 'Admin\MovieController@create' )->name( 'add-movie' );
 
-Route::post('/admin/store-movie','Admin\MovieController@store')->name('store-movie');
+Route::post( '/admin/store-movie','Admin\MovieController@store' )->name( 'store-movie' );
 
 Route::get( '/admin/edit-movie/{id}', 'Admin\MovieController@edit' )->name( 'edit-movie' );
 
-Route::post('/admin/update-movie','Admin\MovieController@update')->name('update-movie');
+Route::post( '/admin/update-movie','Admin\MovieController@update' )->name( 'update-movie' );
 
 Route::get( '/admin/delete-movie/{id}', 'Admin\MovieController@destroy' )->name( 'delete-movie' );
 
@@ -43,11 +51,11 @@ Route::get( '/admin/series', 'Admin\SeriesController@index' )->name( 'series' );
 
 Route::get( '/admin/add-series', 'Admin\SeriesController@create' )->name( 'add-series' );
 
-Route::post('/admin/store-series','Admin\SeriesController@store')->name('store-series');
+Route::post('/admin/store-series','Admin\SeriesController@store')->name( 'store-series' );
 
 Route::get( '/admin/edit-series/{id}', 'Admin\SeriesController@edit' )->name( 'edit-series' );
 
-Route::post('/admin/update-series','Admin\SeriesController@update')->name('update-series');
+Route::post('/admin/update-series','Admin\SeriesController@update')->name( 'update-series' );
 
 Route::get( '/admin/delete-series/{id}', 'Admin\SeriesController@destroy' )->name( 'delete-series' );
 
@@ -57,15 +65,13 @@ Route::get( '/admin/users', 'Admin\UserController@index' )->name( 'users' );
 
 Route::get( '/admin/add-user', 'Admin\UserController@create' )->name( 'add-user' );
 
-Route::post('/admin/store-user','Admin\UserController@store')->name('store-user');
+Route::post('/admin/store-user','Admin\UserController@store')->name( 'store-user' );
 
 Route::get( '/admin/edit-user/{id}', 'Admin\UserController@edit' )->name( 'edit-user' );
 
-Route::post('/admin/update-user','Admin\UserController@update')->name('update-user');
+Route::post('/admin/update-user','Admin\UserController@update')->name( 'update-user' );
 
 Route::get( '/admin/delete-user/{id}', 'Admin\UserController@destroy' )->name( 'delete-user' );
-
-
 
 //adminsettings
 
@@ -108,9 +114,6 @@ Route::get( '/movies', 'MovieController@movies' )->name( 'movies' );
 
 Route::get( '/movie/{name}', 'MovieController@movie' )->name( 'movie' );
 
-
-
-
 //series
 
 Route::get( '/series/{name}', 'SeriesController@series' )->name( 'series' );
@@ -128,8 +131,6 @@ Route::get( '/privacy-policy', 'PageController@policy' )->name( 'privacy-policy'
 //T&C
 
 Route::get( '/terms-and-conditions', 'PageController@terms' )->name( 'terms-and-conditions' );
-
-
 
 Route::get( '/home', function () {
 	return redirect( 'admin' );

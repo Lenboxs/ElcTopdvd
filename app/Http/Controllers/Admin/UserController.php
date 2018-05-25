@@ -5,11 +5,23 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+use Illuminate\Support\Facades\Hash;
+
 use App\User;
 use App\Role;
 
 class UserController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+         $this->middleware( 'auth' );
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -100,7 +112,7 @@ class UserController extends Controller
 
         if( $request->exists( 'password' ) )
         {
-            $user->password = \Hash::make( $request->input( 'password' ) );
+            $user->password = Hash::make( $request->input( 'password' ) );
         }
 
         $user->save();

@@ -21,9 +21,21 @@
       </div>
       <!-- /.box-header -->
       <!-- form start -->
-      <form role="form">
+      <form role="form" method="POST" action="{{ url( '/admin/update-topten' ) }}">
         <div class="box-body">
+			<input type="hidden" name="_token" value="{{ csrf_token() }}" />
 
+			<div class="form-group{{ $errors->has('heading') ? ' has-error' : '' }}">
+				<label for="heading" class="control-label">Heading</label>
+
+				<input id="heading" type="text" class="form-control" name="heading" value="{{ ( !empty( $topten ) && !empty( $topten->heading ) ) ? $topten->heading : '' }}" required>
+
+				@if ($errors->has('heading'))
+					<span class="help-block">
+						<strong>{{ $errors->first('heading') }}</strong>
+					</span>
+				@endif
+            </div>
         </div>
         <!-- /.box-body -->
 
@@ -39,25 +51,156 @@
       </div>
       <!-- /.box-header -->
       <!-- form start -->
-      <form role="form">
-        <div class="box-body">
+	  @if( !empty( $topten ) )
+		  <form role="form">
+			<div class="box-body">
 
-        </div>
-        <!-- /.box-body -->
+				<table class="table table-striped table-hover">
+			<thead>
+			<tr>
+				<th></th>
+				<th>Title</th>
+				<th></th>
+			</tr>
+			</thead>
+			<tbody class="sortable ui-sortable" data-entityname="articles">
+				@if( !empty( $topten->movies ) )
+					@foreach( $topten->movies as $movie )
+						<tr data-itemid="{{ $movie->id }}">
+							<td class="sortable-handle" style="width: 24px;"><span class="glyphicon glyphicon-sort"></span></td>
+							<td style="width: 699px;">{{ $movie->name }}</td>
+							<td class="grid-actions" style="width: 329px;">
+								<!--a href="#" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-pencil"></span></a-->
+								<a href="{{ url( '/admin/remove-movie-from-top-ten/' . $movie->id ) }}" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span></a>
+							</td>
+						</tr>
+					@endforeach
+				@endif
+					</tbody>
+				</table>
+				</div>
+				<!-- /.box-body -->
+			</form>
+		@endif
+
 
         <div class="box-footer">
-          <button type="submit" class="btn btn-primary">Save</button>
+          <button type="submit" class="btn btn-primary">Publish</button>
         </div>
-      </form>
+
     </div>
   </div>
 </div>
 <section>
 @endsection
 
-@push('scripts')
-<script src="{{ asset( 'js/web-animations.min.js' ) }}"></script>
-<script src="{{ asset( 'js/hammer.min.js' ) }}"></script>
-<script src="{{ asset( 'js/muuri.min.js' ) }}"></script>
-<script src="{{ asset( 'js/demo-grid.js' ) }}"></script>
+
+@push( 'custom-scripts' )
+<script>
+
+    $.ajaxSetup({
+        headers: {
+            'X-XSRF-Token': $('meta[name="_token"]').attr('content')
+        }
+    });
+
+    var App = {};
+
+    App.notify = {
+        message: function(message, type){
+            if ($.isArray(message)) {
+                $.each(message, function(i, item){
+                    App.notify.message(item, type);
+                });
+            } else {
+                $.bootstrapGrowl(message, {
+                    type: type,
+                    delay: 4000,
+                    width: 'auto'
+                });
+            }
+        },
+
+        danger: function(message){
+            App.notify.message(message, 'danger');
+        },
+        success: function(message){
+            App.notify.message(message, 'success');
+        },
+        info: function(message){
+            App.notify.message(message, 'info');
+        },
+        warning: function(message){
+            App.notify.message(message, 'warning');
+        },
+        validationError: function(errors){
+            $.each(errors, function(i, fieldErrors){
+                App.notify.danger(fieldErrors);
+            });
+        }
+    };
+
+    /**
+     * @param  {*} requestData
+     */
+    var changePosition = function(requestData){
+
+        $.ajax({
+            'url': '{{ url( 'admin/sort' ) }}',
+            'type': 'GET',
+            'data': requestData,
+            'success': function( data )
+            {
+                $(".alerts").html("<div class='alert alert-success'>Order Saved</div>");
+                if (data.success) {
+                    console.log('Saved!');
+                } else {
+                    console.log(data);
+                }
+            },
+            'error': function(data){
+                console.error('Something wrong!');
+            }
+        });
+    };
+
+    $(document).ready(function(){
+        var $sortableTable = $('.sortable');
+        if ($sortableTable.length > 0) {
+            $sortableTable.sortable({
+                handle: '.sortable-handle',
+                axis: 'y',
+                update: function(a, b){
+
+                    var entityName = $(this).data('entityname');
+                    var $sorted = b.item;
+
+                    var $previous = $sorted.prev();
+                    var $next = $sorted.next();
+
+                    if ($previous.length > 0) {
+                        changePosition({
+                            parentId: $sorted.data('parentid'),
+                            type: 'moveBefore',
+                            entityName: entityName,
+                            id: $sorted.data('itemid'),
+                            positionEntityId: $previous.data('itemid')
+                        });
+                    } else if ($next.length > 0) {
+                        changePosition({
+                            parentId: $sorted.data('parentid'),
+                            type: 'moveAfter',
+                            entityName: entityName,
+                            id: $sorted.data('itemid'),
+                            positionEntityId: $next.data('itemid')
+                        });
+                    } else {
+                        console.error('Something wrong!');
+                    }
+                },
+                cursor: "move"
+            });
+        }
+    });
+</script>
 @endpush
