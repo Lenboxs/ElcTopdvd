@@ -61,7 +61,7 @@ class BranchController extends Controller
 
         $types = Type::all();
 
-        $agerestrcitions = AgeRestriction::all();
+        $agerestrictions = AgeRestriction::all();
 
         return view( 'admin.pages.settings',
           array(
@@ -71,7 +71,7 @@ class BranchController extends Controller
               'branches' => $branches,
               'genres' => $genres,
               'types' => $types,
-              'agerestrcitions' => $agerestrcitions,
+              'agerestrictions' => $agerestrictions,
           )
         );
     }
@@ -129,7 +129,7 @@ class BranchController extends Controller
 
       $types = Type::all();
 
-      $agerestrcitions = AgeRestriction::all();
+      $agerestrictions = AgeRestriction::all();
 
       return view( 'admin.pages.settings',
         array(
@@ -139,7 +139,7 @@ class BranchController extends Controller
             'branch' => $branch,
             'genres' => $genres,
             'types' => $types,
-            'agerestrcitions' => $agerestrcitions,
+            'agerestrictions' => $agerestrictions,
         )
       );
     }

@@ -61,7 +61,7 @@ class TypeController extends Controller
 
       $types = Type::all();
 
-      $agerestrcitions = AgeRestriction::all();
+      $agerestrictions = AgeRestriction::all();
 
       return view( 'admin.pages.settings',
         array(
@@ -71,7 +71,7 @@ class TypeController extends Controller
             'branches' => $branches,
             'genres' => $genres,
             'types' => $types,
-            'agerestrcitions' => $agerestrcitions,
+            'agerestrictions' => $agerestrictions,
         )
       );
     }
@@ -126,7 +126,7 @@ class TypeController extends Controller
 
       $genres = Genre::all();
 
-      $agerestrcitions = AgeRestriction::all();
+      $agerestrictions = AgeRestriction::all();
 
       return view( 'admin.pages.settings',
         array(
@@ -136,7 +136,7 @@ class TypeController extends Controller
             'branches' => $branches,
             'genres' => $genres,
             'type' => $type,
-            'agerestrcitions' => $agerestrcitions,
+            'agerestrictions' => $agerestrictions,
         )
       );
     }

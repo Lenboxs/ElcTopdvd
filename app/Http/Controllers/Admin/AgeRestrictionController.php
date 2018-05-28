@@ -34,11 +34,11 @@ class AgeRestrictionController extends Controller
      */
     public function index()
     {
-       $agerestriction = AgeRestriction::all();
-
        $title = 'Manage Age Restriction';
 
-       return view( 'admin.agerestrictions.agerestrictions' )->withAgeRestriction( $agerestriction )->withTitle( $title );
+       $agerestrictions = AgeRestriction::all();
+
+       return view( 'admin.agerestrictions.agerestrictions' )->withAgerestrictions( $agerestrictions )->withTitle( $title );
     }
 
     /**
@@ -62,7 +62,7 @@ class AgeRestrictionController extends Controller
 
       $types = Type::all();
 
-      $agerestrcitions = AgeRestriction::all();
+      $agerestrictions = AgeRestriction::all();
 
       return view( 'admin.pages.settings',
         array(
@@ -72,7 +72,7 @@ class AgeRestrictionController extends Controller
             'branches' => $branches,
             'genres' => $genres,
             'types' => $types,
-            'agerestrcitions' => $agerestrcitions,
+            'agerestrictions' => $agerestrictions,
         )
       );
     }
@@ -135,7 +135,7 @@ class AgeRestrictionController extends Controller
             'branches' => $branches,
             'genres' => $genres,
             'types' => $types,
-            'agerestrcition' => $agerestrcition,
+            'agerestriction' => $agerestriction,
         )
       );
     }
