@@ -15,22 +15,21 @@ class CreateSeriesTypeTable extends Migration
      {
        Schema::create('series_type', function (Blueprint $table) {
            $table->increments('id');
-           $table->integer('movie_id')->unsigned();
-           $table->integer('series_id')->unsigned();
+           $table->integer('series_branch_id')->unsigned();
+           $table->integer('type_id')->unsigned();
 
            $table->timestamps();
        });
 
        Schema::table('series_type', function ($table) {
 
-           $table->foreign('movie_id' , 'movie_series_id')->references('id')->on('movies')->onDelete('cascade')->onUpdate('cascade');
-           $table->foreign('series_id' , 'series_movie_id')->references('id')->on('series')->onDelete('cascade')->onUpdate('cascade');
+           $table->foreign('series_branch_id' , 'series_branch_type_id')->references('id')->on('series_branch')->onDelete('cascade')->onUpdate('cascade');
+           $table->foreign('type_id' , 'type_branch_series_id')->references('id')->on('types')->onDelete('cascade')->onUpdate('cascade');
        });
      }
 
      /**
       * Reverse the migrations.
-      *
       * @return void
       */
      public function down()

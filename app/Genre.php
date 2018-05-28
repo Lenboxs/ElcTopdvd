@@ -11,5 +11,15 @@ class Genre extends Model
      *
      * @var string
      */
-    protected $table = 'genre';
+    protected $table = 'genres';
+
+    public function movie()
+  	{
+  			return $this->belongsToMany( 'App\Movie', 'movie_genre', 'genre_id' , 'movie_id')->using( 'App\MovieGenre' )->withTimestamps();
+  	}
+
+    public function series()
+    {
+        return $this->belongsToMany( 'App\Series', 'series_genre', 'genre_id' , 'series_id')->using( 'App\SeriesGenre' )->withTimestamps();
+    }
 }

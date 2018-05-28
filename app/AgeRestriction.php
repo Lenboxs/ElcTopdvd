@@ -12,4 +12,14 @@ class AgeRestriction extends Model
      * @var string
      */
     protected $table = 'age_restricton';
+
+    public function movie()
+    {
+        return $this->belongsTo( 'App\Movie');
+    }
+
+    public function series()
+    {
+        return $this->belongsTo( 'App\Series');
+    }
 }

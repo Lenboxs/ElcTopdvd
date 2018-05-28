@@ -16,15 +16,15 @@ class CreateToptenSeriesTable extends Migration
       Schema::create('topten_series', function (Blueprint $table) {
           $table->increments('id');
           $table->integer('topten_id')->unsigned();
-          $table->integer('movie_id')->unsigned();
+          $table->integer('series_id')->unsigned();
           $table->integer('sort');
           $table->timestamps();
       });
 
       Schema::table('topten_series', function ($table) {
 
-          $table->foreign('movie_id' , 'movie_topten_id')->references('id')->on('movies')->onDelete('cascade')->onUpdate('cascade');
-          $table->foreign('topten_id' , 'topten_movie_id')->references('id')->on('top_ten_page')->onDelete('cascade')->onUpdate('cascade');
+          $table->foreign('series_id' , 'series_topten_id')->references('id')->on('series')->onDelete('cascade')->onUpdate('cascade');
+          $table->foreign('topten_id' , 'topten_series_id')->references('id')->on('top_ten_page')->onDelete('cascade')->onUpdate('cascade');
       });
     }
 
