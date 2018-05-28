@@ -62,7 +62,7 @@ class BranchController extends Controller
 
       $branch->save();
 
-      return redirect('admin/add-branch');
+      return redirect( 'admin/settings#branches' );
     }
 
     /**

@@ -44,7 +44,7 @@ class AgeRestrictionController extends Controller
     {
       $title = "Add New Age Restriction";
 
-      return view( 'admin.agerestrictions.add' )->withTitle( $title );
+      return view( 'admin.pages.settings' )->withTitle( $title );
     }
 
     /**
@@ -61,7 +61,7 @@ class AgeRestrictionController extends Controller
 
       $agerestriction->save();
 
-      return redirect('admin/add-agerestriction');
+      return redirect( 'admin/settings#age-restrictions' );
     }
 
     /**
@@ -105,7 +105,7 @@ class AgeRestrictionController extends Controller
 
       $agerestriction->save();
 
-      return redirect('admin/agerestrictions');
+      return redirect( 'admin/settings#age-restrictions' );
     }
 
     /**
@@ -120,7 +120,7 @@ class AgeRestrictionController extends Controller
 
       $agerestriction->delete();
 
-      return redirect('admin/agerestrictions');
+      return redirect( 'admin/settings#age-restrictions' );
   }
 
 }

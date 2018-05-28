@@ -42,7 +42,7 @@ class GenreController extends Controller
     {
       $title = "Add New Genre";
 
-      return view( 'admin.genres.add' )->withTitle( $title );
+      return view( 'admin.pages.settings' )->withTitle( $title );
     }
 
     /**
@@ -59,7 +59,7 @@ class GenreController extends Controller
 
       $genre->save();
 
-      return redirect('admin/add-genre');
+      return redirect( 'admin/settings#genres' );
     }
 
     /**
@@ -103,7 +103,7 @@ class GenreController extends Controller
 
       $genre->save();
 
-      return redirect('admin/genres');
+      return redirect( 'admin/settings#genres' );
     }
 
     /**
@@ -114,11 +114,10 @@ class GenreController extends Controller
      */
     public function destroy($id)
     {
-      $genre = Genre::find($id);
+        $genre = Genre::find($id);
 
-      $genre->delete();
+        $genre->delete();
 
-      return redirect('admin/genres');
-  }
-
+        return redirect( 'admin/settings#genres' );
+     }
 }

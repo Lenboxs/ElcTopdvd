@@ -42,7 +42,7 @@ class TypeController extends Controller
     {
       $title = "Add New Type";
 
-      return view( 'admin.types.add' )->withTitle( $title );
+      return view( 'admin.pages.settings' )->withTitle( $title );
     }
 
     /**
@@ -59,7 +59,7 @@ class TypeController extends Controller
 
       $type->save();
 
-      return redirect('admin/add-type');
+      return redirect( 'admin/settings#types' );
     }
 
     /**
@@ -103,7 +103,7 @@ class TypeController extends Controller
 
       $type->save();
 
-      return redirect('admin/types');
+      return redirect( 'admin/settings#types' );
     }
 
     /**
@@ -118,7 +118,6 @@ class TypeController extends Controller
 
       $type->delete();
 
-      return redirect('admin/types');
-  }
-
+      return redirect( 'admin/settings#types' );
+    }
 }

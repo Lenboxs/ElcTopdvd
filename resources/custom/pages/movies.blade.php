@@ -17,7 +17,7 @@
               </select>
           </div>
           <div class="col-md-3">
-              <label>Sort Movies</label>
+              <label>Select a Type</label>
               <select class="form-control">
                 <option value="all" selected>All</option>
               </select>
