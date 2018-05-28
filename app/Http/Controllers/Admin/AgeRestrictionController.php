@@ -7,7 +7,13 @@ use App\Http\Controllers\Controller;
 
 use App\Http\Requests\Admin\AgeRestrictionFormRequest;
 
+use App\Settings;
+use App\SocialMedia;
+use App\Branch;
+use App\Type;
+use App\Genre;
 use App\AgeRestriction;
+use App\Recaptcha;
 
 class AgeRestrictionController extends Controller
 {
@@ -44,7 +50,31 @@ class AgeRestrictionController extends Controller
     {
       $title = "Add New Age Restriction";
 
-      return view( 'admin.pages.settings' )->withTitle( $title );
+      $settings = Settings::orderBy( 'id', 'desc' )->first();
+
+      $social_media = SocialMedia::orderBy( 'id', 'desc' )->first();
+
+      $recaptcha = Recaptcha::orderBy( 'id', 'desc' )->first();
+
+      $branches = Branch::all();
+
+      $genres = Genre::all();
+
+      $types = Type::all();
+
+      $agerestrcitions = AgeRestriction::all();
+
+      return view( 'admin.pages.settings',
+        array(
+            'title' => $title,
+            'settings' => $settings,
+            'socialmedia' => $social_media,
+            'branches' => $branches,
+            'genres' => $genres,
+            'types' => $types,
+            'agerestrcitions' => $agerestrcitions,
+        )
+      );
     }
 
     /**
@@ -87,7 +117,27 @@ class AgeRestrictionController extends Controller
 
       $agerestriction = AgeRestriction::find( $id );
 
-      return view( 'admin.pages.settings' )->withTitle( $title )->withAgeRestriction( $agerestriction );
+      $settings = Settings::orderBy( 'id', 'desc' )->first();
+
+      $social_media = SocialMedia::orderBy( 'id', 'desc' )->first();
+
+      $recaptcha = Recaptcha::orderBy( 'id', 'desc' )->first();
+
+      $genres = Genre::all();
+
+      $types = Type::all();
+
+      return view( 'admin.pages.settings',
+        array(
+            'title' => $title,
+            'settings' => $settings,
+            'socialmedia' => $social_media,
+            'branches' => $branches,
+            'genres' => $genres,
+            'types' => $types,
+            'agerestrcition' => $agerestrcition,
+        )
+      );
     }
 
     /**

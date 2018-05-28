@@ -5,12 +5,27 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Movie;
+use App\Genre;
+use App\Branch;
+use App\Type;
 
 class MovieController extends Controller
 {
       public function movies()
        {
-           return view( 'pages.movies' );
+         $branches = Branch::all();
+
+         $genres = Genre::all();
+
+         $types = Type::all();
+
+         return view( 'pages.movies',
+           array(
+             'branches' => $branches,
+             'genres' => $genres,
+             'types' => $types,
+           )
+         );
        }
 
      public function movie( $slug )

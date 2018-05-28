@@ -4,8 +4,15 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Type;
 use App\Http\Requests\Admin\TypeFormRequest;
+
+use App\Settings;
+use App\SocialMedia;
+use App\Branch;
+use App\Type;
+use App\Genre;
+use App\AgeRestriction;
+use App\Recaptcha;
 
 class TypeController extends Controller
 {
@@ -42,7 +49,31 @@ class TypeController extends Controller
     {
       $title = "Add New Type";
 
-      return view( 'admin.pages.settings' )->withTitle( $title );
+      $settings = Settings::orderBy( 'id', 'desc' )->first();
+
+      $social_media = SocialMedia::orderBy( 'id', 'desc' )->first();
+
+      $recaptcha = Recaptcha::orderBy( 'id', 'desc' )->first();
+
+      $branches = Branch::all();
+
+      $genres = Genre::all();
+
+      $types = Type::all();
+
+      $agerestrcitions = AgeRestriction::all();
+
+      return view( 'admin.pages.settings',
+        array(
+            'title' => $title,
+            'settings' => $settings,
+            'socialmedia' => $social_media,
+            'branches' => $branches,
+            'genres' => $genres,
+            'types' => $types,
+            'agerestrcitions' => $agerestrcitions,
+        )
+      );
     }
 
     /**
@@ -85,7 +116,29 @@ class TypeController extends Controller
 
       $type = Type::find( $id );
 
-      return view( 'admin.pages.settings' )->withTitle( $title )->withType( $type );
+      $settings = Settings::orderBy( 'id', 'desc' )->first();
+
+      $social_media = SocialMedia::orderBy( 'id', 'desc' )->first();
+
+      $recaptcha = Recaptcha::orderBy( 'id', 'desc' )->first();
+
+      $branches = Branch::all();
+
+      $genres = Genre::all();
+
+      $agerestrcitions = AgeRestriction::all();
+
+      return view( 'admin.pages.settings',
+        array(
+            'title' => $title,
+            'settings' => $settings,
+            'socialmedia' => $social_media,
+            'branches' => $branches,
+            'genres' => $genres,
+            'type' => $type,
+            'agerestrcitions' => $agerestrcitions,
+        )
+      );
     }
 
     /**

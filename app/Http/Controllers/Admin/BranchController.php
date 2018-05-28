@@ -4,8 +4,15 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Branch;
 use App\Http\Requests\Admin\BranchFormRequest;
+
+use App\Settings;
+use App\SocialMedia;
+use App\Branch;
+use App\Type;
+use App\Genre;
+use App\AgeRestriction;
+use App\Recaptcha;
 
 class BranchController extends Controller
 {
@@ -28,7 +35,7 @@ class BranchController extends Controller
     {
        $branches = Branch::all();
 
-       $title = 'Manage Branchs';
+       $title = 'Manage Branches';
 
        return view( 'admin.branches.branches' )->withBranches( $branches )->withTitle( $title );
     }
@@ -42,7 +49,31 @@ class BranchController extends Controller
     {
         $title = "Add New Branch";
 
-        return view( 'admin.pages.settings' )->withTitle( $title );
+        $settings = Settings::orderBy( 'id', 'desc' )->first();
+
+        $social_media = SocialMedia::orderBy( 'id', 'desc' )->first();
+
+        $recaptcha = Recaptcha::orderBy( 'id', 'desc' )->first();
+
+        $branches = Branch::all();
+
+        $genres = Genre::all();
+
+        $types = Type::all();
+
+        $agerestrcitions = AgeRestriction::all();
+
+        return view( 'admin.pages.settings',
+          array(
+              'title' => $title,
+              'settings' => $settings,
+              'socialmedia' => $social_media,
+              'branches' => $branches,
+              'genres' => $genres,
+              'types' => $types,
+              'agerestrcitions' => $agerestrcitions,
+          )
+        );
     }
 
     /**
@@ -88,7 +119,29 @@ class BranchController extends Controller
 
       $branch = Branch::find( $id );
 
-      return view( 'admin.pages.settings' )->withTitle( $title )->withBranch( $branch );
+      $settings = Settings::orderBy( 'id', 'desc' )->first();
+
+      $social_media = SocialMedia::orderBy( 'id', 'desc' )->first();
+
+      $recaptcha = Recaptcha::orderBy( 'id', 'desc' )->first();
+
+      $genres = Genre::all();
+
+      $types = Type::all();
+
+      $agerestrcitions = AgeRestriction::all();
+
+      return view( 'admin.pages.settings',
+        array(
+            'title' => $title,
+            'settings' => $settings,
+            'socialmedia' => $social_media,
+            'branch' => $branch,
+            'genres' => $genres,
+            'types' => $types,
+            'agerestrcitions' => $agerestrcitions,
+        )
+      );
     }
 
     /**

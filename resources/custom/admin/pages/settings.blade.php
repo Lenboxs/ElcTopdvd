@@ -10,6 +10,7 @@
 @endpush
 
 @section( 'content' )
+<div id="msg" class="msg"></div>
 <!-- Main content -->
     <section class="content">
 <div class="row">
@@ -128,11 +129,7 @@
         <!-- /.tab-pane -->
 
         <div class="tab-pane" id="recaptcha">
-          <div class="row">
-            <div class="col-md-12">
-                @includeif( 'admin.recaptcha.edit' )
-            </div>
-          </div>
+            @includeif( 'admin.recaptcha.edit' )
         </div>
         <!-- /.tab-pane -->
 
@@ -221,9 +218,9 @@
 <!-- FastClick -->
 <script src="{{ asset( 'bower_components/fastclick/lib/fastclick.js' ) }}"></script>
 <!-- AdminLTE App -->
-<script src="{{ asset( 'dist/js/adminlte.min.js' ) }}"></script>
+<script src="{{ asset( 'js/adminlte.min.js' ) }}"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="{{ asset( 'dist/js/demo.js' ) }}"></script>
+<script src="{{ asset( 'js/demo.js' ) }}"></script>
 @endpush
 
 @push( 'custom-scripts' )
@@ -249,5 +246,6 @@
     $( '#remove_' + this.id ).val( 'true' );
     $( '#' + this.id + '_file' ).hide( "slow" );
   });
+
 </script>
 @endpush

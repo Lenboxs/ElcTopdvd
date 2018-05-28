@@ -14,18 +14,33 @@
               <label>Select a Branch</label>
               <select class="form-control">
                 <option value="all" selected>All</option>
+                @if( !empty( $branches ) )
+                    @foreach( $branches as $branch )
+                      <option value="{{ $branch->id }}">{{ $branch->name }}</option>
+                    @endforeach
+                @endif
+              </select>
+          </div>
+          <div class="col-md-3">
+              <label>Select a Category</label>
+              <select class="form-control">
+                <option value="all" selected>All</option>
+                @if( !empty( $genres ) )
+                    @foreach( $genres as $genre )
+                      <option value="{{ $genre->id }}">{{ $genre->name }}</option>
+                    @endforeach
+                @endif
               </select>
           </div>
           <div class="col-md-3">
               <label>Select a Type</label>
               <select class="form-control">
                 <option value="all" selected>All</option>
-              </select>
-          </div>
-          <div class="col-md-3">
-              <label>Sort Movies</label>
-              <select class="form-control">
-                <option value="all" selected>All</option>
+                @if( !empty( $types ) )
+                    @foreach( $types as $type )
+                      <option value="{{ $type->id }}">{{ $type->name }}</option>
+                    @endforeach
+                @endif
               </select>
           </div>
           <div class="col-md-3">
