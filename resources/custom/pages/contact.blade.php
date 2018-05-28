@@ -2,91 +2,107 @@
 
 @section( 'content' )
 
-<h1>Contact Us</h1>
+<h1><div class="display-4 p-3 bg-success text-white">Contact Us</div></h1>
 
-<div class="container">
-	<div class="row">
-      <div class="col-md-6 col-md-offset-3">
-        <div class="well well-sm">
-          <form class="form-horizontal" action="{{ route( 'contact' ) }}" method="post">
-          <fieldset>
-            <legend class="text-center">Contact us</legend>
+<div class="content bg-dark text-white">
 
-						<input type="hidden" name="_token" value="{{ csrf_token() }}" />
+    <div class="main-content">
 
-						@if( Session::has( 'success' ) )
-							<p class="alert alert-success">{{ Session::get( 'success' ) }}</p>
-						@endif
+				<div class="container">
 
-						<!-- Branch input-->
-            <div class="form-group{{ $errors->has( 'contact_branch' ) ? ' has-error' : '' }}">
-              <label class="col-md-3 control-label" for="contact_branch">Select a branch:</label>
-              <div class="col-md-9">
-								<select id="contact_branch" name="contact_branch" class="form-control">
-									<option value="">Select a Branch</option>
-									<option value="George">George</option>
-									<option value="Knysna">Knysna</option>
-								</select>
+					<div class="row">
 
-								@if( $errors->has( 'contact_branch' ) )
-                    <span class="help-block">
-                        <strong>{{ $errors->first( 'contact_branch' ) }}</strong>
-                    </span>
-                @endif
-              </div>
-            </div>
+				      <div class="col-md-6 col-md-offset-3">
 
-            <!-- Name input-->
-            <div class="form-group{{ $errors->has( 'contact_name' ) ? ' has-error' : '' }}">
-              <label class="col-md-3 control-label" for="contact_name">Name</label>
-              <div class="col-md-9">
-                <input id="contact_name" name="contact_name" type="text" placeholder="Your name" class="form-control">
+				        <div class="well well-sm">
 
-								@if( $errors->has( 'contact_name' ) )
-                    <span class="help-block">
-                        <strong>{{ $errors->first( 'contact_name' ) }}</strong>
-                    </span>
-                @endif
-              </div>
-            </div>
+				          <form class="form-horizontal" action="{{ route( 'contact' ) }}" method="post">
+				          <fieldset>
 
-            <!-- Email input-->
-            <div class="form-group{{ $errors->has( 'contact_email' ) ? ' has-error' : '' }}">
-              <label class="col-md-3 control-label" for="contact_email">Your E-mail</label>
-              <div class="col-md-9">
-                <input id="contact_email" name="contact_email" type="text" placeholder="Your email" class="form-control">
-								@if( $errors->has( 'contact_email' ) )
-                    <span class="help-block">
-                        <strong>{{ $errors->first( 'contact_email' ) }}</strong>
-                    </span>
-                @endif
-              </div>
-            </div>
+										<input type="hidden" name="_token" value="{{ csrf_token() }}" />
 
-            <!-- Message body -->
-            <div class="form-group{{ $errors->has( 'contact_message' ) ? ' has-error' : '' }}">
-              <label class="col-md-3 control-label" for="contact_message">Your message</label>
-              <div class="col-md-9">
-                <textarea class="form-control" id="contact_message" name="contact_message" placeholder="Please enter your message here..." rows="5"></textarea>
-								@if( $errors->has( 'contact_message' ) )
-                    <span class="help-block">
-                        <strong>{{ $errors->first( 'contact_message' ) }}</strong>
-                    </span>
-                @endif
-              </div>
-            </div>
+										@if( Session::has( 'success' ) )
+											<p class="alert alert-success">{{ Session::get( 'success' ) }}</p>
+										@endif
 
-            <!-- Form actions -->
-            <div class="form-group">
-              <div class="col-md-12 text-right">
-                <button type="contact_submit" class="btn btn-primary">Submit</button>
-              </div>
-            </div>
-          </fieldset>
-          </form>
-        </div>
-      </div>
-	</div>
+										<!-- Branch input-->
+				            <div class="form-group{{ $errors->has( 'contact_branch' ) ? ' has-error' : '' }}">
+				              <label class="col-md-3 control-label" for="contact_branch">Select a branch:</label>
+				              <div class="col-md-9">
+												<select id="contact_branch" name="contact_branch" class="form-control">
+													<option value="">Select a Branch</option>
+													<option value="George">George</option>
+													<option value="Knysna">Knysna</option>
+												</select>
+
+												@if( $errors->has( 'contact_branch' ) )
+				                    <span class="help-block">
+				                        <strong>{{ $errors->first( 'contact_branch' ) }}</strong>
+				                    </span>
+				                @endif
+				              </div>
+				            </div>
+
+				            <!-- Name input-->
+				            <div class="form-group{{ $errors->has( 'contact_name' ) ? ' has-error' : '' }}">
+				              <label class="col-md-3 control-label" for="contact_name">Name</label>
+				              <div class="col-md-9">
+				                <input id="contact_name" name="contact_name" type="text" placeholder="Your name" class="form-control">
+
+												@if( $errors->has( 'contact_name' ) )
+				                    <span class="help-block">
+				                        <strong>{{ $errors->first( 'contact_name' ) }}</strong>
+				                    </span>
+				                @endif
+				              </div>
+				            </div>
+
+				            <!-- Email input-->
+				            <div class="form-group{{ $errors->has( 'contact_email' ) ? ' has-error' : '' }}">
+				              <label class="col-md-3 control-label" for="contact_email">Your E-mail</label>
+				              <div class="col-md-9">
+				                <input id="contact_email" name="contact_email" type="text" placeholder="Your email" class="form-control">
+												@if( $errors->has( 'contact_email' ) )
+				                    <span class="help-block">
+				                        <strong>{{ $errors->first( 'contact_email' ) }}</strong>
+				                    </span>
+				                @endif
+				              </div>
+				            </div>
+
+				            <!-- Message body -->
+				            <div class="form-group{{ $errors->has( 'contact_message' ) ? ' has-error' : '' }}">
+				              <label class="col-md-3 control-label" for="contact_message">Your message</label>
+				              <div class="col-md-9">
+				                <textarea class="form-control" id="contact_message" name="contact_message" placeholder="Please enter your message here..." rows="5"></textarea>
+												@if( $errors->has( 'contact_message' ) )
+				                    <span class="help-block">
+				                        <strong>{{ $errors->first( 'contact_message' ) }}</strong>
+				                    </span>
+				                @endif
+				              </div>
+				            </div>
+
+				            <!-- Form actions -->
+				            <div class="form-group">
+				              <div class="col-md-12 text-right">
+				                <button type="contact_submit" class="btn btn-primary">Submit</button>
+				              </div>
+				            </div>
+
+				          </fieldset>
+
+				          </form>
+
+				        </div>
+
+				      </div>
+
+					</div>
+
+				</div>
+
+		</div>
+
 </div>
-
 @endsection

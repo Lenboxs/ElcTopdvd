@@ -6,10 +6,8 @@
 
 .header{
   background: #333;
-  padding: 14px;
+  padding: 14px 0px;
   color: #eee;
-  text-align: center;
-  height: 100px;
 }
 
 .header .navbar-default {
@@ -50,9 +48,12 @@
   color: #ffffff !important;
   border-radius: 5px;
   transition: .2s all;
+  padding: 12px 20px;
+  margin: 10px 0px;
 }
 
 .register:hover {
+  text-decoration: none;
   background: #0e541a !important;
 }
 
@@ -61,6 +62,11 @@
   border-color: #d3e0e9;
   border: 0px;
   margin-bottom: 0px;
+}
+
+.navbar {
+    padding-left: 0px !important;
+    padding-right: 0px !important;
 }
 
 .navbar-default .navbar-nav>li>a, .navbar-default .navbar-text {
@@ -131,6 +137,7 @@
 
 h1{
   text-align: center;
+  margin: 0 !important;
 }
 
 .heading{
@@ -157,4 +164,27 @@ h1{
 .background-block{
   padding: 1% 10% 5%;
   background: #198c2d;
+}
+
+
+
+
+.bg-darker{
+  background: #222 !important;
+}
+
+.bg-dark2{
+  background: #434b54 !important;
+}
+
+.bg-dark3{
+  background: #20272d !important;
+}
+
+.bg-feat{
+  background: #222 !important;
+}
+
+.text-feat{
+  color: #222 !important;
 }

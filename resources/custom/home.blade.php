@@ -9,7 +9,7 @@
         <div class="background-block">
         <!--div class="container"-->
 
-          <h1 class="heading">Joyful June</h1>
+          <h1 class="heading display-4">Joyful June</h1>
 
           <div class="row">
               <div class="col-md-4">

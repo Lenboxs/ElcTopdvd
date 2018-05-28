@@ -1,13 +1,40 @@
 @extends( 'templates.main' )
 
 @section( 'content' )
-
-<div class="content">
+<h1><div class="display-4 p-3 bg-info text-white">Movies</div></h1>
+<div class="content ">
   <div class="content-background"></div>
   <div class="content-overlay"></div>
     <div class="main-content">
 
       <div class="container">
+
+        <div class="row">
+          <div class="col-md-3">
+              <label>Select a Branch</label>
+              <select class="form-control">
+                <option value="all" selected>All</option>
+              </select>
+          </div>
+          <div class="col-md-3">
+              <label>Sort Movies</label>
+              <select class="form-control">
+                <option value="all" selected>All</option>
+              </select>
+          </div>
+          <div class="col-md-3">
+              <label>Sort Movies</label>
+              <select class="form-control">
+                <option value="all" selected>All</option>
+              </select>
+          </div>
+          <div class="col-md-3">
+              <label>Sort Movies</label>
+              <select class="form-control">
+                <option value="all" selected>All</option>
+              </select>
+          </div>
+        </div>
 
         <div class="row">
             <div class="col-md-2">

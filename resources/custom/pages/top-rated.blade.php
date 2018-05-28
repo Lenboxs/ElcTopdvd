@@ -2,7 +2,7 @@
 
 @section( 'content' )
 
-<h1>Top Rated</h1>
+<h1><div class="display-4 p-3 bg-info text-white">Top Rated</div></h1>
 
 {{ $title }}
 
