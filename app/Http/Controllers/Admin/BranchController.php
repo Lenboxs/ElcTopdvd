@@ -40,9 +40,9 @@ class BranchController extends Controller
      */
     public function create()
     {
-      $title = "Add New Branch";
+        $title = "Add New Branch";
 
-      return view( 'admin.branches.add' )->withTitle( $title );
+        return view( 'admin.pages.settings' )->withTitle( $title );
     }
 
     /**
@@ -88,7 +88,7 @@ class BranchController extends Controller
 
       $branch = Branch::find( $id );
 
-      return view( 'admin.branches.edit' )->withTitle( $title )->withBranch( $branch );
+      return view( 'admin.pages.settings' )->withTitle( $title )->withBranch( $branch );
     }
 
     /**
@@ -100,16 +100,16 @@ class BranchController extends Controller
      */
     public function update(BranchFormRequest $request)
     {
-      $branch = Branch::find($request->input('id'));
+        $branch = Branch::find($request->input('id'));
 
-      $branch->name = !empty($request->input('name')) ? $request->input('name') : '';
-      $branch->email = !empty($request->input('email')) ? $request->input('email') : '';
-      $branch->contact_number = !empty($request->input('contact_number')) ? $request->input('contact_number') : '';
-      $branch->address = !empty($request->input('address')) ? $request->input('address') : '';
+        $branch->name = !empty($request->input('name')) ? $request->input('name') : '';
+        $branch->email = !empty($request->input('email')) ? $request->input('email') : '';
+        $branch->contact_number = !empty($request->input('contact_number')) ? $request->input('contact_number') : '';
+        $branch->address = !empty($request->input('address')) ? $request->input('address') : '';
 
-      $branch->save();
+        $branch->save();
 
-      return redirect('admin/branches');
+        return redirect( 'admin/settings#branches' );
     }
 
     /**
@@ -120,11 +120,19 @@ class BranchController extends Controller
      */
     public function destroy($id)
     {
-      $branch = Branch::find($id);
+        $branch = Branch::find($id);
 
-      $branch->delete();
+        $branch->delete();
 
-      return redirect('admin/branches');
-  }
+        return redirect( 'admin/settings#branches' );
+    }
 
+    public function manage()
+    {
+        $title = "Manage Branch Movies";
+
+        $branches = Branch::all();
+
+        return view( 'admin.branches.manage' )->withTitle( $title )->withBranches( $branches );
+    }
 }

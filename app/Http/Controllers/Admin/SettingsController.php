@@ -9,6 +9,11 @@ use App\Helpers\UploadService;
 
 use App\Settings;
 use App\SocialMedia;
+use App\Branch;
+use App\Type;
+use App\Genre;
+use App\AgeRestriction;
+use App\Recaptcha;
 
 class SettingsController extends Controller
 {
@@ -78,7 +83,27 @@ class SettingsController extends Controller
 
         $social_media = SocialMedia::orderBy( 'id', 'desc' )->first();
 
-        return view( 'admin.pages.settings' )->withTitle( $title )->withSettings( $settings )->withSocialmedia( $social_media );
+        $recaptcha = Recaptcha::orderBy( 'id', 'desc' )->first();
+
+        $branches = Branch::all();
+
+        $genres = Genre::all();
+
+        $types = Type::all();
+
+        $agerestrcitions = AgeRestriction::all();
+
+        return view( 'admin.pages.settings',
+          array(
+              'title' => $title,
+              'settings' => $settings,
+              'socialmedia' => $social_media,
+              'branches' => $branches,
+              'genres' => $genres,
+              'types' => $types,
+              'agerestrcitions' => $agerestrcitions,
+          )
+        );
     }
 
     /**

@@ -89,7 +89,7 @@ class SocialMediaController extends Controller
 
         $socialmedia->save();
 
-        return redirect('admin/settings#tab2');
+        return redirect('admin/settings#social-media');
     }
 
     /**

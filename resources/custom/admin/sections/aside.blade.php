@@ -17,9 +17,10 @@
         <div class="input-group">
           <input type="text" name="q" class="form-control" placeholder="Search...">
           <span class="input-group-btn">
-                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
+                <button type="submit" name="search" id="search-btn" class="btn btn-flat">
+                    <i class="fa fa-search"></i>
                 </button>
-              </span>
+          </span>
         </div>
       </form>
       <!-- /.search form -->
@@ -74,18 +75,11 @@
             <li class="@if( Request::is( '*admin/series*' ) ) active @endif"><a href="{{ url( 'admin/series' ) }}"><i class="fa fa-circle-o"></i> Manage Series</a></li>
           </ul>
         </li>
-        <li class="@if( Request::is( '*branch*' ) ) active @endif treeview">
-          <a href="#">
+        <li class="@if( Request::is( 'admin/manage-branches' ) ) active @endif">
+          <a href="{{ url( 'admin/manage-branches' ) }}">
             <i class="fa fa-folder"></i>
-            <span>Branches</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
+            <span>Manage Branches</span>
           </a>
-          <ul class="treeview-menu">
-            <li class="@if( Request::is( '*admin/add-branch*' ) ) active @endif"><a href="{{ url( 'admin/add-branch' ) }}"><i class="fa fa-circle-o"></i> Add New Branch</a></li>
-            <li class="@if( Request::is( '*admin/branches*' ) ) active @endif"><a href="{{ url( 'admin/branches' ) }}"><i class="fa fa-circle-o"></i> Manage Branches</a></li>
-          </ul>
         </li>
         <li class="@if( Request::is( '*user*' ) ) active @endif">
           <a href="{{ url( 'admin/users' ) }}">

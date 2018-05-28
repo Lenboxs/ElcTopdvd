@@ -1,95 +1,64 @@
-@extends( 'admin.layouts.admin' )
-
-@section( 'title' )
-{{ $title }}
-@endsection
-
-@push('styles')
-<!-- DataTables -->
-  <link rel="stylesheet" href="{{ asset('bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css' ) }}">
-@endpush
-
-@section( 'content' )
-
-<!-- Main content -->
-    <section class="content">
-      <div class="row">
-        <div class="col-xs-12">
-
-          <div class="box">
-            <div class="box-header">
-              <h3 class="box-title">{{ !empty( $title ) ? $title : 'All Branches' }}</h3>
+    <div class="panel panel-default panel-table">
+        <div class="panel-heading">
+            <div class="row">
+                <div class="col col-xs-6">
+                    <h3 class="panel-title">Branches</h3>
+                </div>
+                <div class="col col-xs-6 text-right">
+                    <a href="{{ url( 'admin/add-branch#branches' ) }}" class="btn btn-success btn-sm">Add New Branch</a>
+                </div>
             </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-              <table id="example1" class="table table-bordered table-striped">
-                <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Email</th>
-                  <th>Contact Number</th>
-                  <th>Action</th>
-                </tr>
-                </thead>
-                <tbody>
-
-                  @if( !empty( $branches ) )
-                    @foreach( $branches as $branch )
-
-                      <tr>
-                        <td>{{ ( !empty( $branch ) && !empty($branch->name ) ) ? $branch->name : '' }}</td>
-                        <td>{{ ( !empty( $branch ) && !empty($branch->email ) ) ? $branch->email : '' }}</td>
-                        <td>{{ ( !empty( $branch ) && !empty($branch->contact_number ) ) ? $branch->contact_number : '' }}</td>
-                        <td>
-                          <a href="{{ url( 'admin/edit-branch/' . $branch->id ) }}" class="btn btn-warning btn-sm">Edit</a>
-                          <a href="{{ url( 'admin/delete-branch/' . $branch->id ) }}" class="btn btn-sm btn-danger">Delete</a>
-                        </td>
-                      </tr>
-
-                    @endforeach
-                  @endif
-
-                </tbody>
-                <tfoot>
-                <tr>
-                  <th>Name</th>
-                  <th>Email</th>
-                  <th>Contact Number</th>
-                  <th>Action</th>
-                </tr>
-                </tfoot>
-              </table>
-            </div>
-            <!-- /.box-body -->
-          </div>
-          <!-- /.box -->
         </div>
-        <!-- /.col -->
-      </div>
-      <!-- /.row -->
-    </section>
-    <!-- /.content -->
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-12">
+                  <table id="branchestable" class="table table-bordered table-striped">
+                    <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Email</th>
+                      <th>Contact Number</th>
+                      <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
 
-@endsection
+                      @if( !empty( $branches ) )
+                        @foreach( $branches as $branch )
 
-@push('scripts')
-<!-- DataTables -->
-<script src="{{ asset( 'bower_components/datatables.net/js/jquery.dataTables.min.js' ) }}"></script>
-<script src="{{ asset( 'bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js' ) }}"></script>
-<!-- SlimScroll -->
-<script src="{{ asset( 'bower_components/jquery-slimscroll/jquery.slimscroll.min.js' ) }}"></script>
-<!-- FastClick -->
-<script src="{{ asset( 'bower_components/fastclick/lib/fastclick.js' ) }}"></script>
-<!-- AdminLTE App -->
-<script src="{{ asset( 'dist/js/adminlte.min.js' ) }}"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="{{ asset( 'dist/js/demo.js' ) }}"></script>
-@endpush
+                          <tr>
+                            <td>{{ ( !empty( $branch ) && !empty($branch->name ) ) ? $branch->name : '' }}</td>
+                            <td>{{ ( !empty( $branch ) && !empty($branch->email ) ) ? $branch->email : '' }}</td>
+                            <td>{{ ( !empty( $branch ) && !empty($branch->contact_number ) ) ? $branch->contact_number : '' }}</td>
+                            <td>
+                              <a href="{{ url( 'admin/edit-branch/' . $branch->id . "#branches" ) }}" class="btn btn-warning btn-sm">Edit</a>
+                              <a href="{{ url( 'admin/delete-branch/' . $branch->id ) }}" class="btn btn-sm btn-danger">Delete</a>
+                            </td>
+                          </tr>
 
-@push( 'custom-scripts' )
-<script>
-  $(function () {
-    $( '#example1' ).DataTable()
-  })
-</script>
-@endpush
+                        @endforeach
+                      @endif
+
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                      <th>Name</th>
+                      <th>Email</th>
+                      <th>Contact Number</th>
+                      <th>Action</th>
+                    </tr>
+                    </tfoot>
+                  </table>
+          </div>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <div class="row">
+                    <div class="col col-xs-12">
+                        <div class="pull-right">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </div>

@@ -85,6 +85,8 @@ Route::post('/admin/update-socialmedia','Admin\SocialMediaController@update')->n
 
 Route::get( '/admin/branches', 'Admin\BranchController@index' )->name( 'branches' );
 
+Route::get( '/admin/manage-branches', 'Admin\BranchController@manage' )->name( 'manage-branches' );
+
 Route::get( '/admin/add-branch', 'Admin\BranchController@create' )->name( 'add-branch' );
 
 Route::post('/admin/store-branch','Admin\BranchController@store')->name('store-branch');
@@ -94,6 +96,48 @@ Route::get( '/admin/edit-branch/{id}', 'Admin\BranchController@edit' )->name( 'e
 Route::post('/admin/update-branch','Admin\BranchController@update')->name('update-branch');
 
 Route::get( '/admin/delete-branch/{id}', 'Admin\BranchController@destroy' )->name( 'delete-branch' );
+
+//admingenres
+
+Route::get( '/admin/genres', 'Admin\GenreController@index' )->name( 'genres' );
+
+Route::get( '/admin/add-genre', 'Admin\GenreController@create' )->name( 'add-genre' );
+
+Route::post('/admin/store-genre','Admin\GenreController@store')->name( 'store-genre' );
+
+Route::get( '/admin/edit-genre/{id}', 'Admin\GenreController@edit' )->name( 'edit-genre' );
+
+Route::post('/admin/update-genre','Admin\GenreController@update')->name( 'update-genre' );
+
+Route::get( '/admin/delete-genre/{id}', 'Admin\GenreController@destroy' )->name( 'delete-genre' );
+
+//admintypes
+
+Route::get( '/admin/types', 'Admin\TypeController@index' )->name( 'types' );
+
+Route::get( '/admin/add-type', 'Admin\TypeController@create' )->name( 'add-type' );
+
+Route::post('/admin/store-type','Admin\TypeController@store')->name( 'store-type' );
+
+Route::get( '/admin/edit-type/{id}', 'Admin\TypeController@edit' )->name( 'edit-type' );
+
+Route::post('/admin/update-type','Admin\TypeController@update')->name( 'update-type' );
+
+Route::get( '/admin/delete-type/{id}', 'Admin\TypeController@destroy' )->name( 'delete-type' );
+
+//admingenres
+
+Route::get( '/admin/age-restrictions', 'Admin\AgeRestrictionController@index' )->name( 'age-restrictions' );
+
+Route::get( '/admin/add-age-restriction', 'Admin\AgeRestrictionController@create' )->name( 'add-age-restriction' );
+
+Route::post('/admin/store-age-restriction','Admin\AgeRestrictionController@store')->name( 'store-age-restriction' );
+
+Route::get( '/admin/edit-age-restriction/{id}', 'Admin\AgeRestrictionController@edit' )->name( 'edit-age-restriction' );
+
+Route::post('/admin/update-age-restriction','Admin\AgeRestrictionController@update')->name( 'update-age-restriction' );
+
+Route::get( '/admin/delete-age-restriction/{id}', 'Admin\AgeRestrictionController@destroy' )->name( 'delete-age-restriction' );
 
 //-----------------------------------------------------------------------------------------------------------------------------------------
 //homepage
