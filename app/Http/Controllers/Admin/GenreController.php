@@ -85,7 +85,7 @@ class GenreController extends Controller
 
       $genre = Genre::find( $id );
 
-      return view( 'admin.genres.edit' )->withTitle( $title )->withGenre( $genre );
+      return view( 'admin.pages.settings' )->withTitle( $title )->withGenre( $genre );
     }
 
     /**

@@ -87,7 +87,7 @@ class AgeRestrictionController extends Controller
 
       $agerestriction = AgeRestriction::find( $id );
 
-      return view( 'admin.agerestrictions.edit' )->withTitle( $title )->withAgeRestriction( $agerestriction );
+      return view( 'admin.pages.settings' )->withTitle( $title )->withAgeRestriction( $agerestriction );
     }
 
     /**

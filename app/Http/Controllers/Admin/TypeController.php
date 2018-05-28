@@ -85,7 +85,7 @@ class TypeController extends Controller
 
       $type = Type::find( $id );
 
-      return view( 'admin.types.edit' )->withTitle( $title )->withType( $type );
+      return view( 'admin.pages.settings' )->withTitle( $title )->withType( $type );
     }
 
     /**
