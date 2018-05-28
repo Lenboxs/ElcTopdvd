@@ -12,4 +12,9 @@ class Branch extends Model
    * @var string
    */
   protected $table = 'branches';
+
+  public function movies()
+  {
+      return $this->belongsToMany( 'App\Movie', 'movie_branch','branch_id','movie_id' )->using( 'App\MovieBranch' )->withTimestamps();
+  }
 }

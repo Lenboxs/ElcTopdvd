@@ -17,4 +17,34 @@ class Series extends Model
     {
         return $this->belongsToMany('App\Branch');
     }
+
+  public function agerestricton()
+    {
+        return $this->hasOne( 'App\AgeRestriction');
+    }
+
+  public function genre()
+    {
+        return $this->belongsToMany( 'App\Genre', 'series_genre', 'series_id', 'genre_id' )->using( 'App\SeriesGenre' )->withTimestamps();
+    }
+
+  public function topTen()
+    {
+        return $this->belongsToMany( 'App\TopTenPage', 'topten_series', 'movie_id', 'topten_id' )->using( 'App\TopTenSeries' )->withTimestamps();
+    }
+
+  public function topTentemp()
+    {
+        return $this->belongsToMany( 'App\TopTenPage', 'topten_series_temp', 'movie_id', 'topten_id' )->using( 'App\TopTenSeriesTemp' )->withTimestamps();
+    }
+
+  public function review()
+      {
+          return $this->morphMany('App\Review', 'reviewable');
+      }
+
+  public function rating()
+    {
+        return $this->morphMany('App\Rating', 'rateable');
+    }
 }

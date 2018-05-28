@@ -15,7 +15,7 @@ class CreateMovieTypeTable extends Migration
      {
        Schema::create('movie_type', function (Blueprint $table) {
            $table->increments('id');
-           $table->integer('movie_id')->unsigned();
+           $table->integer('movie_branch_id')->unsigned();
            $table->integer('type_id')->unsigned();
 
            $table->timestamps();
@@ -23,8 +23,8 @@ class CreateMovieTypeTable extends Migration
 
        Schema::table('movie_type', function ($table) {
 
-           $table->foreign('movie_id' , 'movie_type_id')->references('id')->on('movies')->onDelete('cascade')->onUpdate('cascade');
-           $table->foreign('type_id' , 'type_movie_id')->references('id')->on('types')->onDelete('cascade')->onUpdate('cascade');
+           $table->foreign('movie_branch_id' , 'movie_type_branch_id')->references('id')->on('movie_branch')->onDelete('cascade')->onUpdate('cascade');
+           $table->foreign('type_id' , 'branch_type_movie_id')->references('id')->on('types')->onDelete('cascade')->onUpdate('cascade');
        });
      }
 

@@ -11,6 +11,16 @@ class Type extends Model
      *
      * @var string
      */
-    protected $table = 'type';
+    protected $table = 'types';
+
+    public function movies()
+  	{
+  			return $this->belongsToMany( 'App\MovieBranch', 'movie_type','type_id' ,'movie_branch_id')->using( 'App\MovieType' )->withTimestamps();
+  	}
+
+    public function series()
+  	{
+  			return $this->belongsToMany( 'App\SeriesBranch', 'series_type','type_id' ,'series_branch_id')->using( 'App\SeriesType' )->withTimestamps();
+  	}
 
 }

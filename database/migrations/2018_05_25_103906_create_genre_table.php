@@ -13,7 +13,7 @@ class CreateGenreTable extends Migration
      */
     public function up()
     {
-      Schema::create('genre', function (Blueprint $table) {
+      Schema::create('genres', function (Blueprint $table) {
           $table->increments('id');
           $table->string('name')->nullable();
 
@@ -28,6 +28,6 @@ class CreateGenreTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('genre');
+        Schema::dropIfExists('genres');
     }
 }

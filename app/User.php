@@ -34,7 +34,11 @@ class User extends Authenticatable
 
     public function rating()
     {
-        return $this->belongsToMany( 'App\Movies', 'rating' );
+        return $this->hasMany( 'App\Rating');
+    }
+    public function review()
+    {
+        return $this->hasMany( 'App\Review');
     }
     public function isAdmin()
     {
