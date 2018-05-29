@@ -40,6 +40,17 @@
                 <input type="hidden" name="_token" value="{{ csrf_token() }}" />
                 <input type="hidden" name="remove_logo" id="remove_logo" value="false" />
 
+                <div class="form-group {{ $errors->has( 'heading' ) ? ' has-error' : '' }}">
+                  <label for="heading" class="control-label">Title</label>
+                  <input type="text" name="heading" id="heading" class="form-control" value="{{ !empty( $settings->heading ) ? $settings->heading : '' }}" />
+
+                  @if ( $errors->has( 'heading' ) )
+                    <span class="help-block">
+                      <strong>{{ $errors->first( 'heading' ) }}</strong>
+                    </span>
+                  @endif
+                </div>
+
                   <div class="form-group {{ $errors->has( 'logo' ) ? ' has-error' : '' }}">
           					<label for="logo" class="control-label">Logo</label>
           					<input type="file" name="logo" id="logo" />
@@ -57,6 +68,27 @@
           					@if ( $errors->has( 'logo' ) )
           						<span class="help-block">
           							<strong>{{ $errors->first( 'logo' ) }}</strong>
+          						</span>
+          					@endif
+          				</div>
+
+                  <div class="form-group {{ $errors->has( 'favicon' ) ? ' has-error' : '' }}">
+          					<label for="favicon" class="control-label">Favicon</label>
+          					<input type="file" name="favicon" id="favicon" />
+
+                    <p class="help-block">Choose a favicon.</p>
+
+          					<br />
+          					@if( !empty( $settings->favicon ) )
+          						<div id="favicon_file">
+          							<img class="profile-image img-responsive" src="{{ !empty( $settings->favicon ) ? url( 'img/settings/' . $settings->favicon ) : '' }}" width="200" />
+          							<br /><a class="btn btn-danger remove_file" id="favicon"><i class="fa fa-trash-o"></i> Remove file</a>
+          						</div>
+          					@endif
+
+          					@if ( $errors->has( 'favicon' ) )
+          						<span class="help-block">
+          							<strong>{{ $errors->first( 'favicon' ) }}</strong>
           						</span>
           					@endif
           				</div>

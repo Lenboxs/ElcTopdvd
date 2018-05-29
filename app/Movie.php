@@ -23,7 +23,7 @@ class Movie extends Model
         return $this->hasOne( 'App\AgeRestriction');
     }
 
-    public function genre()
+    public function genres()
     {
         return $this->belongsToMany( 'App\Genre', 'movie_genre', 'movie_id', 'genre_id' )->using( 'App\MovieGenre' )->withTimestamps();
     }

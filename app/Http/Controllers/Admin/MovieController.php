@@ -8,6 +8,8 @@ use App\Helpers\UploadService;
 use App\Http\Requests\Admin\MovieFormRequest;
 
 use App\Movie;
+use App\Branch;
+use App\Genre;
 
 class MovieController extends Controller
 {
@@ -29,7 +31,9 @@ class MovieController extends Controller
     public function index()
     {
         $movies = Movie::all();
+
         $title = 'Manage Movies';
+
         return view('admin.movies.movies')->withMovies($movies)->withTitle($title);
     }
 
@@ -40,9 +44,19 @@ class MovieController extends Controller
      */
     public function create()
     {
-      $title = "Add New Movie";
+        $title = "Add New Movie";
 
-      return view( 'admin.movies.add' )->withTitle( $title );
+        $branches = Branch::all();
+
+        $genres = Genre::all();
+
+        return view( 'admin.movies.add',
+            array(
+                'title' => $title,
+                'branches' => $branches,
+                'genres' => $genres
+            )
+        );
     }
 
     /**
@@ -51,21 +65,27 @@ class MovieController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(MovieFormRequest $request, UploadService $uploadService )
+    public function store( MovieFormRequest $request, UploadService $uploadService )
     {
         $movie = new Movie();
 
         $movie->active= !empty($request->input('active')) ? 1 : 2;
+
         $movie->new = !empty($request->input('new')) ? 1 : 2;
+
         $movie->name = !empty($request->input('name')) ? $request->input('name') : '';
+
         $movie->slug = !empty($request->input('name')) ? str_slug( $request->input('name') ) : '';
+
         $movie->description = !empty($request->input('description')) ? $request->input('description') : '';
+
         $movie->image = $this->upload( 'image', $request, $uploadService );
+
         $movie->trailerLink = $this->getTrailerLink( $request->input( 'trailerLink' ) );
 
         $movie->save();
 
-        return redirect('admin/add-movie');
+        return redirect( 'admin/add-movie' );
 
     }
 
@@ -75,7 +95,7 @@ class MovieController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show( $id )
     {
         //
     }
@@ -86,13 +106,24 @@ class MovieController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit( $id )
     {
-      $title = "Edit Movie";
+        $title = "Edit Movie";
 
-      $movie = Movie::find( $id );
+        $movie = Movie::find( $id );
 
-      return view( 'admin.movies.edit' )->withTitle( $title )->withMovie( $movie );
+        $branches = Branch::all();
+
+        $genres = Genre::all();
+
+        return view( 'admin.movies.edit',
+            array(
+                'title' => $title,
+                'movie' => $movie,
+                'branches' => $branches,
+                'genres' => $genres,
+            )
+        );
     }
 
     /**
@@ -102,41 +133,45 @@ class MovieController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(MovieFormRequest $request, UploadService $uploadService )
+    public function update( MovieFormRequest $request, UploadService $uploadService )
     {
-      $movie = Movie::find($request->input('id'));
+        $movie = Movie::find( $request->input( 'id' ) );
 
-      $movie->active= !empty($request->input('active')) ? 1 : 2;
-      $movie->new = !empty($request->input('new')) ? 1 : 2;
-      $movie->name = !empty($request->input('name')) ? $request->input('name') : '';
-      $movie->slug = !empty($request->input('name')) ? str_slug( $request->input('name') ) : '';
-      $movie->description = !empty($request->input('description')) ? $request->input('description') : '';
+        $movie->active= !empty( $request->input( 'active' ) ) ? 1 : 2;
 
-      $movie->trailerLink = $this->getTrailerLink( $request->input( 'trailerLink' ) );
+        $movie->new = !empty( $request->input( 'new' ) ) ? 1 : 2;
 
-      $status = true;
+        $movie->name = !empty( $request->input( 'name' ) ) ? $request->input( 'name' ) : '';
 
-  		if( $request->input( 'remove_image' ) == 'true' )
-  		{
-  			   $movie->image = '';
-  		}
-      elseif( !empty( $request->file( 'image' ) ) )
-  		{
-  			   $movie->image = $this->upload( 'image', $request, $uploadService );
+        $movie->slug = !empty( $request->input( 'name' ) ) ? str_slug( $request->input('name') ) : '';
 
-  			   $status = $uploadService->successful();
-  		}
+        $movie->description = !empty( $request->input( 'description' ) ) ? $request->input( 'description' ) : '';
 
-  		if( $status )
-  		{
-  			   $movie->save();
+        $movie->trailerLink = $this->getTrailerLink( $request->input( 'trailerLink' ) );
 
-  			   return redirect( 'admin/movies' );
-  		}
-  		else
-  		{
-  			   return view( 'admin.movies.edit', [ 'movie' => $movie ] );
-  		}
+        $status = true;
+
+  	  	if( $request->input( 'remove_image' ) == 'true' )
+  		  {
+  			     $movie->image = '';
+  		  }
+        elseif( !empty( $request->file( 'image' ) ) )
+  		  {
+  			     $movie->image = $this->upload( 'image', $request, $uploadService );
+
+  			     $status = $uploadService->successful();
+  	  	}
+
+  		  if( $status )
+  		  {
+  			     $movie->save();
+
+  			     return redirect( 'admin/movies' );
+  		  }
+  		  else
+  		  {
+  			     return view( 'admin.movies.edit', [ 'movie' => $movie ] );
+  		  }
     }
 
     /**

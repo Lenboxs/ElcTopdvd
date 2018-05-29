@@ -12,7 +12,7 @@
         <div class="row">
           <div class="col-md-3">
               <label>Select a Branch</label>
-              <select class="form-control">
+              <select class="form-control p-3 mb-2 bg-success text-white">
                 <option value="all" selected>All</option>
                 @if( !empty( $branches ) )
                     @foreach( $branches as $branch )

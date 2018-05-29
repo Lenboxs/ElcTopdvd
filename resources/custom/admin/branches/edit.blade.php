@@ -4,7 +4,7 @@
         <div class="col-xs-12">
 
             <div class="well">
-              
+
               <form role="form" method="POST" action="{{ url( '/admin/update-branch' ) }}">
                 <!-- text input -->
 
@@ -34,6 +34,7 @@
                             <strong>{{ $errors->first('email') }}</strong>
                         </span>
                     @endif
+
                 </div>
 
                 <div class="form-group{{ $errors->has('contact_number') ? ' has-error' : '' }}">
@@ -46,6 +47,7 @@
                             <strong>{{ $errors->first('contact_number') }}</strong>
                         </span>
                     @endif
+
                 </div>
 
                 <div class="form-group{{ $errors->has('address') ? ' has-error' : '' }}">
@@ -66,7 +68,6 @@
                 </div>
 
                 </form>
-
 
             </div>
             <!-- /.well -->

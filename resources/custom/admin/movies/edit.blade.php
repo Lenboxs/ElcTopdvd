@@ -4,6 +4,11 @@
 {{ $title }}
 @endsection
 
+@push('styles')
+<!-- Morris.js charts -->
+<link rel="stylesheet" href="{{ url( 'plugins/select2/select2.css' ) }}">
+@endpush
+
 @section( 'content' )
 
 <!-- Main content -->
@@ -106,6 +111,52 @@
                     @endif
                 </div>
 
+                <div class="form-group {{ $errors->has( 'genres' ) ? ' has-error' : '' }}">
+                    <label for="genres" class="control-label">Genres</label>
+                    <select class="form-control select2 select-primary" name="genres[]" id="genres" multiple="multiple" data-placeholder="Select a Genre" style="width: 100%;">
+                        @if( !empty( $genres ) )
+                            @foreach( $genres as $genre )
+                                <option value="{{ !empty( $genre->id ) ? $genre->id : '' }}"
+                                @foreach( $movie->genres as $movie_genre )
+                                    @if( $movie_genre->id == $genre->id )
+                                        selected
+                                    @endif
+                                @endforeach
+                                >{{ !empty( $genre->name ) ? Ucfirst( $genre->name ) : '' }}</option>
+                            @endforeach
+                        @endif
+                    </select>
+
+                    @if ( $errors->has( 'genres' ) )
+                        <span class="help-block">
+                            <strong>{{ $errors->first( 'genres' ) }}</strong>
+                        </span>
+                    @endif
+                </div>
+
+                <div class="form-group {{ $errors->has( 'branches' ) ? ' has-error' : '' }}">
+                    <label for="branches" class="control-label">Branches</label>
+                    <select class="form-control select2 select-primary" name="branches[]" id="branches" multiple="multiple" data-placeholder="Select a Branch" style="width: 100%;">
+                        @if( !empty( $branches ) )
+                            @foreach( $branches as $branch )
+                                <option value="{{ !empty( $branch->id ) ? $branch->id : '' }}"
+                                @foreach( $movie->branches as $movie_branch )
+                                    @if( $movie_branch->id == $branch->id )
+                                        selected
+                                    @endif
+                                @endforeach
+                                >{{ !empty( $branch->name ) ? Ucfirst( $branch->name ) : '' }}</option>
+                            @endforeach
+                        @endif
+                    </select>
+
+                    @if ( $errors->has( 'branches' ) )
+                        <span class="help-block">
+                            <strong>{{ $errors->first( 'branches' ) }}</strong>
+                        </span>
+                    @endif
+                </div>
+
             </div>
             <!-- /.box-body -->
             <div class="box-footer">
@@ -123,11 +174,20 @@
 
 @endsection
 
+@push('scripts')
+<script src="{{ url( 'plugins/select2/select2.full.min.js' ) }}"></script>
+@endpush
+
 @push( 'custom-scripts' )
+
 <script type="text/javascript" >
+
+  $( '.select2' ).select2();
+
   $( '.remove_file' ).click( function(e) {
     $( '#remove_' + this.id ).val( 'true' );
     $( '#' + this.id + '_file' ).hide( "slow" );
   });
+
 </script>
 @endpush

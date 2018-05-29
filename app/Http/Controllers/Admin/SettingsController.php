@@ -113,14 +113,12 @@ class SettingsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update( SettingsFormRequest $request, UploadService $uploadService )
+    public function update( Request $request, UploadService $uploadService )
     {
         $setting = Settings::orderBy( 'id', 'desc' )->first();
 
-        $setting->heading = !empty($request->input('heading')) ? $request->input('heading') : '';
-        $setting->favicon = !empty($request->input('favicon')) ? $request->input('favicon') : '';
-
-        $status = true;
+        $setting->heading = !empty( $request->input( 'heading' ) ) ? $request->input( 'heading' ) : '';
+        $setting->favicon = !empty( $request->input( 'favicon' ) ) ? $request->input( 'favicon' ) : '';
 
     		if( $request->input( 'remove_logo' ) == 'true' )
     		{
@@ -129,14 +127,18 @@ class SettingsController extends Controller
         elseif( !empty( $request->file( 'logo' ) ) )
     		{
     			   $setting->logo = $this->upload( 'logo', $request, $uploadService );
-
-    			   $status = $uploadService->successful();
     		}
 
-    		if( $status )
+        if( $request->input( 'remove_favicon' ) == 'true' )
     		{
-    			   $setting->save();
+    			   $setting->favicon = '';
     		}
+        elseif( !empty( $request->file( 'favicon' ) ) )
+    		{
+    			   $setting->favicon = $this->upload( 'favicon', $request, $uploadService );
+    		}
+
+    		$setting->save();
 
         return redirect('admin/settings');
     }

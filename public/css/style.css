@@ -150,11 +150,14 @@ h1{
   background: #333;
   padding: 20px 0px;
   color: #eee;
-  text-align: center;
 }
 
 .footer a{
   color: #01b50f;
+}
+
+.social-media{
+  list-style-type: none;
 }
 
 .stripes-wrapper {
