@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Relations\Pivot;
 
-class TopTenMovie extends Pivot
+class TopTenSeries extends Pivot
 {
 	use \Rutorika\Sortable\SortableTrait;
 
