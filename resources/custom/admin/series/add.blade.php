@@ -4,6 +4,11 @@
 {{ $title }}
 @endsection
 
+@push('styles')
+<!-- Morris.js charts -->
+<link rel="stylesheet" href="{{ url( 'plugins/select2/select2.css' ) }}">
+@endpush
+
 @section( 'content' )
 
 <!-- Main content -->
@@ -176,3 +181,21 @@
     <!-- /.content -->
 
 @endsection
+
+@push('scripts')
+<script src="{{ url( 'plugins/select2/select2.full.min.js' ) }}"></script>
+@endpush
+
+@push( 'custom-scripts' )
+
+<script type="text/javascript" >
+
+  $( '.select2' ).select2();
+
+  $( '.remove_file' ).click( function(e) {
+    $( '#remove_' + this.id ).val( 'true' );
+    $( '#' + this.id + '_file' ).hide( "slow" );
+  });
+
+</script>
+@endpush

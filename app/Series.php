@@ -15,7 +15,7 @@ class Series extends Model
 
   public function branches()
     {
-        return $this->belongsToMany('App\Branch');
+        return $this->belongsToMany('App\Branch', 'series_branch','series_id','branch_id' )->using( 'App\SeriesBranch' )->withTimestamps();
     }
 
   public function agerestricton()
@@ -23,7 +23,7 @@ class Series extends Model
         return $this->hasOne( 'App\AgeRestriction');
     }
 
-  public function genre()
+  public function genres()
     {
         return $this->belongsToMany( 'App\Genre', 'series_genre', 'series_id', 'genre_id' )->using( 'App\SeriesGenre' )->withTimestamps();
     }

@@ -6,7 +6,7 @@
 
 @push('styles')
 <!-- Morris.js charts -->
-<link rel="stylesheet" href="{{ url( 'plugins/select2/select2.full.min.css' ) }}">
+<link rel="stylesheet" href="{{ url( 'plugins/select2/select2.css' ) }}">
 @endpush
 
 @section( 'content' )
