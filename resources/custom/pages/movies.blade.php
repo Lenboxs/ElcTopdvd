@@ -55,7 +55,7 @@
           @if( !empty( $movies ) )
 
             @foreach( $movies as $movie )
-                <div class="col-md-2">
+                <div class="col-2">
                   <div class="dvd">
                     <a href="{{ url( 'movie/' . $movie->slug ) }}"><h4 class="dvd-name">{{ !empty( $movie ) ? $movie->name : '' }}</h4></a>
                     <a href="{{ url( 'movie/' . $movie->slug ) }}">
