@@ -91,6 +91,8 @@ class AgeRestrictionController extends Controller
 
       $agerestriction->save();
 
+      flashy()->success( 'Age Restriction was created successfully.' );
+
       return redirect( 'admin/settings#age-restrictions' );
     }
 
@@ -155,6 +157,8 @@ class AgeRestrictionController extends Controller
 
       $agerestriction->save();
 
+      flashy()->success( 'Age Restriction was updated successfully.' );
+
       return redirect( 'admin/settings#age-restrictions' );
     }
 
@@ -169,6 +173,8 @@ class AgeRestrictionController extends Controller
       $agerestriction = AgeRestriction::find($id);
 
       $agerestriction->delete();
+
+      flashy()->success( 'Age Restriction was deleted successfully.' );
 
       return redirect( 'admin/settings#age-restrictions' );
   }

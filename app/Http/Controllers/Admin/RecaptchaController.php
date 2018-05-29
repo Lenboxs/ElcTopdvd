@@ -59,6 +59,8 @@ class RecaptchaController extends Controller
 
       $recaptcha->save();
 
+      flashy()->success( 'Recaptcha was created successfully.' );
+
       return redirect('admin/add-recaptcha');
     }
 
@@ -103,6 +105,8 @@ class RecaptchaController extends Controller
 
       $recaptcha->save();
 
+      flashy()->success( 'Recaptcha was updated successfully.' );
+
       return redirect('admin/recaptchas');
     }
 
@@ -117,6 +121,8 @@ class RecaptchaController extends Controller
       $recaptcha = Recaptcha::find($id);
 
       $recaptcha->delete();
+
+      flashy()->success( 'Recaptcha was deleted successfully.' );
 
       return redirect('admin/recaptchas');
   }

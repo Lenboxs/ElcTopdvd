@@ -60,6 +60,8 @@ class TopTenController extends Controller
 
 		    $topten->save();
 
+        flashy()->success( 'Top Ten was updated successfully.' );
+
         return redirect( 'admin/top-ten' );
     }
 

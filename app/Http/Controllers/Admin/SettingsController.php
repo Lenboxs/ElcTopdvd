@@ -140,6 +140,8 @@ class SettingsController extends Controller
 
     		$setting->save();
 
+        flashy()->success( 'Settings was updated successfully.' );
+
         return redirect('admin/settings');
     }
 

@@ -85,6 +85,8 @@ class MovieController extends Controller
 
         $movie->save();
 
+        flashy()->success( 'Movie was created successfully.' );
+
         return redirect( 'admin/add-movie' );
 
     }
@@ -166,6 +168,8 @@ class MovieController extends Controller
   		  {
   			     $movie->save();
 
+             flashy()->success( 'Movies was updated successfully.' );
+
   			     return redirect( 'admin/movies' );
   		  }
   		  else
@@ -185,6 +189,8 @@ class MovieController extends Controller
         $movie = Movie::find($id);
 
         $movie->delete();
+
+        flashy()->success( 'Movie was deleted successfully.' );
 
         return redirect('admin/movies');
     }

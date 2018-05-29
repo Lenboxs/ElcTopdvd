@@ -66,6 +66,8 @@ class SeriesController extends Controller
 
       $series->save();
 
+      flashy()->success( 'Series was created successfully.' );
+
       return redirect('admin/add-series');
     }
 
@@ -132,12 +134,16 @@ class SeriesController extends Controller
   		{
   			   $series->save();
 
+           flashy()->success( 'Series was updated successfully.' );
+
   			   return redirect( 'admin/series' );
   		}
   		else
   		{
   			   return view( 'admin.series.edit', [ 'series' => $series ] );
   		}
+
+
 
     }
 
@@ -152,6 +158,8 @@ class SeriesController extends Controller
       $series = Series::find($id);
 
       $series->delete();
+
+      flashy()->success( 'Series was deleted successfully.' );
 
       return redirect('admin/series');
     }

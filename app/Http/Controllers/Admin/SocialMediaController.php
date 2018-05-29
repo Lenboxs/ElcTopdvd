@@ -89,6 +89,8 @@ class SocialMediaController extends Controller
 
         $socialmedia->save();
 
+        flashy()->success( 'Social Media was updated successfully.' );
+
         return redirect('admin/settings#social-media');
     }
 

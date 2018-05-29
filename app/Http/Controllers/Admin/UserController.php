@@ -73,8 +73,9 @@ class UserController extends Controller
       $user->email = !empty($request->input('email')) ? $request->input('email') : '';
       $user->password = !empty($request->input('password')) ? $request->input('password') : '';
 
-
       $user->save();
+
+      flashy()->success( 'User was created successfully.' );
 
       return redirect('admin/add-user');
     }
@@ -124,6 +125,8 @@ class UserController extends Controller
             $user->roles()->attach( $request->input( 'roles' ) );
         }
 
+        flashy()->success( 'User was updated successfully.' );
+
         return redirect('admin/users');
     }
 
@@ -138,6 +141,8 @@ class UserController extends Controller
       $user = User::find($id);
 
       $user->delete();
+
+      flashy()->success( 'User was deleted successfully.' );
 
       return redirect('admin/users');
   }

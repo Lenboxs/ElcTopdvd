@@ -93,6 +93,8 @@ class BranchController extends Controller
 
       $branch->save();
 
+      flashy()->success( 'Branch was created successfully.' );
+
       return redirect( 'admin/settings#branches' );
     }
 
@@ -162,6 +164,8 @@ class BranchController extends Controller
 
         $branch->save();
 
+        flashy()->success( 'Branch was updated successfully.' );
+
         return redirect( 'admin/settings#branches' );
     }
 
@@ -176,6 +180,8 @@ class BranchController extends Controller
         $branch = Branch::find($id);
 
         $branch->delete();
+
+        flashy()->success( 'Branch was deleted successfully.' );
 
         return redirect( 'admin/settings#branches' );
     }

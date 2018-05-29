@@ -90,6 +90,8 @@ class TypeController extends Controller
 
       $type->save();
 
+      flashy()->success( 'Type was created successfully.' );
+
       return redirect( 'admin/settings#types' );
     }
 
@@ -156,6 +158,8 @@ class TypeController extends Controller
 
       $type->save();
 
+      flashy()->success( 'Type was updated successfully.' );
+
       return redirect( 'admin/settings#types' );
     }
 
@@ -170,6 +174,8 @@ class TypeController extends Controller
       $type = Type::find($id);
 
       $type->delete();
+
+      flashy()->success( 'Type was deleted successfully.' );
 
       return redirect( 'admin/settings#types' );
     }

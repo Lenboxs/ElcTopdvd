@@ -90,6 +90,8 @@ class GenreController extends Controller
 
       $genre->save();
 
+      flashy()->success( 'Genre was created successfully.' );
+
       return redirect( 'admin/settings#genres' );
     }
 
@@ -156,6 +158,8 @@ class GenreController extends Controller
 
       $genre->save();
 
+      flashy()->success( 'Genre was updated successfully.' );
+
       return redirect( 'admin/settings#genres' );
     }
 
@@ -170,6 +174,8 @@ class GenreController extends Controller
         $genre = Genre::find($id);
 
         $genre->delete();
+
+        flashy()->success( 'Genre was deleted successfully.' );
 
         return redirect( 'admin/settings#genres' );
      }

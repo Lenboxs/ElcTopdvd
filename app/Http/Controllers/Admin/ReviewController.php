@@ -59,6 +59,8 @@ class ReviewController extends Controller
 
       $review->save();
 
+      flashy()->success( 'Review was created successfully.' );
+
       return redirect('admin/add-review');
     }
 
@@ -103,6 +105,8 @@ class ReviewController extends Controller
 
       $review->save();
 
+      flashy()->success( 'Review was updated successfully.' );
+
       return redirect('admin/reviews');
     }
 
@@ -117,6 +121,8 @@ class ReviewController extends Controller
       $review = Review::find($id);
 
       $review->delete();
+
+      flashy()->success( 'Review was deleted successfully.' );
 
       return redirect('admin/reviews');
   }
