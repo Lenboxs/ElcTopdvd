@@ -83,6 +83,8 @@ class MovieController extends Controller
 
         $movie->trailerLink = $this->getTrailerLink( $request->input( 'trailerLink' ) );
 
+        $movie->runtime = $this->getTrailerLink( $request->input( 'runtime' ) );
+
         $movie->save();
 
         if( $request->exists( 'genres' ) )
@@ -164,6 +166,8 @@ class MovieController extends Controller
         $movie->description = !empty( $request->input( 'description' ) ) ? $request->input( 'description' ) : '';
 
         $movie->trailerLink = $this->getTrailerLink( $request->input( 'trailerLink' ) );
+
+        $movie->runtime = $this->getTrailerLink( $request->input( 'runtime' ) );
 
         $status = true;
 
