@@ -88,7 +88,7 @@
     function flashy(message, link) {
         var template = $($("#flashy-template").html());
         $(".flashy").remove();
-        template.find(".flashy__body").html(message).attr("href", link || "#").end()
+        template.find(".flashy__body").html(message).end()
          .appendTo("body").hide().fadeIn(300).delay(2800).animate({
             marginRight: "-100%"
         }, 300, "swing", function() {
@@ -100,7 +100,7 @@
 @if(Session::has('flashy_notification.message'))
 <script id="flashy-template" type="text/template">
     <div class="flashy flashy--{{ Session::get('flashy_notification.type') }}">
-        <a href="#" class="flashy__body" target="_blank"></a>
+        <a class="flashy__body" target="_blank"></a>
     </div>
 </script>
 

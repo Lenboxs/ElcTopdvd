@@ -85,6 +85,20 @@ class MovieController extends Controller
 
         $movie->save();
 
+        if( $request->exists( 'genres' ) )
+        {
+            $movie->genres()->detach();
+
+            $movie->genres()->attach( $request->input( 'genres' ) );
+        }
+
+        if( $request->exists( 'branches' ) )
+        {
+            $movie->branches()->detach();
+
+            $movie->branches()->attach( $request->input( 'branches' ) );
+        }
+
         flashy()->success( 'Movie was created successfully.' );
 
         return redirect( 'admin/add-movie' );
@@ -164,18 +178,25 @@ class MovieController extends Controller
   			     $status = $uploadService->successful();
   	  	}
 
-  		  if( $status )
-  		  {
-  			     $movie->save();
+  			$movie->save();
 
-             flashy()->success( 'Movies was updated successfully.' );
+        if( $request->exists( 'genres' ) )
+        {
+            $movie->genres()->detach();
 
-  			     return redirect( 'admin/movies' );
-  		  }
-  		  else
-  		  {
-  			     return view( 'admin.movies.edit', [ 'movie' => $movie ] );
-  		  }
+            $movie->genres()->attach( $request->input( 'genres' ) );
+        }
+
+        if( $request->exists( 'branches' ) )
+        {
+            $movie->branches()->detach();
+
+            $movie->branches()->attach( $request->input( 'branches' ) );
+        }
+
+        flashy()->success( 'Movies was updated successfully.' );
+
+  			return redirect( 'admin/movies' );
     }
 
     /**

@@ -12,26 +12,29 @@ use App\Type;
 class MovieController extends Controller
 {
       public function movies()
-       {
-         $branches = Branch::all();
+      {
+           $movies = Movie::all();
 
-         $genres = Genre::all();
+           $branches = Branch::all();
 
-         $types = Type::all();
+           $genres = Genre::all();
 
-         return view( 'pages.movies',
-           array(
-             'branches' => $branches,
-             'genres' => $genres,
-             'types' => $types,
-           )
-         );
+           $types = Type::all();
+
+           return view( 'pages.movies',
+             array(
+               'movies' => $movies,
+               'branches' => $branches,
+               'genres' => $genres,
+               'types' => $types,
+             )
+           );
        }
 
      public function movie( $slug )
-      {
+    {
           $movie = Movie::where( 'slug', $slug )->orderBy( 'id', 'desc' )->first();
 
           return view( 'pages.movie' )->withMovie( $movie );
-      }
+    }
 }

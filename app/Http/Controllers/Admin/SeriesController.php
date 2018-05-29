@@ -8,6 +8,8 @@ use App\Helpers\UploadService;
 use App\Http\Requests\Admin\SeriesFormRequest;
 
 use App\Series;
+use App\Branch;
+use App\Genre;
 
 class SeriesController extends Controller
 {
@@ -42,7 +44,17 @@ class SeriesController extends Controller
     {
       $title = "Add New Series";
 
-      return view( 'admin.series.add' )->withTitle( $title );
+      $branches = Branch::all();
+
+      $genres = Genre::all();
+
+      return view( 'admin.series.add',
+          array(
+              'title' => $title,
+              'branches' => $branches,
+              'genres' => $genres
+          )
+      );
     }
 
     /**
@@ -65,6 +77,20 @@ class SeriesController extends Controller
       $series->season = !empty($request->input('season')) ? $request->input('season') : '';
 
       $series->save();
+
+      if( $request->exists( 'genres' ) )
+      {
+          $series->genres()->detach();
+
+          $series->genres()->attach( $request->input( 'genres' ) );
+      }
+
+      if( $request->exists( 'branches' ) )
+      {
+          $series->branches()->detach();
+
+          $series->branches()->attach( $request->input( 'branches' ) );
+      }
 
       flashy()->success( 'Series was created successfully.' );
 
@@ -94,7 +120,18 @@ class SeriesController extends Controller
 
         $series = Series::find( $id );
 
-        return view( 'admin.series.edit' )->withTitle( $title )->withSeries( $series );
+        $branches = Branch::all();
+
+        $genres = Genre::all();
+
+        return view( 'admin.series.edit',
+            array(
+                'title' => $title,
+                'series' => $series,
+                'branches' => $branches,
+                'genres' => $genres,
+            )
+        );
     }
 
     /**
@@ -106,18 +143,18 @@ class SeriesController extends Controller
      */
     public function update(SeriesFormRequest $request, UploadService $uploadService )
     {
-      $series = Series::find($request->input('id'));
+        $series = Series::find($request->input('id'));
 
-      $series->active= !empty($request->input('active')) ? 1 : 2;
-      $series->new = !empty($request->input('new')) ? 1 : 2;
-      $series->name = !empty($request->input('name')) ? $request->input('name') : '';
-      $series->slug = !empty($request->input('name')) ? str_slug( $request->input('name') ) : '';
-      $series->description = !empty($request->input('description')) ? $request->input('description') : '';
+        $series->active= !empty($request->input('active')) ? 1 : 2;
+        $series->new = !empty($request->input('new')) ? 1 : 2;
+        $series->name = !empty($request->input('name')) ? $request->input('name') : '';
+        $series->slug = !empty($request->input('name')) ? str_slug( $request->input('name') ) : '';
+        $series->description = !empty($request->input('description')) ? $request->input('description') : '';
 
-      $series->trailerLink = $this->getTrailerLink( $request->input( 'trailerLink' ) );
-      $series->season = !empty($request->input('season')) ? $request->input('season') : '';
+        $series->trailerLink = $this->getTrailerLink( $request->input( 'trailerLink' ) );
+        $series->season = !empty($request->input('season')) ? $request->input('season') : '';
 
-      $status = true;
+        $status = true;
 
       if( $request->input( 'remove_image' ) == 'true' )
   		{
@@ -130,21 +167,25 @@ class SeriesController extends Controller
   			   $status = $uploadService->successful();
   		}
 
-  		if( $status )
-  		{
-  			   $series->save();
+      if( $request->exists( 'genres' ) )
+      {
+          $series->genres()->detach();
 
-           flashy()->success( 'Series was updated successfully.' );
+          $series->genres()->attach( $request->input( 'genres' ) );
+      }
 
-  			   return redirect( 'admin/series' );
-  		}
-  		else
-  		{
-  			   return view( 'admin.series.edit', [ 'series' => $series ] );
-  		}
+      if( $request->exists( 'branches' ) )
+      {
+          $series->branches()->detach();
 
+          $series->branches()->attach( $request->input( 'branches' ) );
+      }
 
+  		$series->save();
 
+      flashy()->success( 'Series was updated successfully.' );
+
+  		return redirect( 'admin/series' );
     }
 
     /**
@@ -155,13 +196,13 @@ class SeriesController extends Controller
      */
     public function destroy($id)
     {
-      $series = Series::find($id);
+        $series = Series::find($id);
 
-      $series->delete();
+        $series->delete();
 
-      flashy()->success( 'Series was deleted successfully.' );
+        flashy()->success( 'Series was deleted successfully.' );
 
-      return redirect('admin/series');
+        return redirect('admin/series');
     }
 
     public function upload( $input, $request, $uploadService )

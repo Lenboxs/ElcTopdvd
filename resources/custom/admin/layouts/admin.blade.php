@@ -39,13 +39,38 @@
 
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
-
+  <link href="//fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700' rel='stylesheet'>
 @stack( 'styles' )
 
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 
   <div class="wrapper">
+
+    <div class="flash-message">
+      @foreach( ['danger', 'warning', 'success', 'info'] as $msg )
+        @if( Session::has( 'alert-' . $msg ) )
+
+          @foreach( Session::get( 'alert-' . $msg ) as $alert )
+
+            <div class="alert alert-{{ $msg }}">
+              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+                &times;
+              </button>
+              {{ $alert }}
+            </div>
+
+          @endforeach
+
+        @endif
+
+        {{ Session::forget( 'alert-' . $msg ) }}
+
+      @endforeach
+    </div>
+    <!-- /flash-message -->
+
     @includeif( 'admin.sections.header' )
 
     @includeif( 'admin.sections.aside' )
@@ -88,6 +113,8 @@
 @stack( 'scripts' )
 
 @stack( 'custom-scripts' )
+
+@include('flashy::message')
 
 </body>
 </html>
