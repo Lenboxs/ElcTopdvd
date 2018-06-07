@@ -213,7 +213,7 @@ class TypeController extends Controller
       			{
       				return $uploadService->getTargetFile();
       			}
-
+ 
       			$this->status = $this->status && $uploadService->successful();
     		}
     		elseif( $request->input( 'remove_' . $input ) == 'true' )
