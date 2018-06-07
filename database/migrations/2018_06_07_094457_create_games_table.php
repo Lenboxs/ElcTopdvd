@@ -21,9 +21,9 @@ class CreateGamesTable extends Migration
          $table->string('name')->nullable();
          $table->string('slug')->nullable();
          $table->text('description');
-         $table->string('image');
-         $table->string('trailerLink');
-         $table->integer('year');
+         $table->string('image')nullable();
+         $table->string('trailerLink')nullable();
+         $table->integer('year')nullable();
 
          $table->timestamps();
        });
