@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Helpers\UploadService;
 use App\Http\Requests\Admin\ConsoleFormRequest;
 
 use App\Settings;
@@ -75,7 +76,7 @@ class ConsoleController extends Controller
                 'branches' => $branches,
                 'genres' => $genres,
                 'consoles' => $consoles,
-                '$types' => $types,
+                'types' => $types,
                 'agerestrictions' => $agerestrictions,
             )
         );
@@ -87,7 +88,7 @@ class ConsoleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store( ConsoleFormRequest $request )
+    public function store( ConsoleFormRequest $request, UploadService $uploadService )
     {
         $console = new Console();
 
@@ -163,13 +164,13 @@ class ConsoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update( ConsoleFormRequest $request )
+    public function update( ConsoleFormRequest $request, UploadService $uploadService )
     {
-        $console = Console::find($request->input('id'));
+        $console = Console::find( $request->input( 'id' ) );
 
         $console->active= !empty( $request->input( 'active' ) ) ? 1 : 2;
 
-        $console->name = !empty($request->input('name')) ? $request->input('name') : '';
+        $console->name = !empty($request->input( 'name' ) ) ? $request->input( 'name' ) : '';
 
         if( $request->input( 'remove_logo' ) == 'true' )
   		  {
@@ -208,7 +209,7 @@ class ConsoleController extends Controller
     {
     		if( !empty( $request->file( $input ) ) )
     		{
-      			if( $uploadService->setRequest( $request )->setFilename( $input )->setUploadDirectory( 'img/movies' )->move() )
+      			if( $uploadService->setRequest( $request )->setFilename( $input )->setUploadDirectory( 'img/consoles' )->move() )
       			{
       				return $uploadService->getTargetFile();
       			}

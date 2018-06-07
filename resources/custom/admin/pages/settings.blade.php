@@ -26,6 +26,7 @@
         <li><a href="#branches" data-toggle="tab">Branches</a></li>
         <li><a href="#genres" data-toggle="tab">Genres</a></li>
         <li><a href="#types" data-toggle="tab">Types</a></li>
+        <li><a href="#consoles" data-toggle="tab">Consoles</a></li>
         <li><a href="#age-restrictions" data-toggle="tab">Age Restrictions</a></li>
       </ul>
       <div class="tab-content">
@@ -214,6 +215,23 @@
         </div>
         <!-- /.tab-pane -->
 
+        <div class="tab-pane" id="consoles">
+          <div class="row">
+            <div class="col-md-12">
+
+              @if( Request::is( '*add-console*' ) )
+                  @includeif( 'admin.consoles.add' )
+              @elseif( Request::is( '*edit-console*' ) )
+                  @includeif( 'admin.consoles.edit' )
+              @else
+                  @includeif( 'admin.consoles.consoles' )
+              @endif
+
+            </div>
+          </div>
+        </div>
+        <!-- /.tab-pane -->
+
         <div class="tab-pane" id="age-restrictions">
           <div class="row">
             <div class="col-md-12">
@@ -261,6 +279,7 @@
     $( '#branchestable' ).DataTable();
     $( '#genrestable' ).DataTable();
     $( '#typestable' ).DataTable();
+    $( '#consolestable' ).DataTable();
     $( '#agerestrictionstable' ).DataTable();
   })
 

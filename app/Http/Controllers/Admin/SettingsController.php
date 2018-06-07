@@ -105,7 +105,7 @@ class SettingsController extends Controller
               'branches' => $branches,
               'genres' => $genres,
               'types' => $types,
-              '$consoles' => $consoles,
+              'consoles' => $consoles,
               'agerestrictions' => $agerestrictions,
           )
         );
@@ -123,7 +123,6 @@ class SettingsController extends Controller
         $setting = Settings::orderBy( 'id', 'desc' )->first();
 
         $setting->heading = !empty( $request->input( 'heading' ) ) ? $request->input( 'heading' ) : '';
-        $setting->favicon = !empty( $request->input( 'favicon' ) ) ? $request->input( 'favicon' ) : '';
 
     		if( $request->input( 'remove_logo' ) == 'true' )
     		{

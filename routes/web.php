@@ -149,6 +149,20 @@ Route::post('/admin/update-type','Admin\TypeController@update')->name( 'update-t
 
 Route::get( '/admin/delete-type/{id}', 'Admin\TypeController@destroy' )->name( 'delete-type' );
 
+//admintypes
+
+Route::get( '/admin/consoles', 'Admin\ConsoleController@index' )->name( 'consoles' );
+
+Route::get( '/admin/add-console', 'Admin\ConsoleController@create' )->name( 'add-console' );
+
+Route::post('/admin/store-console','Admin\ConsoleController@store')->name( 'store-console' );
+
+Route::get( '/admin/edit-console/{id}', 'Admin\ConsoleController@edit' )->name( 'edit-console' );
+
+Route::post('/admin/update-console','Admin\ConsoleController@update')->name( 'update-console' );
+
+Route::get( '/admin/delete-console/{id}', 'Admin\ConsoleController@destroy' )->name( 'delete-conosle' );
+
 //admingenres
 
 Route::get( '/admin/age-restrictions', 'Admin\AgeRestrictionController@index' )->name( 'age-restrictions' );

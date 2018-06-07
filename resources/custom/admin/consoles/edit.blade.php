@@ -5,17 +5,17 @@
 
         <div class="well">
 
-          <form role="form" method="POST" action="{{ url( '/admin/update-console' ) }}">
+          <form role="form" method="POST" action="{{ url( '/admin/update-console' ) }}" enctype="multipart/form-data">
             <!-- text input -->
 
-            <input console="hidden" name="_token" value="{{ csrf_token() }}" />
+            <input type="hidden" name="_token" value="{{ csrf_token() }}" />
 
-            <input console="hidden" name="id" value="{{ ( !empty( $console ) && !empty( $console->id ) ) ? $console->id : '' }}" />
+            <input type="hidden" name="id" value="{{ ( !empty( $console ) && !empty( $console->id ) ) ? $console->id : '' }}" />
 
             <div class="form-group {{ $errors->has( 'active' ) ? ' has-error' : '' }}">
                <label for="active" class="control-label">Active</label>
                <div class="switch" data-toggle="switch">
-                   <label>Off <input console="checkbox" name="active" class="active" id="active" {{ ( !empty( $console ) && !empty( $console->active ) && ( $console->active == 1 ) ) ? 'checked' : '' }} /><span class="toggle"></span> On</label>
+                   <label>Off <input type="checkbox" name="active" class="active" id="active" {{ ( !empty( $console ) && !empty( $console->active ) && ( $console->active == 1 ) ) ? 'checked' : '' }} /><span class="toggle"></span> On</label>
                </div>
 
                @if ( $errors->has( 'active' ) )
@@ -28,7 +28,7 @@
             <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                 <label for="name" class="control-label">Name</label>
 
-                <input id="name" console="text" class="form-control" name="name" value="{{ ( !empty( $console ) && !empty( $console->name ) ) ? $console->name : '' }}" required>
+                <input id="name" type="text" class="form-control" name="name" value="{{ ( !empty( $console ) && !empty( $console->name ) ) ? $console->name : '' }}" required>
 
                 @if ($errors->has('name'))
                     <span class="help-block">
@@ -39,7 +39,7 @@
 
             <div class="form-group {{ $errors->has( 'logo' ) ? ' has-error' : '' }}">
               <label for="logo" class="control-label">Logo</label>
-              <input class="form-control" console="file" name="logo" id="logo" />
+              <input class="form-control" type="file" name="logo" id="logo" />
               <br />
               @if( !empty( $console->logo ) )
                 <div id="logo_file">
@@ -56,7 +56,7 @@
             </div>
 
             <div class="well-footer">
-                <button console="submit" class="btn btn-info">Save</button>
+                <button type="submit" class="btn btn-info">Save</button>
                 <a href="{{ url( 'admin/settings#consoles' ) }}" class="btn btn-info">Back</a>
             </div>
 

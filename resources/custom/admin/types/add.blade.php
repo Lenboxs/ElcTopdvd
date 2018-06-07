@@ -6,7 +6,7 @@
 
         <div class="well">
 
-            <form role="form" method="POST" action="{{ url( '/admin/store-type' ) }}">
+            <form role="form" method="POST" action="{{ url( '/admin/store-type' ) }}" enctype="multipart/form-data">
 
             <input type="hidden" name="_token" value="{{ csrf_token() }}" />
 

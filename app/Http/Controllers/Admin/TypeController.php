@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Helpers\UploadService;
 use App\Http\Requests\Admin\TypeFormRequest;
 
 use App\Settings;
@@ -75,7 +76,7 @@ class TypeController extends Controller
                 'branches' => $branches,
                 'genres' => $genres,
                 'types' => $types,
-                '$consoles' => $consoles,
+                'consoles' => $consoles,
                 'agerestrictions' => $agerestrictions,
             )
         );
@@ -87,7 +88,7 @@ class TypeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store( TypeFormRequest $request )
+    public function store( TypeFormRequest $request, UploadService $uploadService )
     {
         $type = new Type();
 
@@ -163,13 +164,13 @@ class TypeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update( TypeFormRequest $request )
+    public function update( TypeFormRequest $request, UploadService $uploadService )
     {
-        $type = Type::find($request->input('id'));
+        $type = Type::find( $request->input( 'id' ) );
 
         $type->active= !empty( $request->input( 'active' ) ) ? 1 : 2;
 
-        $type->name = !empty($request->input('name')) ? $request->input('name') : '';
+        $type->name = !empty( $request->input( 'name' ) ) ? $request->input( 'name' ) : '';
 
         if( $request->input( 'remove_logo' ) == 'true' )
   		  {
@@ -208,7 +209,7 @@ class TypeController extends Controller
     {
     		if( !empty( $request->file( $input ) ) )
     		{
-      			if( $uploadService->setRequest( $request )->setFilename( $input )->setUploadDirectory( 'img/movies' )->move() )
+      			if( $uploadService->setRequest( $request )->setFilename( $input )->setUploadDirectory( 'img/types' )->move() )
       			{
       				return $uploadService->getTargetFile();
       			}
