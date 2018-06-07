@@ -22,4 +22,9 @@ class AgeRestriction extends Model
     {
         return $this->belongsTo( 'App\Series');
     }
+
+    public function games()
+    {
+        return $this->belongsTo( 'App\Games');
+    }
 }

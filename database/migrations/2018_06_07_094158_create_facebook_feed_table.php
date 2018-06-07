@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTypesTable extends Migration
+class CreateFacebookFeedTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreateTypesTable extends Migration
      */
     public function up()
     {
-      Schema::create('types', function (Blueprint $table) {
+      Schema::create('facebook_feed', function (Blueprint $table) {
           $table->increments('id');
-          $table->integer('active')->unsigned();
           $table->string('name')->nullable();
-          $table->string('logo')->nullable();
+          $table->string('facebook_api_key')->nullable();
 
           $table->timestamps();
       });
@@ -30,6 +29,7 @@ class CreateTypesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('types');
+        Schema::dropIfExists('facebook_feed');
+
     }
 }

@@ -16,8 +16,13 @@ class HomePage extends Model
     {
         return $this->belongsToMany('App\Movie');
     }
-    public function series()
+  public function series()
     {
         return $this->belongsToMany('App\Series');
     }
+  public function specials()
+    {
+        return $this->hasMany( 'App\Special');
+    }
+
 }

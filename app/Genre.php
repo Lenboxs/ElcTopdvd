@@ -22,4 +22,9 @@ class Genre extends Model
     {
         return $this->belongsToMany( 'App\Series', 'series_genre', 'genre_id' , 'series_id')->using( 'App\SeriesGenre' )->withTimestamps();
     }
+
+    public function games()
+    {
+        return $this->belongsToMany( 'App\Games', 'game_genre', 'genre_id' , 'game_id')->using( 'App\GameGenre' )->withTimestamps();
+    }
 }

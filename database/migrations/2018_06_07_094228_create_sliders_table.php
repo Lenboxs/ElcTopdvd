@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTypesTable extends Migration
+class CreateSlidersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,18 @@ class CreateTypesTable extends Migration
      */
     public function up()
     {
-      Schema::create('types', function (Blueprint $table) {
+      Schema::create('sliders', function (Blueprint $table) {
           $table->increments('id');
-          $table->integer('active')->unsigned();
           $table->string('name')->nullable();
-          $table->string('logo')->nullable();
+          $table->integer('home_page_id')->unsigned()->nullable();
+
 
           $table->timestamps();
       });
+
+      Schema::table('sliders', function ($table) {
+          $table->foreign('home_page_id' , 'home_page_slides_id')->references('id')->on('home_page')->onDelete('cascade')->onUpdate('cascade');
+          });
     }
 
     /**
@@ -30,6 +34,6 @@ class CreateTypesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('types');
+        Schema::dropIfExists('sliders');
     }
 }
