@@ -30,18 +30,18 @@
               </select>
           </div>
           <div class="col-md-3">
-              <label>Select a Type</label>
+              <label>Select a Console</label>
               <select class="form-control">
                 <option value="all" selected>All</option>
-                @if( !empty( $types ) )
-                    @foreach( $types as $type )
-                      <option value="{{ $type->id }}">{{ $type->name }}</option>
+                @if( !empty( $consoles ) )
+                    @foreach( $consoles as $console )
+                      <option value="{{ $console->id }}">{{ $console->name }}</option>
                     @endforeach
                 @endif
               </select>
           </div>
           <div class="col-md-3">
-              <label>Sort Movies</label>
+              <label>Sort Games</label>
               <select class="form-control">
                 <option value="all" selected>All</option>
               </select>
@@ -49,22 +49,22 @@
         </div>
 
         <div class="row row-eq-height">
-          @if( !empty( $movies ) )
+          @if( !empty( $games ) )
 
-            @foreach( $movies as $movie )
+            @foreach( $games as $game )
 
                   <div class="col-md-3">
                       @component( 'sections.dvd' )
 
                           @slot('link')
-                              {{ url( 'movie/' . $movie->slug ) }}
+                              {{ url( 'game/' . $game->slug ) }}
                           @endslot
 
                           @slot('img')
-                              {{ url( 'img/movies/' . $movie->image ) }}
+                              {{ url( 'img/games/' . $game->image ) }}
                           @endslot
 
-                          {{ !empty( $movie ) ? $movie->name : '' }}
+                          {{ !empty( $game ) ? $game->name : '' }}
 
                       @endcomponent
                   </div>

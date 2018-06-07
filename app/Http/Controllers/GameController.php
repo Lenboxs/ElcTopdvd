@@ -23,10 +23,10 @@ class GameController extends Controller
 
          return view( 'pages.games',
            array(
-             'consoles' => $consoles,
+             'games' => $games,
              'branches' => $branches,
              'genres' => $genres,
-             'types' => $types,
+             'consoles' => $consoles,
            )
          );
      }

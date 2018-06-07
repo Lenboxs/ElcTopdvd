@@ -11,6 +11,7 @@ use App\Game;
 use App\Branch;
 use App\Genre;
 use App\Console;
+use App\AgeRestriction;
 
 class GameController extends Controller
 {
@@ -53,12 +54,15 @@ class GameController extends Controller
 
         $consoles = Console::all();
 
+        $agerestrictions = AgeRestriction::all();
+
         return view( 'admin.games.add',
             array(
                 'title' => $title,
                 'branches' => $branches,
                 'genres' => $genres,
-                'consoles' => $consoles
+                'consoles' => $consoles,
+                'agerestrictions' => $agerestrictions
             )
         );
     }
@@ -112,6 +116,13 @@ class GameController extends Controller
             $game->consoles()->attach( $request->input( 'consoles' ) );
         }
 
+        if( $request->exists( 'agerestriction' ) )
+        {
+            $game->agerestricton()->detach();
+
+            $game->agerestricton()->attach( $request->input( 'agerestriction' ) );
+        }
+
         flashy()->success( 'Game was created successfully.' );
 
         return redirect( 'admin/add-game' );
@@ -147,13 +158,16 @@ class GameController extends Controller
 
         $consoles = Console::all();
 
+        $agerestrictions = AgeRestriction::all();
+
         return view( 'admin.games.edit',
             array(
                 'title' => $title,
                 'game' => $game,
                 'branches' => $branches,
                 'genres' => $genres,
-                'consoles' => $consoles
+                'consoles' => $consoles,
+                'agerestrictions' => $agerestrictions
             )
         );
     }
@@ -217,6 +231,13 @@ class GameController extends Controller
             $game->consoles()->detach();
 
             $game->consoles()->attach( $request->input( 'consoles' ) );
+        }
+
+        if( $request->exists( 'agerestriction' ) )
+        {
+            $game->agerestricton()->detach();
+
+            $game->agerestricton()->attach( $request->input( 'agerestriction' ) );
         }
 
         flashy()->success( 'Games was updated successfully.' );

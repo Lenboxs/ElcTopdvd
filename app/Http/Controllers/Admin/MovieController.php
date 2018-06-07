@@ -10,6 +10,8 @@ use App\Http\Requests\Admin\MovieFormRequest;
 use App\Movie;
 use App\Branch;
 use App\Genre;
+use App\Type;
+use App\AgeRestriction;
 
 class MovieController extends Controller
 {
@@ -50,11 +52,17 @@ class MovieController extends Controller
 
         $genres = Genre::all();
 
+        $types = Type::all();
+
+        $agerestrictions = AgeRestriction::all();
+
         return view( 'admin.movies.add',
             array(
                 'title' => $title,
                 'branches' => $branches,
-                'genres' => $genres
+                'genres' => $genres,
+                'types' => $types,
+                'agerestrictions' => $agerestrictions
             )
         );
     }
@@ -101,6 +109,20 @@ class MovieController extends Controller
             $movie->branches()->attach( $request->input( 'branches' ) );
         }
 
+        if( $request->exists( 'types' ) )
+        {
+            $game->types()->detach();
+
+            $game->types()->attach( $request->input( 'types' ) );
+        }
+
+        if( $request->exists( 'agerestriction' ) )
+        {
+            $game->agerestricton()->detach();
+
+            $game->agerestricton()->attach( $request->input( 'agerestriction' ) );
+        }
+
         flashy()->success( 'Movie was created successfully.' );
 
         return redirect( 'admin/add-movie' );
@@ -134,12 +156,18 @@ class MovieController extends Controller
 
         $genres = Genre::all();
 
+        $types = Type::all();
+
+        $agerestrictions = AgeRestriction::all();
+
         return view( 'admin.movies.edit',
             array(
                 'title' => $title,
                 'movie' => $movie,
                 'branches' => $branches,
                 'genres' => $genres,
+                'types' => $types,
+                'agerestrictions' => $agerestrictions
             )
         );
     }
@@ -196,6 +224,20 @@ class MovieController extends Controller
             $movie->branches()->detach();
 
             $movie->branches()->attach( $request->input( 'branches' ) );
+        }
+
+        if( $request->exists( 'types' ) )
+        {
+            $game->types()->detach();
+
+            $game->types()->attach( $request->input( 'types' ) );
+        }
+
+        if( $request->exists( 'agerestriction' ) )
+        {
+            $game->agerestricton()->detach();
+
+            $game->agerestricton()->attach( $request->input( 'agerestriction' ) );
         }
 
         flashy()->success( 'Movies was updated successfully.' );

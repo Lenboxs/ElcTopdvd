@@ -10,6 +10,8 @@ use App\Http\Requests\Admin\SeriesFormRequest;
 use App\Series;
 use App\Branch;
 use App\Genre;
+use App\Type;
+use App\AgeRestriction;
 
 class SeriesController extends Controller
 {
@@ -31,7 +33,9 @@ class SeriesController extends Controller
     public function index()
     {
       $series = Series::all();
+
       $title = 'Manage Series';
+
       return view('admin.series.series')->withSeries($series)->withTitle($title);
     }
 
@@ -48,11 +52,17 @@ class SeriesController extends Controller
 
       $genres = Genre::all();
 
+      $types = Type::all();
+
+      $agerestrictions = AgeRestriction::all();
+
       return view( 'admin.series.add',
           array(
               'title' => $title,
               'branches' => $branches,
-              'genres' => $genres
+              'genres' => $genres,
+              'types' => $types,
+              'agerestrictions' => $agerestrictions
           )
       );
     }
@@ -92,6 +102,20 @@ class SeriesController extends Controller
           $series->branches()->attach( $request->input( 'branches' ) );
       }
 
+      if( $request->exists( 'types' ) )
+      {
+          $game->types()->detach();
+
+          $game->types()->attach( $request->input( 'types' ) );
+      }
+
+      if( $request->exists( 'agerestriction' ) )
+      {
+          $game->agerestricton()->detach();
+
+          $game->agerestricton()->attach( $request->input( 'agerestriction' ) );
+      }
+
       flashy()->success( 'Series was created successfully.' );
 
       return redirect('admin/add-series');
@@ -124,12 +148,18 @@ class SeriesController extends Controller
 
         $genres = Genre::all();
 
+        $types = Type::all();
+
+        $agerestrictions = AgeRestriction::all();
+
         return view( 'admin.series.edit',
             array(
                 'title' => $title,
                 'series' => $series,
                 'branches' => $branches,
                 'genres' => $genres,
+                'types' => $types,
+                'agerestrictions' => $agerestrictions
             )
         );
     }
@@ -179,6 +209,20 @@ class SeriesController extends Controller
           $series->branches()->detach();
 
           $series->branches()->attach( $request->input( 'branches' ) );
+      }
+
+      if( $request->exists( 'types' ) )
+      {
+          $game->types()->detach();
+
+          $game->types()->attach( $request->input( 'types' ) );
+      }
+
+      if( $request->exists( 'agerestriction' ) )
+      {
+          $game->agerestricton()->detach();
+
+          $game->agerestricton()->attach( $request->input( 'agerestriction' ) );
       }
 
   		$series->save();
