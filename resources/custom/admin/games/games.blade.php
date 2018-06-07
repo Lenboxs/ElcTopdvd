@@ -45,9 +45,9 @@
                         </h4></td>
                         <td>{{ ( !empty( $game ) && !empty( $game->name ) ) ? $game->name : '' }}</td>
                         <td>
-                          <a href="{{ url( 'admin/edit-movie/' . $game->id ) }}" class="btn btn-warning btn-sm">Edit</a>
-                          <a href="{{ url( 'admin/delete-movie/' . $game->id ) }}" class="btn btn-sm btn-danger">Delete</a>
-                          <a href="{{ url( 'admin/movie-to-top-ten/' . $game->id ) }}" class="btn btn-info btn-sm">Add to Top Ten</a>
+                          <a href="{{ url( 'admin/edit-game/' . $game->id ) }}" class="btn btn-warning btn-sm">Edit</a>
+                          <a href="{{ url( 'admin/delete-game/' . $game->id ) }}" class="btn btn-sm btn-danger">Delete</a>
+                          {{--<a href="{{ url( 'admin/movie-to-top-ten/' . $game->id ) }}" class="btn btn-info btn-sm">Add to Top Ten</a>--}}
                         </td>
                       </tr>
 
