@@ -11,7 +11,7 @@ class AgeRestriction extends Model
      *
      * @var string
      */
-    protected $table = 'age_restrictions';
+    protected $table = 'agerestrictions';
 
     public function movie()
     {

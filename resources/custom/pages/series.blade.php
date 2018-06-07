@@ -1,49 +1,52 @@
 @extends( 'templates.main' )
 
+@section( 'title' )
+{{ !empty( $title ) ? $title : '' }}
+@endsection
+
 @section( 'content' )
-<h1><div class="display-4 p-3 bg-info text-white">Series</div></h1>
-<div class="content">
-  <div class="content-background"></div>
-  <div class="content-overlay"></div>
-    <div class="main-content">
 
-      <div class="container">
+@component( 'templates.one-column' )
 
-        <div class="row">
-            <div class="col-md-2">
-              <div class="dvd">
-                <a href="#"><h4 class="dvd-name">Deadpool 2 (2018)</h4></a>
-                <a href="#">
-                    <img src="{{ url( 'img/new/deadpool-2.jpg' ) }}" class="img-responsive dvd-img">
-                </a>
-              </div>
+    @slot('title')
+       {{ $series->name }}
+    @endslot
+
+    @if( !empty( $series ) )
+        <div class="col-12">
+            <div class="youtube">
+                <iframe width="640" height="360" src="{{ $series->trailerLink }}" allow="autoplay; fullscreen" frameborder="no" scrolling="no" allowfullscreen="yes" style="width: 100%; height: 100%;"></iframe>
             </div>
-            <div class="col-md-2">
-              <div class="dvd">
-                <a href="#"><h4 class="dvd-name">Annihilation (2018)</h4></a>
-                <a href="#">
-                  <img src="{{ url( 'img/new/annihilation.jpg' ) }}" class="img-responsive dvd-img">
-                </a>
-              </div>
-            </div>
-            <div class="col-md-2">
-              <div class="dvd">
-                <a href="#"><h4 class="dvd-name">Black Panther (2018)</h4></a>
-                <a href="#">
-                  <img src="{{ url( 'img/new/black-panther.jpg' ) }}" class="img-responsive dvd-img">
-                </a>
-              </div>
-            </div>
-            <div class="col-md-2">
-              <div class="dvd">
-                <a href="#"><h4 class="dvd-name">A Wrinkle in Time (2018)</h4></a>
-                <a href="#">
-                  <img src="{{ url( 'img/new/a-wrinkle-in-time.jpg' ) }}" class="img-responsive dvd-img">
-                </a>
+        </div>
+
+        <div class="col-12 my-5">
+            <div class="lighter-head p-3"><h3>{{ $series->name }} ( Season {{ $series->season }} )<h3></div>
+            <div class="lighter px-3">
+              <div class="row">
+                  <div class="col-sm-4 p-5">
+                      <img src="{{ url( 'img/series/' . $series->image ) }}" class="w-100">
+                  </div>
+                  <div class="col-sm-8 py-5 pr-5">
+                      @if( $series->new == 1 )<h4><span class="badge badge-danger">NEW</span></h4>@endif
+                      <p><span class="label label-success">Name:</span> {{ $series->name }}</p>
+                      <p><span class="label label-success">Season:</span> {{ $series->season }}</p>
+                      <p><span class="label label-success">Description:</span> {{ $series->description }}</p>
+                      <p><span class="label label-success">Rating:</span> <i class="fa fa-star text-yellow" aria-hidden="true"></i><i class="fa fa-star text-yellow" aria-hidden="true"></i><i class="fa fa-star text-yellow" aria-hidden="true"></i><i class="fa fa-star text-dark" aria-hidden="true"></i><i class="fa fa-star text-dark" aria-hidden="true"></i></p>
+                  </div>
               </div>
             </div>
         </div>
-      </div>
-    </div>
-</div>
+
+        <div class="col-12 my-5">
+            <div class="lighter-head p-3"><h3>Reviews<h3></div>
+            <div class="lighter px-3 py-5">
+              <div class="col-12">
+
+              </div>
+            </div>
+        </div>
+    @endif
+
+@endcomponent
+
 @endsection

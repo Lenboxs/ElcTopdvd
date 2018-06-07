@@ -17,16 +17,41 @@
     <!-- Fonts -->
     <link href="{{ asset('fonts/EricaOne-Regular.ttf') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Anton" rel="stylesheet">
+    <script>
+      window.fbAsyncInit = function() {
+        FB.init({
+          appId            : 'your-app-id',
+          autoLogAppEvents : true,
+          xfbml            : true,
+          version          : 'v3.0'
+        });
+      };
+
+      (function(d, s, id){
+         var js, fjs = d.getElementsByTagName(s)[0];
+         if (d.getElementById(id)) {return;}
+         js = d.createElement(s); js.id = id;
+         js.src = "https://connect.facebook.net/en_US/sdk.js";
+         fjs.parentNode.insertBefore(js, fjs);
+       }(document, 'script', 'facebook-jssdk'));
+    </script>
+    @stack( 'styles' )
 </head>
-<body>
+<body class="bg-dark">
     <div id="app">
 
-		@includeif( 'section.nav' )
+		    @includeif( 'section.nav' )
 
         @yield( 'template' )
+
     </div>
 
     <!-- Scripts -->
     <script src="{{ asset( 'js/app.js' ) }}"></script>
+
+    @stack( 'scripts' )
+
+    @stack( 'custom-scripts' )
 </body>
 </html>

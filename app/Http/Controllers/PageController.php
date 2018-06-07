@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Branch;
+
 class PageController extends Controller
 {
     /**
@@ -18,7 +20,14 @@ class PageController extends Controller
 
     public function contact()
     {
-        return view( 'pages.contact' );
+        $branches = Branch::all();
+
+        return view( 'pages.contact' )->withBranches( $branches );
+    }
+
+    public function team()
+    {
+        return view( 'pages.team' );
     }
 
     public function terms()

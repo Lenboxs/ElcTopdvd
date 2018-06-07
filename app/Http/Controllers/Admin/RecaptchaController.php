@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+
 use App\Recaptcha;
 
 
@@ -26,11 +27,7 @@ class RecaptchaController extends Controller
      */
     public function index()
     {
-       $recaptcha = Recaptcha::all();
-
-       $title = 'Manage Recaptcha';
-
-       return view( 'admin.recaptchas.recaptchas' )->withRecaptcha( $recaptcha )->withTitle( $title );
+        //
     }
 
     /**
@@ -40,9 +37,7 @@ class RecaptchaController extends Controller
      */
     public function create()
     {
-      $title = "Add New Recaptcha";
-
-      return view( 'admin.recaptchas.add' )->withTitle( $title );
+        //
     }
 
     /**
@@ -53,15 +48,7 @@ class RecaptchaController extends Controller
      */
     public function store(Request $request)
     {
-      $recaptcha = new Recaptcha();
-
-      $recaptcha->name = !empty($request->input('name')) ? $request->input('name') : '';
-
-      $recaptcha->save();
-
-      flashy()->success( 'Recaptcha was created successfully.' );
-
-      return redirect('admin/add-recaptcha');
+        //
     }
 
     /**
@@ -81,13 +68,9 @@ class RecaptchaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit( $id )
+    public function edit()
     {
-      $title = "Edit Recaptcha";
-
-      $recaptcha = Type::find( $id );
-
-      return view( 'admin.recaptchas.edit' )->withTitle( $title )->withRecaptcha( $recaptcha );
+        //
     }
 
     /**
@@ -97,17 +80,19 @@ class RecaptchaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update( Request $request )
     {
-      $recaptcha = Type::find($request->input('id'));
+        $recaptcha = Recaptcha::orderBy( 'id', 'desc' )->first();
 
-      $recaptcha->name = !empty($request->input('name')) ? $request->input('name') : '';
+        $recaptcha->public_key = !empty( $request->input( 'public_key' ) ) ? $request->input( 'public_key' ) : '';
 
-      $recaptcha->save();
+        $recaptcha->private_key = !empty( $request->input( 'private_key' ) ) ? $request->input( 'private_key' ) : '';
 
-      flashy()->success( 'Recaptcha was updated successfully.' );
+        $recaptcha->save();
 
-      return redirect('admin/recaptchas');
+        flashy()->success( 'Recaptcha was updated successfully.' );
+
+        return redirect( 'admin/settings#recaptcha' );
     }
 
     /**
@@ -118,13 +103,6 @@ class RecaptchaController extends Controller
      */
     public function destroy($id)
     {
-      $recaptcha = Recaptcha::find($id);
-
-      $recaptcha->delete();
-
-      flashy()->success( 'Recaptcha was deleted successfully.' );
-
-      return redirect('admin/recaptchas');
-  }
-
+        //
+    }
 }

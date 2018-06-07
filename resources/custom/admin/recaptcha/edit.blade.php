@@ -5,31 +5,31 @@
 
         <div class="well">
 
-          <form role="form" method="POST" action="{{ url( '/admin/update-branch' ) }}">
+          <form role="form" method="POST" action="{{ url( '/admin/update-recaptcha' ) }}">
             <!-- text input -->
 
             <input type="hidden" name="_token" value="{{ csrf_token() }}" />
-            
-            <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                <label for="name" class="control-label">Public Key</label>
 
-                <input id="name" type="text" class="form-control" name="name" value="{{ ( !empty( $branch ) && !empty( $branch->name ) ) ? $branch->name : '' }}" required>
+            <div class="form-group{{ $errors->has('public_key') ? ' has-error' : '' }}">
+                <label for="public_key" class="control-label">Site Key</label>
 
-                @if ($errors->has('name'))
+                <input id="public_key" type="text" class="form-control" name="public_key" value="{{ ( !empty( $recaptcha ) && !empty( $recaptcha->public_key ) ) ? $recaptcha->public_key : '' }}" required>
+
+                @if( $errors->has( 'public_key' ) )
                     <span class="help-block">
-                        <strong>{{ $errors->first('name') }}</strong>
+                        <strong>{{ $errors->first( 'public_key' ) }}</strong>
                     </span>
                 @endif
             </div>
 
-            <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                <label for="name" class="control-label">Private Key</label>
+            <div class="form-group{{ $errors->has( 'private_key' ) ? ' has-error' : '' }}">
+                <label for="private_key" class="control-label">Secret Key</label>
 
-                <input id="name" type="text" class="form-control" name="name" value="{{ ( !empty( $branch ) && !empty( $branch->name ) ) ? $branch->name : '' }}" required>
+                <input id="private_key" type="text" class="form-control" name="private_key" value="{{ ( !empty( $recaptcha ) && !empty( $recaptcha->private_key ) ) ? $recaptcha->private_key : '' }}" required>
 
-                @if ($errors->has('name'))
+                @if( $errors->has( 'private_key' ) )
                     <span class="help-block">
-                        <strong>{{ $errors->first('name') }}</strong>
+                        <strong>{{ $errors->first( 'private_key' ) }}</strong>
                     </span>
                 @endif
             </div>

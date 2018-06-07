@@ -124,13 +124,7 @@
                     <select class="form-control select2 select-primary" name="genres[]" id="genres" multiple="multiple" data-placeholder="Select a Genre" style="width: 100%;">
                         @if( !empty( $genres ) )
                             @foreach( $genres as $genre )
-                                <option value="{{ !empty( $genre->id ) ? $genre->id : '' }}"
-                                @foreach( $series->genres as $series_genre )
-                                    @if( $series_genre->id == $genre->id )
-                                        selected
-                                    @endif
-                                @endforeach
-                                >{{ !empty( $genre->name ) ? Ucfirst( $genre->name ) : '' }}</option>
+                                <option value="{{ !empty( $genre->id ) ? $genre->id : '' }}">{{ !empty( $genre->name ) ? Ucfirst( $genre->name ) : '' }}</option>
                             @endforeach
                         @endif
                     </select>
@@ -147,13 +141,7 @@
                     <select class="form-control select2 select-primary" name="branches[]" id="branches" multiple="multiple" data-placeholder="Select a Branch" style="width: 100%;">
                         @if( !empty( $branches ) )
                             @foreach( $branches as $branch )
-                                <option value="{{ !empty( $branch->id ) ? $branch->id : '' }}"
-                                @foreach( $series->branches as $series_branch )
-                                    @if( $series_branch->id == $branch->id )
-                                        selected
-                                    @endif
-                                @endforeach
-                                >{{ !empty( $branch->name ) ? Ucfirst( $branch->name ) : '' }}</option>
+                                <option value="{{ !empty( $branch->id ) ? $branch->id : '' }}">{{ !empty( $branch->name ) ? Ucfirst( $branch->name ) : '' }}</option>
                             @endforeach
                         @endif
                     </select>

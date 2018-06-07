@@ -13,7 +13,7 @@ class MovieController extends Controller
 {
       public function movies()
       {
-           $movies = Movie::all();
+           $movies = Movie::where( 'active', 1 )->get();
 
            $branches = Branch::all();
 
@@ -31,9 +31,9 @@ class MovieController extends Controller
            );
        }
 
-     public function movie( $slug )
+    public function movie( $slug )
     {
-          $movie = Movie::where( 'slug', $slug )->orderBy( 'id', 'desc' )->first();
+          $movie = Movie::where( 'slug', $slug )->where( 'active', 1 )->orderBy( 'id', 'desc' )->first();
 
           return view( 'pages.movie' )->withMovie( $movie );
     }

@@ -25,9 +25,9 @@ class BranchFormRequest extends FormRequest
     {
         return [
           'name' => 'required',
-          'email' => 'required',
-          'contact_number' => 'required',
-          'address' => 'required',
+          //'email' => 'required',
+          //'contact_number' => 'required',
+        //  'address' => 'required',
 
         ];
     }
@@ -38,11 +38,11 @@ class BranchFormRequest extends FormRequest
 
         $input['name'] = filter_var( $input['name'], FILTER_SANITIZE_STRING );
 
-        $input['email'] = filter_var( $input['email'], FILTER_SANITIZE_EMAIL );
+        //$input['email'] = filter_var( $input['email'], FILTER_SANITIZE_EMAIL );
 
-        $input['contact_number'] = filter_var( $input['contact_number'], FILTER_SANITIZE_STRING );
+        //$input['contact_number'] = filter_var( $input['contact_number'], FILTER_SANITIZE_STRING );
 
-        $input['address'] = filter_var( $input['address'], FILTER_SANITIZE_STRING );
+        //$input['address'] = filter_var( $input['address'], FILTER_SANITIZE_STRING );
 
 
         $this->replace( $input );

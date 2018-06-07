@@ -98,6 +98,7 @@ class SettingsController extends Controller
               'title' => $title,
               'settings' => $settings,
               'socialmedia' => $social_media,
+              'recaptcha' => $recaptcha,
               'branches' => $branches,
               'genres' => $genres,
               'types' => $types,

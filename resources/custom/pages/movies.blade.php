@@ -1,18 +1,15 @@
 @extends( 'templates.main' )
 
 @section( 'content' )
-<h1><div class="display-4 p-3 bg-success text-white">Movies</div></h1>
-<div class="content bg-dark text-white">
-  <!--div class="content-background"></div>
-  <div class="content-overlay"></div-->
-    <div class="main-content">
+@component( 'templates.one-column' )
 
-      <div class="container">
+    @slot('title')
+        Movies
+    @endslot
 
-        <div class="row">
           <div class="col-md-3">
               <label>Select a Branch</label>
-              <select class="form-control p-3 mb-2 bg-success text-white">
+              <select class="form-control p-3 mb-2">
                 <option value="all" selected>All</option>
                 @if( !empty( $branches ) )
                     @foreach( $branches as $branch )
@@ -22,7 +19,7 @@
               </select>
           </div>
           <div class="col-md-3">
-              <label>Select a Category</label>
+              <label>Select a Genre</label>
               <select class="form-control">
                 <option value="all" selected>All</option>
                 @if( !empty( $genres ) )
@@ -51,22 +48,30 @@
           </div>
         </div>
 
-        <div class="row">
+        <div class="row row-eq-height">
           @if( !empty( $movies ) )
 
             @foreach( $movies as $movie )
-                <div class="col-2">
-                  <div class="dvd">
-                    <a href="{{ url( 'movie/' . $movie->slug ) }}"><h4 class="dvd-name">{{ !empty( $movie ) ? $movie->name : '' }}</h4></a>
-                    <a href="{{ url( 'movie/' . $movie->slug ) }}">
-                        <img src="{{ url( 'img/movies/' . $movie->image ) }}" class="img-responsive dvd-img">
-                    </a>
+
+                  <div class="col-md-3">
+                      @component( 'sections.dvd' )
+
+                          @slot('link')
+                              {{ url( 'movie/' . $movie->slug ) }}
+                          @endslot
+
+                          @slot('img')
+                              {{ url( 'img/movies/' . $movie->image ) }}
+                          @endslot
+
+                          {{ !empty( $movie ) ? $movie->name : '' }}
+
+                      @endcomponent
                   </div>
-                </div>
+
             @endforeach
           @endif
         </div>
-      </div>
-    </div>
-</div>
+@endcomponent
+
 @endsection

@@ -25,10 +25,9 @@ class SettingsFormRequest extends FormRequest
     {
         return [
 
-          'logo' => 'required',
+          //'logo' => 'required',
           'heading' => 'required',
-          'favicon' => 'required',
-
+          //'favicon' => 'required',
         ];
     }
 
@@ -36,9 +35,9 @@ class SettingsFormRequest extends FormRequest
     {
         $input = $this->all();
 
-        $input['logo'] = filter_var( $input['logo'], FILTER_SANITIZE_STRING );
+      //  $input['logo'] = filter_var( $input['logo'], FILTER_SANITIZE_STRING );
         $input['heading'] = filter_var( $input['heading'], FILTER_SANITIZE_STRING );
-        $input['favicon'] = filter_var( $input['favicon'], FILTER_SANITIZE_STRING );
+        //$input['favicon'] = filter_var( $input['favicon'], FILTER_SANITIZE_STRING );
 
         $this->replace( $input );
     }

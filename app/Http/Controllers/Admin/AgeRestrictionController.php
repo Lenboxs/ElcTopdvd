@@ -69,6 +69,7 @@ class AgeRestrictionController extends Controller
             'title' => $title,
             'settings' => $settings,
             'socialmedia' => $social_media,
+            'recaptcha' => $recaptcha,
             'branches' => $branches,
             'genres' => $genres,
             'types' => $types,
@@ -125,6 +126,8 @@ class AgeRestrictionController extends Controller
 
       $recaptcha = Recaptcha::orderBy( 'id', 'desc' )->first();
 
+      $branches = Branch::all();
+
       $genres = Genre::all();
 
       $types = Type::all();
@@ -134,6 +137,7 @@ class AgeRestrictionController extends Controller
             'title' => $title,
             'settings' => $settings,
             'socialmedia' => $social_media,
+            'recaptcha' => $recaptcha,
             'branches' => $branches,
             'genres' => $genres,
             'types' => $types,

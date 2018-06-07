@@ -12,9 +12,17 @@
 */
 
 //Route::get( '/', function () { return view('welcome'); });
+Route::get( '/login', function () {
+	return redirect( 'sign-in' );
+});
+
+Route::get( '/register', function () {
+	return redirect( 'sign-in' );
+});
 
 Auth::routes();
 //admin
+Route::get( '/sign-in', 'Auth\SignInController@index' )->name( 'sign-in' );
 Route::get( '/admin', 'Admin\HomeController@index' )->name( 'admin' );
 
 //adminpages
@@ -78,6 +86,8 @@ Route::get( '/admin/delete-user/{id}', 'Admin\UserController@destroy' )->name( '
 Route::get( '/admin/settings', 'Admin\SettingsController@edit' )->name( 'settings' );
 
 Route::post('/admin/update-settings','Admin\SettingsController@update')->name('update-settings');
+
+Route::post('/admin/update-recaptcha','Admin\RecaptchaController@update')->name('update-recaptcha');
 
 Route::post('/admin/update-socialmedia','Admin\SocialMediaController@update')->name('update-socialmedia');
 
@@ -143,6 +153,7 @@ Route::get( '/admin/delete-age-restriction/{id}', 'Admin\AgeRestrictionControlle
 //homepage
 
 Route::get( '/', 'HomeController@index' )->name( 'home' );
+Route::get( '/search', 'SearchController@index' )->name( 'search' );
 
 //topten
 
@@ -152,6 +163,8 @@ Route::get( '/top-10', 'TopController@top' )->name( 'top-10' );
 
 Route::get( '/top-rated', 'TopController@rated' )->name( 'top-rated' );
 
+Route::get( '/meet-our-staff', 'PageController@team' )->name( 'meet-our-staff' );
+
 //movies
 
 Route::get( '/movies', 'MovieController@movies' )->name( 'movies' );
@@ -159,6 +172,7 @@ Route::get( '/movies', 'MovieController@movies' )->name( 'movies' );
 Route::get( '/movie/{name}', 'MovieController@movie' )->name( 'movie' );
 
 //series
+Route::get( '/series', 'SeriesController@allSeries' )->name( 'all-series' );
 
 Route::get( '/series/{name}', 'SeriesController@series' )->name( 'series' );
 

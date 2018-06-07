@@ -11,9 +11,9 @@ use App\Type;
 
 class SeriesController extends Controller
 {
-    public function series( $name )
+    public function allSeries()
     {
-        $series = Series::all();
+        $series = Series::where( 'active', 1 )->get();
 
         $branches = Branch::all();
 
@@ -21,12 +21,23 @@ class SeriesController extends Controller
 
         $types = Type::all();
 
-        return view( 'pages.series',
+        return view( 'pages.all-series',
           array(
             'series' => $series,
             'branches' => $branches,
             'genres' => $genres,
             'types' => $types,
+          )
+      );
+    }
+
+    public function series( $slug )
+    {
+        $series = Series::where( 'slug', $slug )->where( 'active', 1 )->orderBy( 'id', 'desc' )->first();
+
+        return view( 'pages.series',
+          array(
+            'series' => $series
           )
       );
     }
