@@ -4,18 +4,18 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\TypeFormRequest;
+use App\Http\Requests\Admin\ConsoleFormRequest;
 
 use App\Settings;
 use App\SocialMedia;
 use App\Branch;
-use App\Type;
 use App\Console;
+use App\Type;
 use App\Genre;
 use App\AgeRestriction;
 use App\Recaptcha;
 
-class TypeController extends Controller
+class ConsoleController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -34,11 +34,11 @@ class TypeController extends Controller
      */
     public function index()
     {
-       $type = Type::all();
+       $console = Console::all();
 
-       $title = 'Manage Types';
+       $title = 'Manage Consoles';
 
-       return view( 'admin.types.types' )->withType( $type )->withTitle( $title );
+       return view( 'admin.consoles.consoles' )->withConsole( $console )->withTitle( $title );
     }
 
     /**
@@ -48,7 +48,7 @@ class TypeController extends Controller
      */
     public function create()
     {
-        $title = "Add New Type";
+        $title = "Add New Console";
 
         $settings = Settings::orderBy( 'id', 'desc' )->first();
 
@@ -60,9 +60,9 @@ class TypeController extends Controller
 
         $genres = Genre::all();
 
-        $types = Type::all();
-
         $consoles = Console::all();
+
+        $types = Type::all();
 
         $agerestrictions = AgeRestriction::all();
 
@@ -74,8 +74,8 @@ class TypeController extends Controller
                 'recaptcha' => $recaptcha,
                 'branches' => $branches,
                 'genres' => $genres,
-                'types' => $types,
-                '$consoles' => $consoles,
+                'consoles' => $consoles,
+                '$types' => $types,
                 'agerestrictions' => $agerestrictions,
             )
         );
@@ -87,21 +87,21 @@ class TypeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store( TypeFormRequest $request )
+    public function store( ConsoleFormRequest $request )
     {
-        $type = new Type();
+        $console = new Console();
 
-        $type->active= !empty( $request->input( 'active' ) ) ? 1 : 2;
+        $console->active= !empty( $request->input( 'active' ) ) ? 1 : 2;
 
-        $type->name = !empty($request->input('name')) ? $request->input('name') : '';
+        $console->name = !empty($request->input('name')) ? $request->input('name') : '';
 
-        $type->logo = $this->upload( 'logo', $request, $uploadService );
+        $console->logo = $this->upload( 'logo', $request, $uploadService );
 
-        $type->save();
+        $console->save();
 
-        flashy()->success( 'Type was created successfully.' );
+        flashy()->success( 'Console was created successfully.' );
 
-        return redirect( 'admin/settings#types' );
+        return redirect( 'admin/settings#consoles' );
     }
 
     /**
@@ -123,9 +123,9 @@ class TypeController extends Controller
      */
     public function edit( $id )
     {
-        $title = "Edit Type";
+        $title = "Edit Console";
 
-        $type = Type::find( $id );
+        $console = Console::find( $id );
 
         $settings = Settings::orderBy( 'id', 'desc' )->first();
 
@@ -137,7 +137,7 @@ class TypeController extends Controller
 
         $genres = Genre::all();
 
-        $consoles = Console::all();
+        $types = Type::all();
 
         $agerestrictions = AgeRestriction::all();
 
@@ -149,8 +149,8 @@ class TypeController extends Controller
               'recaptcha' => $recaptcha,
               'branches' => $branches,
               'genres' => $genres,
-              'type' => $type,
-              'consoles' => $consoles,
+              'console' => $console,
+              'types' => $types,
               'agerestrictions' => $agerestrictions,
             )
         );
@@ -163,28 +163,28 @@ class TypeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update( TypeFormRequest $request )
+    public function update( ConsoleFormRequest $request )
     {
-        $type = Type::find($request->input('id'));
+        $console = Console::find($request->input('id'));
 
-        $type->active= !empty( $request->input( 'active' ) ) ? 1 : 2;
+        $console->active= !empty( $request->input( 'active' ) ) ? 1 : 2;
 
-        $type->name = !empty($request->input('name')) ? $request->input('name') : '';
+        $console->name = !empty($request->input('name')) ? $request->input('name') : '';
 
         if( $request->input( 'remove_logo' ) == 'true' )
   		  {
-  			     $type->logo = '';
+  			     $console->logo = '';
   		  }
         elseif( !empty( $request->file( 'logo' ) ) )
   		  {
-  			     $type->logo = $this->upload( 'logo', $request, $uploadService );
+  			     $console->logo = $this->upload( 'logo', $request, $uploadService );
   	  	}
 
-        $type->save();
+        $console->save();
 
-        flashy()->success( 'Type was updated successfully.' );
+        flashy()->success( 'Console was updated successfully.' );
 
-        return redirect( 'admin/settings#types' );
+        return redirect( 'admin/settings#consoles' );
     }
 
     /**
@@ -195,13 +195,13 @@ class TypeController extends Controller
      */
     public function destroy( $id )
     {
-        $type = Type::find( $id );
+        $console = Console::find( $id );
 
-        $type->delete();
+        $console->delete();
 
-        flashy()->success( 'Type was deleted successfully.' );
+        flashy()->success( 'Console was deleted successfully.' );
 
-        return redirect( 'admin/settings#types' );
+        return redirect( 'admin/settings#consoles' );
     }
 
     public function upload( $input, $request, $uploadService )

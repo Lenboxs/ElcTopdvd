@@ -75,6 +75,19 @@
             <li class="@if( Request::is( '*admin/series*' ) ) active @endif"><a href="{{ url( 'admin/series' ) }}"><i class="fa fa-circle-o"></i> Manage Series</a></li>
           </ul>
         </li>
+        <li class="@if( Request::is( '*game*' ) ) active @endif treeview">
+          <a href="#">
+            <i class="fa fa-folder"></i>
+            <span>Games</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li class="@if( Request::is( '*admin/add-game*' ) ) active @endif"><a href="{{ url( 'admin/add-game' ) }}"><i class="fa fa-circle-o"></i> Add New Game</a></li>
+            <li class="@if( Request::is( '*admin/games*' ) ) active @endif"><a href="{{ url( 'admin/games' ) }}"><i class="fa fa-circle-o"></i> Manage Games</a></li>
+          </ul>
+        </li>
         <li class="@if( Request::is( 'admin/manage-branches' ) ) active @endif">
           <a href="{{ url( 'admin/manage-branches' ) }}">
             <i class="fa fa-folder"></i>

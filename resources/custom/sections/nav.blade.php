@@ -10,20 +10,43 @@
 
 				  <div class="collapse navbar-collapse" id="navbarSupportedContent">
 				    <ul class="navbar-nav mr-auto">
-							<li class="nav-item {{ Request::is( '/' ) ? 'active' : '' }}"><a class="nav-link font-weight-bold" href="{{ route( 'home' ) }}">Home</a></li>
+							<li class="nav-item {{ Request::is( '/' ) ? 'active' : '' }}">
+								<a class="nav-link" href="{{ route( 'home' ) }}">
+									<span class="nav-link-text">Home</span>
+								</a>
+							</li>
 							<li class="nav-item {{ ( Request::is( 'movies' ) || Request::is( 'series' ) ) ? 'active' : '' }} dropdown">
-				        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				          Catalog
+				        <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				          <span class="nav-link-text dropdown-toggle">Catalog</span>
 				        </a>
-				        <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
-				          <a class="dropdown-item text-white" href="{{ url( 'movies' ) }}">Movies</a>
-				          <a class="dropdown-item text-white" href="{{ url( 'series' ) }}">Series</a>
+				        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+				          <a class="dropdown-item" href="{{ url( 'movies' ) }}">Movies</a>
+				          <a class="dropdown-item" href="{{ url( 'series' ) }}">Series</a>
+									<a class="dropdown-item" href="{{ url( 'games' ) }}">Games</a>
+									<a class="dropdown-item" href="{{ url( 'old-movies' ) }}">We Sell Old Movies</a>
+									<a class="dropdown-item" href="{{ url( 'kiddies-budget' ) }}">Kiddies Budget</a>
 				        </div>
 				      </li>
-							<li class="nav-item {{ Request::is( 'top-10' ) ? 'active' : '' }}"><a class="nav-link" href="{{ route( 'top-10' ) }}">Top 10 Movies</a></li>
-							<li class="nav-item {{ Request::is( 'top-rated' ) ? 'active' : '' }}"><a class="nav-link" href="{{ route( 'top-rated' ) }}">Top Rated</a></li>
-							<li class="nav-item {{ Request::is( 'meet-our-staff' ) ? 'active' : '' }}"><a class="nav-link" href="{{ route( 'meet-our-staff' ) }}">Meet Our Staff</a></li>
-							<li class="nav-item {{ Request::is( 'contact-us' ) ? 'active' : '' }}"><a class="nav-link" href="{{ route( 'contact-us' ) }}">Contact Us</a></li>
+							<li class="nav-item {{ Request::is( 'top-10' ) ? 'active' : '' }}">
+								<a class="nav-link" href="{{ route( 'top-10' ) }}">
+									<span class="nav-link-text">Top 10 Movies</span>
+								</a>
+							</li>
+							<li class="nav-item {{ Request::is( 'top-rated' ) ? 'active' : '' }}">
+								<a class="nav-link" href="{{ route( 'top-rated' ) }}">
+									<span class="nav-link-text">Top Rated</span>
+								</a>
+							</li>
+							<li class="nav-item {{ Request::is( 'meet-our-staff' ) ? 'active' : '' }}">
+								<a class="nav-link" href="{{ route( 'meet-our-staff' ) }}">
+									<span class="nav-link-text">Meet Our Staff</span>
+								</a>
+							</li>
+							<li class="nav-item {{ Request::is( 'contact-us' ) ? 'active' : '' }}">
+								<a class="nav-link" href="{{ route( 'contact-us' ) }}">
+									<span class="nav-link-text">Contact Us</span>
+								</a>
+							</li>
 				    </ul>
 				    <form class="form-inline my-2 my-lg-0 justify-content-end" method="get" action="{{ url( 'search' ) }}">
 				      <input class="form-control mr-sm-2 rounded" type="search" placeholder="Search" aria-label="Search" name="search">

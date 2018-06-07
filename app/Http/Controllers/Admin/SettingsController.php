@@ -11,6 +11,7 @@ use App\Settings;
 use App\SocialMedia;
 use App\Branch;
 use App\Type;
+use App\Console;
 use App\Genre;
 use App\AgeRestriction;
 use App\Recaptcha;
@@ -91,6 +92,8 @@ class SettingsController extends Controller
 
         $types = Type::all();
 
+        $consoles = Console::all();
+
         $agerestrictions = AgeRestriction::all();
 
         return view( 'admin.pages.settings',
@@ -102,6 +105,7 @@ class SettingsController extends Controller
               'branches' => $branches,
               'genres' => $genres,
               'types' => $types,
+              '$consoles' => $consoles,
               'agerestrictions' => $agerestrictions,
           )
         );

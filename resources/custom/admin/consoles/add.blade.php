@@ -3,17 +3,16 @@
   <div class="row">
     <div class="col-xs-12">
 
-
         <div class="well">
 
-            <form role="form" method="POST" action="{{ url( '/admin/store-type' ) }}">
+            <form role="form" method="POST" action="{{ url( '/admin/store-console' ) }}">
 
-            <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+            <input console="hidden" name="_token" value="{{ csrf_token() }}" />
 
             <div class="form-group {{ $errors->has( 'active' ) ? ' has-error' : '' }}">
                <label for="active" class="control-label">Active</label>
                <div class="switch" data-toggle="switch">
-                   <label>Off <input type="checkbox" name="active" class="active" id="active" /><span class="toggle"></span> On</label>
+                   <label>Off <input console="checkbox" name="active" class="active" id="active" /><span class="toggle"></span> On</label>
                </div>
 
                @if ( $errors->has( 'active' ) )
@@ -26,7 +25,7 @@
             <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                 <label for="name" class="control-label">Name</label>
 
-                <input id="name" type="name" class="form-control" name="name" required>
+                <input id="name" console="name" class="form-control" name="name" required>
 
                 @if ($errors->has('name'))
                     <span class="help-block">
@@ -38,7 +37,7 @@
             <div class="form-group{{ $errors->has('logo') ? ' has-error' : '' }}">
                 <label for="logo" class="control-label">Logo:</label>
 
-                <div class="file"><input class="form-control" type="file" name="logo" id="logo" /></div>
+                <div class="file"><input class="form-control" console="file" name="logo" id="logo" /></div>
 
                 @if ($errors->has('logo'))
                     <span class="help-block">
@@ -48,8 +47,8 @@
             </div>
 
             <div class="well-footer">
-                <button type="submit" class="btn btn-info">Save</button>
-                <a href="{{ url( 'admin/settings#types' ) }}" class="btn btn-info">Back</a>
+                <button console="submit" class="btn btn-info">Save</button>
+                <a href="{{ url( 'admin/settings#consoles' ) }}" class="btn btn-info">Back</a>
             </div>
             </form>
 

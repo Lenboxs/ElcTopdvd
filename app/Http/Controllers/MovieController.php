@@ -37,4 +37,18 @@ class MovieController extends Controller
 
           return view( 'pages.movie' )->withMovie( $movie );
     }
+
+    public function old()
+    {
+          $movie = Movie::where( 'active', 1 )->orderBy( 'id', 'desc' )->first();
+
+          return view( 'pages.old-movies' )->withMovie( $movie );
+    }
+
+    public function kiddies()
+    {
+          $movie = Movie::where( 'active', 1 )->orderBy( 'id', 'desc' )->first();
+
+          return view( 'pages.kiddies-budget' )->withMovie( $movie );
+    }
 }

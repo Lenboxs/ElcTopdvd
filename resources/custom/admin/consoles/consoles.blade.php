@@ -2,17 +2,17 @@
     <div class="panel-heading">
         <div class="row">
             <div class="col col-xs-6">
-                <h3 class="panel-title">Types</h3>
+                <h3 class="panel-title">Consoles</h3>
             </div>
             <div class="col col-xs-6 text-right">
-                <a href="{{ url( 'admin/add-type#types' ) }}" class="btn btn-success btn-sm">Add New Type</a>
+                <a href="{{ url( 'admin/add-console#consoles' ) }}" class="btn btn-success btn-sm">Add New Console</a>
             </div>
         </div>
     </div>
     <div class="panel-body">
         <div class="row">
             <div class="col-md-12">
-              <table id="typestable" class="table table-bordered table-striped">
+              <table id="consolestable" class="table table-bordered table-striped">
                 <thead>
                 <tr>
                   <th>Active</th>
@@ -22,21 +22,21 @@
                 </thead>
                 <tbody>
 
-                  @if( !empty( $types ) )
-                    @foreach( $types as $type )
+                  @if( !empty( $consoles ) )
+                    @foreach( $consoles as $console )
 
                       <tr>
                         <td><h4>
-                          @if( !empty( $type ) && !empty( $type->active ) && $type->active == 1 )
+                          @if( !empty( $console ) && !empty( $console->active ) && $console->active == 1 )
                               <span class="label label-success">Active</span>
                           @else
                               <span class="label label-danger">Not Active</span>
                           @endif
                         </h4></td>
-                        <td>{{ ( !empty( $type ) && !empty( $type->name ) ) ? $type->name : '' }}</td>
+                        <td>{{ ( !empty( $console ) && !empty( $console->name ) ) ? $console->name : '' }}</td>
                         <td>
-                          <a href="{{ url( 'admin/edit-type/' . $type->id . "#types" ) }}" class="btn btn-warning btn-sm">Edit</a>
-                          <a href="{{ url( 'admin/delete-type/' . $type->id ) }}" class="btn btn-sm btn-danger">Delete</a>
+                          <a href="{{ url( 'admin/edit-console/' . $console->id . "#consoles" ) }}" class="btn btn-warning btn-sm">Edit</a>
+                          <a href="{{ url( 'admin/delete-console/' . $console->id ) }}" class="btn btn-sm btn-danger">Delete</a>
                         </td>
                       </tr>
 

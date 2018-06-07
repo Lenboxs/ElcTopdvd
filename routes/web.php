@@ -67,6 +67,20 @@ Route::post('/admin/update-series','Admin\SeriesController@update')->name( 'upda
 
 Route::get( '/admin/delete-series/{id}', 'Admin\SeriesController@destroy' )->name( 'delete-series' );
 
+//admingames
+
+Route::get( '/admin/games', 'Admin\GameController@index' )->name( 'games' );
+
+Route::get( '/admin/add-game', 'Admin\GameController@create' )->name( 'add-game' );
+
+Route::post( '/admin/store-game','Admin\GameController@store' )->name( 'store-game' );
+
+Route::get( '/admin/edit-game/{id}', 'Admin\GameController@edit' )->name( 'edit-game' );
+
+Route::post( '/admin/update-game','Admin\GameController@update' )->name( 'update-game' );
+
+Route::get( '/admin/delete-game/{id}', 'Admin\GameController@destroy' )->name( 'delete-game' );
+
 //adminusers
 
 Route::get( '/admin/users', 'Admin\UserController@index' )->name( 'users' );
@@ -171,10 +185,20 @@ Route::get( '/movies', 'MovieController@movies' )->name( 'movies' );
 
 Route::get( '/movie/{name}', 'MovieController@movie' )->name( 'movie' );
 
+Route::get( '/old-movies', 'MovieController@old' )->name( 'old-movies' );
+
+Route::get( '/kiddies-budget', 'MovieController@kiddies' )->name( 'kiddies-budget' );
+
 //series
 Route::get( '/series', 'SeriesController@allSeries' )->name( 'all-series' );
 
 Route::get( '/series/{name}', 'SeriesController@series' )->name( 'series' );
+
+// games
+
+Route::get( '/games', 'GameController@index' )->name( 'games' );
+
+Route::get( '/game/{name}', 'GameController@show' )->name( 'game' );
 
 //contactus
 

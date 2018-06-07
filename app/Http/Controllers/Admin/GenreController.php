@@ -10,6 +10,7 @@ use App\Settings;
 use App\SocialMedia;
 use App\Branch;
 use App\Type;
+use App\Console;
 use App\Genre;
 use App\AgeRestriction;
 use App\Recaptcha;
@@ -61,6 +62,8 @@ class GenreController extends Controller
 
       $types = Type::all();
 
+      $consoles = Console::all();
+
       $agerestrictions = AgeRestriction::all();
 
       return view( 'admin.pages.settings',
@@ -72,6 +75,7 @@ class GenreController extends Controller
             'branches' => $branches,
             'genres' => $genres,
             'types' => $types,
+            '$consoles' => $consoles,
             'agerestrictions' => $agerestrictions,
         )
       );
@@ -129,6 +133,8 @@ class GenreController extends Controller
 
       $types = Type::all();
 
+      $consoles = Console::all();
+
       $agerestrictions = AgeRestriction::all();
 
       return view( 'admin.pages.settings',
@@ -140,6 +146,7 @@ class GenreController extends Controller
             'branches' => $branches,
             'genre' => $genre,
             'types' => $types,
+            '$consoles' => $consoles,
             'agerestrictions' => $agerestrictions,
         )
       );
