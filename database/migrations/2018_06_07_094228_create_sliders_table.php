@@ -15,6 +15,7 @@ class CreateSlidersTable extends Migration
     {
       Schema::create('sliders', function (Blueprint $table) {
           $table->increments('id');
+          $table->integer('active')->unsigned();
           $table->string('name')->nullable();
           $table->integer('home_page_id')->unsigned()->nullable();
 

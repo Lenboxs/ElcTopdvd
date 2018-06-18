@@ -6,6 +6,7 @@ use Illuminate\Support\ServiceProvider;
 use App\Settings;
 use App\SocialMedia;
 use App\Recaptcha;
+use Illuminate\Support\Facades\Schema;
 
 class ConfigServiceProvider extends ServiceProvider
 {
@@ -16,16 +17,19 @@ class ConfigServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $settings = Settings::orderBy( 'id', 'desc' )->first();
+        if (Schema::hasTable('settings')) {
+          $settings = Settings::orderBy( 'id', 'desc' )->first();
 
-        if( !empty( $settings['attributes'] ) )
-        {
-            foreach( $settings['attributes'] as $key => $value )
-            {
-                \Config::set( 'settings.' .  $key, $value );
-            }
+          if( !empty( $settings['attributes'] ) )
+          {
+              foreach( $settings['attributes'] as $key => $value )
+              {
+                  \Config::set( 'settings.' .  $key, $value );
+              }
+          }
         }
 
+        if (Schema::hasTable('social_media')) {
         $socialmedia = SocialMedia::orderBy( 'id', 'desc' )->first();
 
         if( !empty( $socialmedia['attributes'] ) )
@@ -35,7 +39,9 @@ class ConfigServiceProvider extends ServiceProvider
                 \Config::set( 'settings.' .  $key, $value );
             }
         }
+        }
 
+        if (Schema::hasTable('recaptcha'))
         $recaptcha = Recaptcha::orderBy( 'id', 'desc' )->first();
 
         if( !empty( $recaptcha['attributes'] ) )
@@ -46,6 +52,7 @@ class ConfigServiceProvider extends ServiceProvider
             }
         }
     }
+
 
     /**
      * Register the application services.
