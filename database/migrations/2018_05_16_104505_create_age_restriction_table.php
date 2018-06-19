@@ -15,6 +15,7 @@ class CreateAgerestrictionTable extends Migration
      {
        Schema::create('agerestrictions', function (Blueprint $table) {
            $table->increments('id');
+           $table->integer('active')->unsigned();
            $table->string('name')->nullable();
 
            $table->timestamps();

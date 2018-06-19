@@ -17,7 +17,7 @@ class CreateGamesTable extends Migration
          $table->increments('id');
          $table->integer('active')->unsigned();
          $table->integer('new')->unsigned();
-         $table->integer('age_id')->unsigned()->nullable();
+         $table->integer('agerestrictions_id')->unsigned()->nullable();
          $table->string('name')->nullable();
          $table->string('slug')->nullable();
          $table->text('description');
