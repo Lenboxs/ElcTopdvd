@@ -39,11 +39,17 @@ class Movie extends Model
     }
 
     public function review()
-      {
-          return $this->morphMany('App\Review', 'reviewable');
-      }
-      public function rating()
+    {
+        return $this->morphMany('App\Review', 'reviewable');
+    }
+
+    public function rating()
     {
         return $this->morphMany('App\Rating', 'rateable');
+    }
+
+    public function types()
+    {
+        return $this->belongsToMany( 'App\Type', 'movie_type', 'movie_branch_id', 'type_id')->using( 'App\MovieType' )->withTimestamps();
     }
 }

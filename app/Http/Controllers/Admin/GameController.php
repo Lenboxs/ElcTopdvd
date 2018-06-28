@@ -93,6 +93,8 @@ class GameController extends Controller
 
         $game->year = !empty( $request->input( 'year' ) ) ? $request->input( 'year' ) : '';
 
+        $game->agerestriction_id = !empty( $request->input( 'agerestriction_id' ) ) ? $request->input( 'agerestriction_id' ) : null;
+
         $game->save();
 
         if( $request->exists( 'genres' ) )
@@ -116,17 +118,9 @@ class GameController extends Controller
             $game->consoles()->attach( $request->input( 'consoles' ) );
         }
 
-        if( $request->exists( 'agerestriction' ) )
-        {
-            $game->agerestricton()->detach();
-
-            $game->agerestricton()->attach( $request->input( 'agerestriction' ) );
-        }
-
         flashy()->success( 'Game was created successfully.' );
 
         return redirect( 'admin/add-game' );
-
     }
 
     /**
@@ -210,6 +204,8 @@ class GameController extends Controller
   			     $status = $uploadService->successful();
   	  	}
 
+        $game->agerestriction_id = !empty( $request->input( 'agerestriction_id' ) ) ? $request->input( 'agerestriction_id' ) : null;
+
   			$game->save();
 
         if( $request->exists( 'genres' ) )
@@ -233,13 +229,6 @@ class GameController extends Controller
             $game->consoles()->attach( $request->input( 'consoles' ) );
         }
 
-        if( $request->exists( 'agerestriction' ) )
-        {
-            $game->agerestricton()->detach();
-
-            $game->agerestricton()->attach( $request->input( 'agerestriction' ) );
-        }
-
         flashy()->success( 'Games was updated successfully.' );
 
   			return redirect( 'admin/games' );
@@ -251,9 +240,9 @@ class GameController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy( $id )
     {
-        $game = Game::find($id);
+        $game = Game::find( $id );
 
         $game->delete();
 
@@ -268,14 +257,14 @@ class GameController extends Controller
     		{
       			if( $uploadService->setRequest( $request )->setFilename( $input )->setUploadDirectory( 'img/games' )->move() )
       			{
-      				return $uploadService->getTargetFile();
+      				  return $uploadService->getTargetFile();
       			}
 
       			$this->status = $this->status && $uploadService->successful();
     		}
     		elseif( $request->input( 'remove_' . $input ) == 'true' )
     		{
-    			   return '';
+    			  return '';
     		}
     }
 
@@ -283,7 +272,7 @@ class GameController extends Controller
     {
         if( empty( $trailerLink ) )
         {
-           return '';
+            return '';
         }
 
         if( strpos( $trailerLink, 'embed' ) !== false )
@@ -300,7 +289,7 @@ class GameController extends Controller
         }
         else
         {
-           return '';
+            return '';
         }
     }
 }

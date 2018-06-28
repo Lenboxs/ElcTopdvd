@@ -36,15 +36,30 @@ class User extends Authenticatable
     {
         return $this->hasMany( 'App\Rating');
     }
+
     public function review()
     {
         return $this->hasMany( 'App\Review');
     }
+
     public function isAdmin()
     {
         foreach ( $this->roles as $role)
         {
             if ( $role->role == 'admin' )
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public function isAdminOrIsOwner()
+    {
+        foreach ( $this->roles as $role)
+        {
+            if ( $role->role == 'admin' || $role->role == 'owner' )
             {
                 return true;
             }

@@ -22,5 +22,4 @@ class Type extends Model
   	{
   			return $this->belongsToMany( 'App\SeriesBranch', 'series_type','type_id' ,'series_branch_id')->using( 'App\SeriesType' )->withTimestamps();
   	}
-
 }

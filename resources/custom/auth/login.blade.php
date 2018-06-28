@@ -1,7 +1,7 @@
 @component( 'sections.box' )
 
     @slot('title')
-        <span class="featured">Sign</span> In
+        Sign In
     @endslot
 
     <form class="form-horizontal" method="POST" action="{{ route('login') }}">
@@ -47,5 +47,5 @@
                 </a>
         </div>
     </form>
-    
+
 @endcomponent

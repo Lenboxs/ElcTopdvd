@@ -1,7 +1,7 @@
 @component( 'sections.box' )
 
     @slot('title')
-        <span class="featured">Sign</span> Up
+        Sign Up
     @endslot
 
     <form class="form-horizontal" method="POST" action="{{ route('register') }}">

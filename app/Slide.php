@@ -17,4 +17,4 @@ class Slide extends Model
     {
         return $this->belongsTo( 'App\Slider');
     }
-  }
+}

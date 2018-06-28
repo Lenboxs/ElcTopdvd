@@ -11,6 +11,7 @@ use App\User;
 use App\Movie;
 use App\Series;
 use App\HomePage;
+use App\Slider;
 
 class HomeController extends Controller
 {
@@ -59,10 +60,29 @@ class HomeController extends Controller
      */
     public function homePage()
     {
-      $title = "Manage Home Page";
+        $title = "Manage Home Page";
 
-      $homepage = HomePage::orderBy( 'id', 'desc' )->first();
+        $sliders = Slider::where( 'active', 1 )->get();
 
-      return view( 'admin.pages.home' )->withTitle( $title )->withHomePage( $homepage );
+        $homepage = HomePage::getHomePage();
+
+        return view( 'admin.pages.home', [
+          'title' => $title,
+          'homepage' => $homepage,
+          'sliders' => $sliders
+        ]);
+    }
+
+    public function updateHomepage( Request $request )
+    {
+        $homepage = HomePage::getHomePage();
+
+        $homepage->slider_id = !empty( $request->input( 'slider' ) ) ? $request->input( 'slider' ) : '';
+
+        $homepage->save();
+
+        flashy()->success( 'Home page was updated successfully.' );
+
+        return redirect( 'admin/home-page' );
     }
 }

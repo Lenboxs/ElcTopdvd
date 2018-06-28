@@ -111,6 +111,40 @@
                     @endif
                 </div>
 
+                <div class="form-group{{ $errors->has('runtime') ? ' has-error' : '' }}">
+                    <label for="runtime" class="control-label">Runtime:</label>
+
+                    <input id="runtime" type="text" class="form-control" name="runtime"  value="{{ ( !empty( $movie ) && !empty( $movie->runtime ) ) ? $movie->runtime : '' }}" />
+
+                    @if ($errors->has('runtime'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('runtime') }}</strong>
+                        </span>
+                    @endif
+                </div>
+
+                <div class="form-group {{ $errors->has( 'agerestriction_id' ) ? ' has-error' : '' }}">
+                    <label for="agerestriction_id" class="control-label">Age Restrictions</label>
+                    <select class="form-control select-primary" name="agerestriction_id" id="agerestriction_id">
+                        <option value="">Select an Age Restriction</option>
+                        @if( !empty( $agerestrictions ) )
+                            @foreach( $agerestrictions as $agerestriction )
+                                <option value="{{ !empty( $agerestriction->id ) ? $agerestriction->id : '' }}"
+                                    @if( $movie->agerestriction_id == $agerestriction->id )
+                                        selected
+                                    @endif
+                                >{{ !empty( $agerestriction->name ) ? Ucfirst( $agerestriction->name ) : '' }}</option>
+                            @endforeach
+                        @endif
+                    </select>
+
+                    @if ( $errors->has( 'agerestriction_id' ) )
+                        <span class="help-block">
+                            <strong>{{ $errors->first( 'agerestriction_id' ) }}</strong>
+                        </span>
+                    @endif
+                </div>
+
                 <div class="form-group {{ $errors->has( 'genres' ) ? ' has-error' : '' }}">
                     <label for="genres" class="control-label">Genres</label>
                     <select class="form-control select2 select-primary" name="genres[]" id="genres" multiple="multiple" data-placeholder="Select a Genre" style="width: 100%;">

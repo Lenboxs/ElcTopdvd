@@ -11,7 +11,7 @@
 
 @section( 'content' )
 
-<!-- Main content -->
+    <!-- Main content -->
     <section class="content">
       <div class="row">
         <div class="col-xs-12">
@@ -98,6 +98,37 @@
                     @if ($errors->has('trailerLink'))
                         <span class="help-block">
                             <strong>{{ $errors->first('trailerLink') }}</strong>
+                        </span>
+                    @endif
+                </div>
+
+                <div class="form-group{{ $errors->has('runtime') ? ' has-error' : '' }}">
+                    <label for="runtime" class="control-label">Runtime:</label>
+
+                    <input id="runtime" type="text" class="form-control" name="runtime" required>
+
+                    @if ($errors->has('runtime'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('runtime') }}</strong>
+                        </span>
+                    @endif
+                </div>
+
+                <div class="form-group {{ $errors->has( 'agerestriction_id' ) ? ' has-error' : '' }}">
+                    <label for="agerestriction_id" class="control-label">Age Restrictions</label>
+                    <select class="form-control select-primary" name="agerestriction_id" id="agerestriction_id">
+                        <option value="">Select an Age Restriction</option>
+                        @if( !empty( $agerestrictions ) )
+                            @foreach( $agerestrictions as $agerestriction )
+                                <option value="{{ !empty( $agerestriction->id ) ? $agerestriction->id : '' }}"
+                                >{{ !empty( $agerestriction->name ) ? Ucfirst( $agerestriction->name ) : '' }}</option>
+                            @endforeach
+                        @endif
+                    </select>
+
+                    @if ( $errors->has( 'agerestriction_id' ) )
+                        <span class="help-block">
+                            <strong>{{ $errors->first( 'agerestriction_id' ) }}</strong>
                         </span>
                     @endif
                 </div>

@@ -1,11 +1,7 @@
-@extends( 'templates.main' )
-
-@section( 'content' )
-
     @component( 'templates.one-column' )
 
         @slot('title')
-            Meat Our Staff
+            Meet Our Staff
         @endslot
 
         <div class="col-md-4">
@@ -23,4 +19,3 @@
             <div class="staff-position text-center">CEO</div>
         </div>
     @endcomponent
-@endsection

@@ -10,24 +10,30 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Auth::routes();
 
 //Route::get( '/', function () { return view('welcome'); });
 Route::get( '/login', function () {
 	return redirect( 'sign-in' );
-});
+})->name( 'login' );
 
 Route::get( '/register', function () {
 	return redirect( 'sign-in' );
-});
+})->name( 'register' );
 
-Auth::routes();
+
 //admin
 Route::get( '/sign-in', 'Auth\SignInController@index' )->name( 'sign-in' );
+
+Route::group( [ 'middleware' => ['IsAdmin' ] ], function () {
+
 Route::get( '/admin', 'Admin\HomeController@index' )->name( 'admin' );
 
 //adminpages
 
 Route::get( '/admin/home-page', 'Admin\HomeController@homePage' )->name( 'home-page' );
+
+Route::post( '/admin/update-homepage', 'Admin\HomeController@updateHomepage' )->name( 'update-home-page' );
 
 Route::get( '/admin/top-ten', 'Admin\TopTenController@edit' )->name( 'top-ten' );
 
@@ -50,6 +56,10 @@ Route::post( '/admin/store-movie','Admin\MovieController@store' )->name( 'store-
 Route::get( '/admin/edit-movie/{id}', 'Admin\MovieController@edit' )->name( 'edit-movie' );
 
 Route::post( '/admin/update-movie','Admin\MovieController@update' )->name( 'update-movie' );
+
+Route::get( '/admin/manage-movie/{id}', 'Admin\MovieController@manage' )->name( 'manage-movie' );
+
+Route::post( '/admin/update-movie-type','Admin\MovieController@updateMovieType' )->name( 'update-movie-type' );
 
 Route::get( '/admin/delete-movie/{id}', 'Admin\MovieController@destroy' )->name( 'delete-movie' );
 
@@ -81,6 +91,34 @@ Route::post( '/admin/update-game','Admin\GameController@update' )->name( 'update
 
 Route::get( '/admin/delete-game/{id}', 'Admin\GameController@destroy' )->name( 'delete-game' );
 
+//adminsliders
+
+Route::get( '/admin/sliders', 'Admin\SliderController@index' )->name( 'sliders' );
+
+Route::get( '/admin/add-slider', 'Admin\SliderController@create' )->name( 'add-slider' );
+
+Route::post( '/admin/store-slider','Admin\SliderController@store' )->name( 'store-slider' );
+
+Route::get( '/admin/edit-slider/{id}', 'Admin\SliderController@edit' )->name( 'edit-slider' );
+
+Route::post( '/admin/update-slider','Admin\SliderController@update' )->name( 'update-slider' );
+
+Route::get( '/admin/delete-slider/{id}', 'Admin\SliderController@destroy' )->name( 'delete-slider' );
+
+//adminslides
+
+Route::get( '/admin/slides', 'Admin\SlideController@index' )->name( 'slides' );
+
+Route::get( '/admin/add-slide', 'Admin\SlideController@create' )->name( 'add-slide' );
+
+Route::post( '/admin/store-slide','Admin\SlideController@store' )->name( 'store-slide' );
+
+Route::get( '/admin/edit-slide/{id}', 'Admin\SlideController@edit' )->name( 'edit-slide' );
+
+Route::post( '/admin/update-slide','Admin\SlideController@update' )->name( 'update-slide' );
+
+Route::get( '/admin/delete-slide/{id}', 'Admin\SlideController@destroy' )->name( 'delete-slide' );
+
 //adminusers
 
 Route::get( '/admin/users', 'Admin\UserController@index' )->name( 'users' );
@@ -110,6 +148,8 @@ Route::post('/admin/update-socialmedia','Admin\SocialMediaController@update')->n
 Route::get( '/admin/branches', 'Admin\BranchController@index' )->name( 'branches' );
 
 Route::get( '/admin/manage-branches', 'Admin\BranchController@manage' )->name( 'manage-branches' );
+
+Route::get( '/admin/manage-branch/{id}', 'Admin\BranchController@manageBranch' )->name( 'manage-branch' );
 
 Route::get( '/admin/add-branch', 'Admin\BranchController@create' )->name( 'add-branch' );
 
@@ -177,6 +217,7 @@ Route::post('/admin/update-age-restriction','Admin\AgeRestrictionController@upda
 
 Route::get( '/admin/delete-age-restriction/{id}', 'Admin\AgeRestrictionController@destroy' )->name( 'delete-age-restriction' );
 
+} );
 //-----------------------------------------------------------------------------------------------------------------------------------------
 //homepage
 
@@ -191,7 +232,7 @@ Route::get( '/top-10', 'TopController@top' )->name( 'top-10' );
 
 Route::get( '/top-rated', 'TopController@rated' )->name( 'top-rated' );
 
-Route::get( '/meet-our-staff', 'PageController@team' )->name( 'meet-our-staff' );
+Route::get( '/about-us', 'PageController@about' )->name( 'about-us' );
 
 //movies
 

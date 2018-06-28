@@ -17,7 +17,7 @@ class CreateMoviesTable extends Migration
           $table->increments('id');
           $table->integer('active')->unsigned();
           $table->integer('new')->unsigned();
-          $table->integer('agerestrictions_id')->unsigned()->nullable();
+          $table->integer('agerestriction_id')->unsigned()->nullable();
           $table->string('name')->nullable();
           $table->string('slug')->nullable();
           $table->text('description');
@@ -28,11 +28,11 @@ class CreateMoviesTable extends Migration
           $table->timestamps();
       });
 
-      Schema::table('movies', function ($table) {
+      Schema::table( 'movies', function ($table) {
 
-          $table->foreign('age_id' , 'movie_age_id')->references('id')->on('agerestrictions')->onDelete('cascade')->onUpdate('cascade');
-          $table->foreign('active' , 'movie_active_id')->references('id')->on('statuses')->onDelete('cascade')->onUpdate('cascade');
-          $table->foreign('new' , 'movie_new_id')->references('id')->on('statuses')->onDelete('cascade')->onUpdate('cascade');
+          $table->foreign( 'agerestriction_id' , 'movie_age_id' )->references('id')->on('agerestrictions')->onDelete('cascade')->onUpdate('cascade');
+          $table->foreign( 'active' , 'movie_active_id' )->references('id')->on('statuses')->onDelete('cascade')->onUpdate('cascade');
+          $table->foreign( 'new' , 'movie_new_id' )->references('id')->on('statuses')->onDelete('cascade')->onUpdate('cascade');
       });
     }
 

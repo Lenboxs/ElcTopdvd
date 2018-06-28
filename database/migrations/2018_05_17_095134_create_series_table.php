@@ -17,7 +17,7 @@ class CreateSeriesTable extends Migration
         $table->increments('id');
         $table->integer('active')->unsigned();
         $table->integer('new')->unsigned();
-        $table->integer('agerestrictions_id')->unsigned()->nullable();
+        $table->integer('agerestriction_id')->unsigned()->nullable();
         $table->string('name')->nullable();
         $table->string('slug')->nullable();
         $table->text('description');
@@ -32,7 +32,7 @@ class CreateSeriesTable extends Migration
 
           $table->foreign('active' , 'series_active_id')->references('id')->on('statuses')->onDelete('cascade')->onUpdate('cascade');
           $table->foreign('new' , 'series_new_id')->references('id')->on('statuses')->onDelete('cascade')->onUpdate('cascade');
-          $table->foreign('age_id' , 'series_age_id')->references('id')->on('agerestrictions')->onDelete('cascade')->onUpdate('cascade');
+          $table->foreign('agerestriction_id' , 'series_age_id')->references('id')->on('agerestrictions')->onDelete('cascade')->onUpdate('cascade');
 
       });
     }

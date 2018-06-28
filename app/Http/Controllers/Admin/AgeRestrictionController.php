@@ -76,7 +76,7 @@ class AgeRestrictionController extends Controller
             'branches' => $branches,
             'genres' => $genres,
             'types' => $types,
-            '$consoles' => $consoles,
+            'consoles' => $consoles,
             'agerestrictions' => $agerestrictions,
         )
       );
@@ -90,15 +90,17 @@ class AgeRestrictionController extends Controller
      */
     public function store(AgeRestrictionFormRequest $request)
     {
-      $agerestriction = new AgeRestriction();
+        $agerestriction = new AgeRestriction();
 
-      $agerestriction->name = !empty($request->input('name')) ? $request->input('name') : '';
+        $agerestriction->active= !empty( $request->input( 'active' ) ) ? 1 : 2;
 
-      $agerestriction->save();
+        $agerestriction->name = !empty($request->input('name')) ? $request->input('name') : '';
 
-      flashy()->success( 'Age Restriction was created successfully.' );
+        $agerestriction->save();
 
-      return redirect( 'admin/settings#age-restrictions' );
+        flashy()->success( 'Age Restriction was created successfully.' );
+
+        return redirect( 'admin/settings#age-restrictions' );
     }
 
     /**
@@ -147,7 +149,7 @@ class AgeRestrictionController extends Controller
             'branches' => $branches,
             'genres' => $genres,
             'types' => $types,
-            '$consoles' => $consoles,
+            'consoles' => $consoles,
             'agerestriction' => $agerestriction,
         )
       );
@@ -160,17 +162,19 @@ class AgeRestrictionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(AgeRestrictionFormRequest $request)
+    public function update( AgeRestrictionFormRequest $request )
     {
-      $agerestriction = AgeRestriction::find($request->input('id'));
+        $agerestriction = AgeRestriction::find( $request->input( 'id' ) );
 
-      $agerestriction->name = !empty($request->input('name')) ? $request->input('name') : '';
+        $agerestriction->active = !empty( $request->input( 'active' ) ) ? 1 : 2;
 
-      $agerestriction->save();
+        $agerestriction->name = !empty($request->input('name')) ? $request->input('name') : '';
 
-      flashy()->success( 'Age Restriction was updated successfully.' );
+        $agerestriction->save();
 
-      return redirect( 'admin/settings#age-restrictions' );
+        flashy()->success( 'Age Restriction was updated successfully.' );
+
+        return redirect( 'admin/settings#age-restrictions' );
     }
 
     /**
@@ -181,13 +185,12 @@ class AgeRestrictionController extends Controller
      */
     public function destroy($id)
     {
-      $agerestriction = AgeRestriction::find($id);
+        $agerestriction = AgeRestriction::find($id);
 
-      $agerestriction->delete();
+        $agerestriction->delete();
 
-      flashy()->success( 'Age Restriction was deleted successfully.' );
+        flashy()->success( 'Age Restriction was deleted successfully.' );
 
-      return redirect( 'admin/settings#age-restrictions' );
-  }
-
+        return redirect( 'admin/settings#age-restrictions' );
+    }
 }

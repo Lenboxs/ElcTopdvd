@@ -203,4 +203,19 @@ class BranchController extends Controller
 
         return view( 'admin.branches.manage' )->withTitle( $title )->withBranches( $branches );
     }
+
+    public function manageBranch( $id )
+    {
+        $title = "Manage Branch";
+
+        $branch = Branch::find( $id );
+
+        $movies = $branch->movies;
+
+        return view( 'admin.branches.manage-branch', array(
+          'title' => $title,
+          'branch' => $branch,
+          'movies' => $movies
+        ) );
+    }
 }

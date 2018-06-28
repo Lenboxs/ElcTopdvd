@@ -1,4 +1,4 @@
-@extends( 'templates.main' )
+@extends( 'templates.full-width' )
 
 @section( 'content' )
 
@@ -10,7 +10,7 @@
 
           <div class="col-md-3">
               <label>Select a Branch</label>
-              <select class="form-control p-3 mb-2">
+              <select class="form-control">
                 <option value="all" selected>All</option>
                 @if( !empty( $branches ) )
                     @foreach( $branches as $branch )

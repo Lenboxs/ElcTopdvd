@@ -1,7 +1,7 @@
 @component( 'sections.box' )
 
     @slot('title')
-        <span class="featured">Contract</span> Special
+        Contract Special
     @endslot
 
     <a href="#">

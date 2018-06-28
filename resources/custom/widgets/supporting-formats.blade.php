@@ -1,12 +1,18 @@
 @component( 'sections.box' )
     @slot('title')
-        <span class="featured">Supported</span> Formats
+        Supported Formats
     @endslot
     <div class="row">
-        <div class="col-3"><div class="format"><img src="{{ url( 'img/formats/bluray.png' ) }}" class="format-img" /></div></div>
-        <div class="col-3"><div class="format"><img src="{{ url( 'img/formats/dvd.png' ) }}" class="format-img" /></div></div>
-        <div class="col-3"><div class="format"><img src="{{ url( 'img/formats/ps2.png' ) }}" class="format-img" /></div></div>
-        <div class="col-3"><div class="format"><img src="{{ url( 'img/formats/ps3.png' ) }}" class="format-img" /></div></div>
-        <div class="col-3"><div class="format"><img src="{{ url( 'img/formats/ps4.png' ) }}" class="format-img" /></div></div>
+        @if( !empty( $types ) )
+            @foreach( $types as $type )
+                <div class="col-3"><div class="format"><img src="{{ url( 'img/types/' . $type->logo ) }}" class="format-img" /></div></div>
+            @endforeach
+        @endif
+
+        @if( !empty( $consoles ) )
+            @foreach( $consoles as $console )
+                <div class="col-3"><div class="format"><img src="{{ url( 'img/consoles/' . $console->logo ) }}" class="format-img" /></div></div>
+            @endforeach
+        @endif
     </div>
 @endcomponent

@@ -4,10 +4,6 @@
 {{ $title }}
 @endsection
 
-@push('styles')
-<link rel="stylesheet" href="{{ asset( 'css/demo-grid.css' ) }}" />
-@endpush
-
 @section( 'content' )
 <!-- Main content -->
     <section class="content">
@@ -21,73 +17,33 @@
       </div>
       <!-- /.box-header -->
       <!-- form start -->
-      <form role="form">
+      <form role="form" action="{{ url( '/admin/update-homepage' ) }}" method="post">
         <div class="box-body">
-          <section class="grid-demo">
 
-                <h2 class="section-title"><span>Grid Demo</span></h2>
+          <input type="hidden" name="_token" value="{{ csrf_token() }}" />
 
-                <div class="controls cf">
-                  <div class="control search">
-                    <div class="control-icon">
-                      <i class="fa fa-search"></i>
-                    </div>
-                    <input class="control-field search-field form-control " type="text" name="search" placeholder="Search...">
-                  </div>
-                  <div class="control filter">
-                    <div class="control-icon">
-                      <i class="material-icons"></i>
-                    </div>
-                    <div class="select-arrow">
-                      <i class="material-icons"></i>
-                    </div>
-                    <select class="control-field filter-field form-control">
-                      <option value="" selected="">All</option>
-                      <option value="red">Red</option>
-                      <option value="blue">Blue</option>
-                      <option value="green">Green</option>
-                    </select>
-                  </div>
-                  <div class="control sort">
-                    <div class="control-icon">
-                      <i class="material-icons"></i>
-                    </div>
-                    <div class="select-arrow">
-                      <i class="material-icons"></i>
-                    </div>
-                    <select class="control-field sort-field form-control">
-                      <option value="order" selected="">Drag</option>
-                      <option value="title">Title (drag disabled)</option>
-                      <option value="color">Color (drag disabled)</option>
-                    </select>
-                  </div>
-                  <div class="control layout">
-                    <div class="control-icon">
-                      <i class="material-icons"></i>
-                    </div>
-                    <div class="select-arrow">
-                      <i class="material-icons"></i>
-                    </div>
-                    <select class="control-field layout-field form-control">
-                      <option value="left-top" selected="">Left Top</option>
-                      <option value="left-top-fillgaps">Left Top (fill gaps)</option>
-                      <option value="right-top">Right Top</option>
-                      <option value="right-top-fillgaps">Right Top (fill gaps)</option>
-                      <option value="left-bottom">Left Bottom</option>
-                      <option value="left-bottom-fillgaps">Left Bottom (fill gaps)</option>
-                      <option value="right-bottom">Right Bottom</option>
-                      <option value="right-bottom-fillgaps">Right Bottom (fill gaps)</option>
-                    </select>
-                  </div>
-                </div>
+          <div class="form-group {{ $errors->has( 'slider' ) ? ' has-error' : '' }}">
+              <label for="slider" class="control-label">Slider</label>
+              <select class="form-control select-primary" name="slider" id="slider">
+                  <option value="">Select a Slider</option>
+                  @if( !empty( $sliders ) )
+                      @foreach( $sliders as $slider )
+                          <option value="{{ !empty( $slider->id ) ? $slider->id : '' }}"
+                              @if( $homepage->slider_id == $slider->id )
+                                  selected
+                              @endif
+                          >{{ !empty( $slider->name ) ? Ucfirst( $slider->name ) : '' }}</option>
+                      @endforeach
+                  @endif
+              </select>
 
-                <div class="grid muuri" style="height: 720px;"></div>
+              @if ( $errors->has( 'slider' ) )
+                  <span class="help-block">
+                      <strong>{{ $errors->first( 'slider' ) }}</strong>
+                  </span>
+              @endif
+          </div>
 
-                <div class="grid-footer">
-                  <button class="add-more-items btn btn-primary"><i class="material-icons"></i>Add more items</button>
-                </div>
-
-              </section>
         </div>
         <!-- /.box-body -->
 
@@ -100,10 +56,3 @@
 </div>
 <section>
 @endsection
-
-@push('scripts')
-<script src="{{ asset( 'js/web-animations.min.js' ) }}"></script>
-<script src="{{ asset( 'js/hammer.min.js' ) }}"></script>
-<script src="{{ asset( 'js/muuri.min.js' ) }}"></script>
-<script src="{{ asset( 'js/demo-grid.js' ) }}"></script>
-@endpush

@@ -1,7 +1,7 @@
 @component( 'sections.box' )
 
     @slot('title')
-        <span class="featured">Social</span> Media
+        Social Media
     @endslot
 <div id="fb-root"></div>
     <div class="fb-page" data-href="https://www.facebook.com/TOPDVD/?ref=br_rs" data-tabs="timeline" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"></div>

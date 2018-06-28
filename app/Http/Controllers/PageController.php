@@ -25,9 +25,9 @@ class PageController extends Controller
         return view( 'pages.contact' )->withBranches( $branches );
     }
 
-    public function team()
+    public function about()
     {
-        return view( 'pages.team' );
+        return view( 'pages.about-us' );
     }
 
     public function terms()

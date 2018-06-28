@@ -27,4 +27,9 @@ class Game extends Model
     {
         return $this->belongsToMany( 'App\Genre', 'game_genre', 'game_id', 'genre_id' )->using( 'App\GameGenre' )->withTimestamps();
     }
+
+    public function consoles()
+    {
+        return $this->belongsToMany( 'App\Console', 'game_console', 'game_branch_id', 'console_id')->using( 'App\GameConsole' )->withTimestamps();
+    }
 }

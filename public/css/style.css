@@ -66,7 +66,7 @@ h1{
   background: #d0c400 !important;
 }
 .navigation {
-  background: #28a745 !important;
+  background: transparent; /*#28a745 !important;*/
 }
 
 .navigation .navbar-default {
@@ -76,16 +76,13 @@ h1{
 }
 
 .navbar {
-  padding: 0 0 0 16px !important;
+  padding: 0px !important;
   background: transparent !important;
 }
 
 .navbar-dark .navbar-nav .nav-link {
   background: #fff100;
   color: #222;
-  -webkit-transform: skew( -41deg );
-  -moz-transform: skew( -41deg );
-  -o-transform: skew( -41deg );
   font-family: 'Anton', sans-serif;
   text-transform: uppercase;
   font-size: 20px;
@@ -93,9 +90,6 @@ h1{
 }
 
 .navbar-dark .navbar-nav .nav-link-text {
-  -webkit-transform: skew( 41deg );
-  -moz-transform: skew( 41deg );
-  -o-transform: skew( 41deg );
   padding: 0 5px;
   display: inline-block;
 }
@@ -139,7 +133,6 @@ h1{
 
 .navbar-dark .navbar-nav .active .nav-link {
   background: rgba(0, 0, 0, 0.4);
-  border-radius: 3px;
 }
 
 .navbar-dark .navbar-nav .active .nav-link {
@@ -177,7 +170,8 @@ h1{
 .main-content {
     position: relative;
     z-index: 100;
-    padding: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 
 .dvd {
@@ -380,6 +374,10 @@ h1{
   padding: 20px;
 }
 
+.box-body p{
+  font-size: 17px;
+}
+
 .box-dark {
   background: #475058;
   color: #fff;
@@ -464,6 +462,16 @@ h1{
 
 }
 
+.top-ten-dvd {
+    background: rgba(0,0,0,0.1);
+    border-radius: 5px;
+    padding-bottom: 10px;
+}
+
+.top-ten-description {
+    margin-top: 10px;
+}
+
 @media only screen and (max-width: 767px) {
   .register {
     margin-top: 10%;
@@ -480,9 +488,7 @@ h1{
     flex: 0 0 38%;
     max-width: 38%;
   }
-}
 
-@media only screen and (min-width: 768px) {
   .col-md-3-0 {
     width: 24% !important;
     padding-right: 15px;
@@ -492,4 +498,17 @@ h1{
     flex: 0 0 24%;
     max-width: 24%;
   }
+/*
+  .navbar-dark .navbar-nav .nav-link {
+    -webkit-transform: skew( -41deg );
+    -moz-transform: skew( -41deg );
+    -o-transform: skew( -41deg );
+
+  }
+
+  .navbar-dark .navbar-nav .nav-link-text {
+    -webkit-transform: skew( 41deg );
+    -moz-transform: skew( 41deg );
+    -o-transform: skew( 41deg );
+  }*/
 }

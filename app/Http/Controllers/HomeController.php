@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Movie;
+use App\Type;
+use App\Console;
+use App\HomePage;
 
 class HomeController extends Controller
 {
@@ -25,11 +28,23 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $home = HomePage::getHomePage();
+
+        $slider = $home->slider;
+
         $movies = Movie::take(7)->get();
+
+        $types = Type::where( 'active', 1 )->get();
+
+        $consoles = Console::where( 'active', 1 )->get();
 
         return view( 'home',
           array(
-            'movies' => $movies
+            'home' => $home,
+            'slider' => $slider,
+            'movies' => $movies,
+            'types' => $types,
+            'consoles' => $consoles
           )
         );
     }

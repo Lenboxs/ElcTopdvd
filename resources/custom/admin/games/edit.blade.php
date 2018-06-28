@@ -23,7 +23,7 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-              <form role="form" method="POST" action="{{ url( '/admin/update-movie' ) }}" enctype="multipart/form-data">
+              <form role="form" method="POST" action="{{ url( '/admin/update-game' ) }}" enctype="multipart/form-data">
 
                 <input type="hidden" name="_token" value="{{ csrf_token() }}" />
 
@@ -146,8 +146,76 @@
                     @endif
                 </div>
 
+                <div class="form-group {{ $errors->has( 'agerestriction_id' ) ? ' has-error' : '' }}">
+                    <label for="agerestriction_id" class="control-label">Age Restrictions</label>
+                    <select class="form-control select-primary" name="agerestriction_id" id="agerestriction_id">
+                        <option value="">Select an Age Restriction</option>
+                        @if( !empty( $agerestrictions ) )
+                            @foreach( $agerestrictions as $agerestriction )
+                                <option value="{{ !empty( $agerestriction->id ) ? $agerestriction->id : '' }}"
+                                    @if( $game->agerestriction_id == $agerestriction->id )
+                                        selected
+                                    @endif
+                                >{{ !empty( $agerestriction->name ) ? Ucfirst( $agerestriction->name ) : '' }}</option>
+                            @endforeach
+                        @endif
+                    </select>
+
+                    @if ( $errors->has( 'agerestriction_id' ) )
+                        <span class="help-block">
+                            <strong>{{ $errors->first( 'agerestriction_id' ) }}</strong>
+                        </span>
+                    @endif
+                </div>
+
                 <div class="form-group {{ $errors->has( 'branches' ) ? ' has-error' : '' }}">
                     <label for="branches" class="control-label">Branches</label>
+                    <select class="form-control select2 select-primary" name="branches[]" id="branches" multiple="multiple" data-placeholder="Select a Branch" style="width: 100%;">
+                        @if( !empty( $branches ) )
+                            @foreach( $branches as $branch )
+                                <option value="{{ !empty( $branch->id ) ? $branch->id : '' }}"
+                                @foreach( $game->branches as $game_branch )
+                                    @if( $game_branch->id == $branch->id )
+                                        selected
+                                    @endif
+                                @endforeach
+                                >{{ !empty( $branch->name ) ? Ucfirst( $branch->name ) : '' }}</option>
+                            @endforeach
+                        @endif
+                    </select>
+
+                    @if ( $errors->has( 'branches' ) )
+                        <span class="help-block">
+                            <strong>{{ $errors->first( 'branches' ) }}</strong>
+                        </span>
+                    @endif
+                </div>
+
+                <div class="form-group {{ $errors->has( 'consoles' ) ? ' has-error' : '' }}">
+                    <label for="consoles" class="control-label">Consoles</label>
+                    <select class="form-control select2 select-primary" name="consoles[]" id="consoles" multiple="multiple" data-placeholder="Select a Console" style="width: 100%;">
+                        @if( !empty( $consoles ) )
+                            @foreach( $consoles as $console )
+                                <option value="{{ !empty( $console->id ) ? $console->id : '' }}"
+                                @foreach( $game->consoles as $game_console )
+                                    @if( $game_console->id == $console->id )
+                                        selected
+                                    @endif
+                                @endforeach
+                                >{{ !empty( $console->name ) ? Ucfirst( $console->name ) : '' }}</option>
+                            @endforeach
+                        @endif
+                    </select>
+
+                    @if ( $errors->has( 'consoles' ) )
+                        <span class="help-block">
+                            <strong>{{ $errors->first( 'consoles' ) }}</strong>
+                        </span>
+                    @endif
+                </div>
+
+                <div class="form-group {{ $errors->has( 'branches' ) ? ' has-error' : '' }}">
+                    <label for="branches" class="control-label">Age Restriction</label>
                     <select class="form-control select2 select-primary" name="branches[]" id="branches" multiple="multiple" data-placeholder="Select a Branch" style="width: 100%;">
                         @if( !empty( $branches ) )
                             @foreach( $branches as $branch )

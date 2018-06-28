@@ -15,6 +15,7 @@
               <table id="agerestrictionstable" class="table table-bordered table-striped">
                 <thead>
                 <tr>
+                  <th>Active</th>
                   <th>Name</th>
                   <th>Action</th>
                 </tr>
@@ -25,6 +26,13 @@
                     @foreach( $agerestrictions as $agerestriction )
 
                       <tr>
+                        <td><h4>
+                          @if( !empty( $agerestriction ) && !empty( $agerestriction->active ) && $agerestriction->active == 1 )
+                              <span class="label label-success">Active</span>
+                          @else
+                              <span class="label label-danger">Not Active</span>
+                          @endif
+                        </h4></td>
                         <td>{{ ( !empty( $agerestriction ) && !empty( $agerestriction->name ) ) ? $agerestriction->name : '' }}</td>
                         <td>
                           <a href="{{ url( 'admin/edit-age-restriction/' . $agerestriction->id . "#age-restrictions" ) }}" class="btn btn-warning btn-sm">Edit</a>
@@ -38,6 +46,7 @@
                 </tbody>
                 <tfoot>
                 <tr>
+                  <th>Active</th>
                   <th>Name</th>
                   <th>Action</th>
                 </tr>

@@ -6,21 +6,20 @@ use Illuminate\Database\Eloquent\Model;
 
 class Slider extends Model
 {
-	/**
-	 * The table associated with the model.
-	 *
-	 * @var string
-	 */
-	protected $table = 'sliders';
+		/**
+		 * The table associated with the model.
+		 *
+		 * @var string
+		 */
+		protected $table = 'sliders';
 
-	public function homepage()
-	{
-			return $this->belongsTo( 'App\Homepage');
-	}
-
-	public function slides()
+		public function homepage()
 		{
-				return $this->hasMany( 'App\Slide');
+				return $this->belongsTo( 'App\Homepage', 'slider_id' );
 		}
 
+		public function slides()
+		{
+				return $this->hasMany( 'App\Slide')->where( 'slides.active', 1 );
+		}
 }

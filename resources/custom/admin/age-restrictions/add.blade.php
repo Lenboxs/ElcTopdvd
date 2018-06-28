@@ -10,6 +10,19 @@
 
             <input type="hidden" name="_token" value="{{ csrf_token() }}" />
 
+            <div class="form-group {{ $errors->has( 'active' ) ? ' has-error' : '' }}">
+               <label for="active" class="control-label">Active</label>
+               <div class="switch" data-toggle="switch">
+                   <label>Off <input type="checkbox" name="active" class="active" id="active" /><span class="toggle"></span> On</label>
+               </div>
+
+               @if ( $errors->has( 'active' ) )
+                   <span class="help-block">
+                       <strong>{{ $errors->first( 'active' ) }}</strong>
+                   </span>
+               @endif
+            </div>
+
             <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                 <label for="name" class="control-label">Name</label>
 

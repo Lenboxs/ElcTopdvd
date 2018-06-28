@@ -36,10 +36,3 @@
 </div>
 <section>
 @endsection
-
-@push('scripts')
-<script src="{{ asset( 'js/web-animations.min.js' ) }}"></script>
-<script src="{{ asset( 'js/hammer.min.js' ) }}"></script>
-<script src="{{ asset( 'js/muuri.min.js' ) }}"></script>
-<script src="{{ asset( 'js/demo-grid.js' ) }}"></script>
-@endpush

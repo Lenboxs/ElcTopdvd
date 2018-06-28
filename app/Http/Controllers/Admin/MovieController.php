@@ -36,7 +36,7 @@ class MovieController extends Controller
 
         $title = 'Manage Movies';
 
-        return view('admin.movies.movies')->withMovies($movies)->withTitle($title);
+        return view( 'admin.movies.movies' )->withMovies( $movies )->withTitle( $title );
     }
 
     /**
@@ -77,21 +77,23 @@ class MovieController extends Controller
     {
         $movie = new Movie();
 
-        $movie->active= !empty($request->input('active')) ? 1 : 2;
+        $movie->active= !empty( $request->input( 'active' ) ) ? 1 : 2;
 
-        $movie->new = !empty($request->input('new')) ? 1 : 2;
+        $movie->new = !empty( $request->input( 'new' ) ) ? 1 : 2;
 
-        $movie->name = !empty($request->input('name')) ? $request->input('name') : '';
+        $movie->name = !empty( $request->input( 'name' ) ) ? $request->input( 'name' ) : '';
 
-        $movie->slug = !empty($request->input('name')) ? str_slug( $request->input('name') ) : '';
+        $movie->slug = !empty( $request->input( 'name' ) ) ? str_slug( $request->input( 'name' ) ) : '';
 
-        $movie->description = !empty($request->input('description')) ? $request->input('description') : '';
+        $movie->description = !empty( $request->input( 'description' ) ) ? $request->input( 'description' ) : '';
 
         $movie->image = $this->upload( 'image', $request, $uploadService );
 
         $movie->trailerLink = $this->getTrailerLink( $request->input( 'trailerLink' ) );
 
         $movie->runtime = !empty( $request->input( 'runtime' ) ) ? $request->input( 'runtime' ) : '';
+
+        $movie->agerestriction_id = !empty( $request->input( 'agerestriction_id' ) ) ? $request->input( 'agerestriction_id' ) : null;
 
         $movie->save();
 
@@ -114,13 +116,6 @@ class MovieController extends Controller
             $game->types()->detach();
 
             $game->types()->attach( $request->input( 'types' ) );
-        }
-
-        if( $request->exists( 'agerestriction' ) )
-        {
-            $game->agerestricton()->detach();
-
-            $game->agerestricton()->attach( $request->input( 'agerestriction' ) );
         }
 
         flashy()->success( 'Movie was created successfully.' );
@@ -197,7 +192,7 @@ class MovieController extends Controller
 
         $movie->runtime = !empty( $request->input( 'runtime' ) ) ? $request->input( 'runtime' ) : '';
 
-        $status = true;
+        $movie->agerestriction_id = !empty( $request->input( 'agerestriction_id' ) ) ? $request->input( 'agerestriction_id' ) : null;
 
   	  	if( $request->input( 'remove_image' ) == 'true' )
   		  {
@@ -206,8 +201,6 @@ class MovieController extends Controller
         elseif( !empty( $request->file( 'image' ) ) )
   		  {
   			     $movie->image = $this->upload( 'image', $request, $uploadService );
-
-  			     $status = $uploadService->successful();
   	  	}
 
   			$movie->save();
@@ -228,16 +221,9 @@ class MovieController extends Controller
 
         if( $request->exists( 'types' ) )
         {
-            $game->types()->detach();
+            $movie->types()->detach();
 
-            $game->types()->attach( $request->input( 'types' ) );
-        }
-
-        if( $request->exists( 'agerestriction' ) )
-        {
-            $game->agerestricton()->detach();
-
-            $game->agerestricton()->attach( $request->input( 'agerestriction' ) );
+            $movie->types()->attach( $request->input( 'types' ) );
         }
 
         flashy()->success( 'Movies was updated successfully.' );
@@ -260,6 +246,32 @@ class MovieController extends Controller
         flashy()->success( 'Movie was deleted successfully.' );
 
         return redirect('admin/movies');
+    }
+
+    public function manage( $id )
+    {
+        $title = "Manage Movie Types";
+
+        $movie = Movie::find( $id );
+
+        $types = Type::all();
+
+        return view( 'admin.movies.manage',
+            array(
+                'title' => $title,
+                'movie' => $movie,
+                'types' => $types
+            )
+        );
+    }
+
+    public function updateMovieType()
+    {
+        $movie = Movie::find( $id );
+
+        flashy()->success( 'Movie was deleted successfully.' );
+
+        return redirect( 'admin/movies' );
     }
 
     public function upload( $input, $request, $uploadService )

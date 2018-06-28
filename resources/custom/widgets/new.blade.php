@@ -1,7 +1,9 @@
 @component( 'sections.box' )
 
     @slot('title')
-        <span class="featured">Joyful</span> June
+        @if( !empty( $home ) && !empty( $home->heading ) )
+          {{ $home->heading }}
+        @endif
     @endslot
 
     <div class="row">

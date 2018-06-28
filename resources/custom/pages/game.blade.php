@@ -24,7 +24,7 @@
                         <div class="lighter px-3">
                           <div class="row">
                               <div class="col-sm-4 p-5">
-                                  <img src="{{ url( 'img/movies/' . $game->image ) }}" class="w-100">
+                                  <img src="{{ url( 'img/games/' . $game->image ) }}" class="w-100">
                               </div>
                               <div class="col-sm-8 py-5 pr-5">
                                   @if( $game->new == 1 )<h4><span class="badge badge-danger">NEW</span></h4>@endif

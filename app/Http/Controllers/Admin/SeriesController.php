@@ -75,50 +75,45 @@ class SeriesController extends Controller
      */
     public function store( SeriesFormRequest $request, UploadService $uploadService )
     {
-      $series = new Series();
+        $series = new Series();
 
-      $series->active= !empty($request->input('active')) ? 1 : 2;
-      $series->new = !empty($request->input('new')) ? 1 : 2;
-      $series->name = !empty($request->input('name')) ? $request->input('name') : '';
-      $series->slug = !empty($request->input('name')) ? str_slug( $request->input('name') ) : '';
-      $series->description = !empty($request->input('description')) ? $request->input('description') : '';
-      $series->image = $this->upload( 'image', $request, $uploadService );
-      $series->trailerLink = $this->getTrailerLink( $request->input( 'trailerLink' ) );
-      $series->season = !empty($request->input('season')) ? $request->input('season') : '';
+        $series->active= !empty($request->input('active')) ? 1 : 2;
+        $series->new = !empty($request->input('new')) ? 1 : 2;
+        $series->name = !empty($request->input('name')) ? $request->input('name') : '';
+        $series->slug = !empty($request->input('name')) ? str_slug( $request->input('name') ) : '';
+        $series->description = !empty($request->input('description')) ? $request->input('description') : '';
+        $series->image = $this->upload( 'image', $request, $uploadService );
+        $series->trailerLink = $this->getTrailerLink( $request->input( 'trailerLink' ) );
+        $series->season = !empty($request->input('season')) ? $request->input('season') : '';
 
-      $series->save();
+        $series->agerestriction_id = !empty( $request->input( 'agerestriction_id' ) ) ? $request->input( 'agerestriction_id' ) : null;
 
-      if( $request->exists( 'genres' ) )
-      {
-          $series->genres()->detach();
+        $series->save();
 
-          $series->genres()->attach( $request->input( 'genres' ) );
-      }
+        if( $request->exists( 'genres' ) )
+        {
+            $series->genres()->detach();
 
-      if( $request->exists( 'branches' ) )
-      {
-          $series->branches()->detach();
+            $series->genres()->attach( $request->input( 'genres' ) );
+        }
 
-          $series->branches()->attach( $request->input( 'branches' ) );
-      }
+        if( $request->exists( 'branches' ) )
+        {
+            $series->branches()->detach();
 
-      if( $request->exists( 'types' ) )
-      {
-          $game->types()->detach();
+            $series->branches()->attach( $request->input( 'branches' ) );
+        }
 
-          $game->types()->attach( $request->input( 'types' ) );
-      }
+        if( $request->exists( 'types' ) )
+        {
+            $game->types()->detach();
 
-      if( $request->exists( 'agerestriction' ) )
-      {
-          $game->agerestricton()->detach();
+            $game->types()->attach( $request->input( 'types' ) );
+        }
 
-          $game->agerestricton()->attach( $request->input( 'agerestriction' ) );
-      }
+        flashy()->success( 'Series was created successfully.' );
 
-      flashy()->success( 'Series was created successfully.' );
-
-      return redirect('admin/add-series');
+        return redirect('admin/add-series');
     }
 
     /**
@@ -184,52 +179,47 @@ class SeriesController extends Controller
         $series->trailerLink = $this->getTrailerLink( $request->input( 'trailerLink' ) );
         $series->season = !empty($request->input('season')) ? $request->input('season') : '';
 
+        $series->agerestriction_id = !empty( $request->input( 'agerestriction_id' ) ) ? $request->input( 'agerestriction_id' ) : null;
+
         $status = true;
 
-      if( $request->input( 'remove_image' ) == 'true' )
-  		{
-  			   $series->image = '';
-  		}
-      elseif( !empty( $request->file( 'image' ) ) )
-  		{
-  			   $series->image = $this->upload( 'image', $request, $uploadService );
+        if( $request->input( 'remove_image' ) == 'true' )
+    		{
+    			   $series->image = '';
+    		}
+        elseif( !empty( $request->file( 'image' ) ) )
+    		{
+    			   $series->image = $this->upload( 'image', $request, $uploadService );
 
-  			   $status = $uploadService->successful();
-  		}
+    			   $status = $uploadService->successful();
+    		}
 
-      if( $request->exists( 'genres' ) )
-      {
-          $series->genres()->detach();
+        if( $request->exists( 'genres' ) )
+        {
+            $series->genres()->detach();
 
-          $series->genres()->attach( $request->input( 'genres' ) );
-      }
+            $series->genres()->attach( $request->input( 'genres' ) );
+        }
 
-      if( $request->exists( 'branches' ) )
-      {
-          $series->branches()->detach();
+        if( $request->exists( 'branches' ) )
+        {
+            $series->branches()->detach();
 
-          $series->branches()->attach( $request->input( 'branches' ) );
-      }
+            $series->branches()->attach( $request->input( 'branches' ) );
+        }
 
-      if( $request->exists( 'types' ) )
-      {
-          $game->types()->detach();
+        if( $request->exists( 'types' ) )
+        {
+            $game->types()->detach();
 
-          $game->types()->attach( $request->input( 'types' ) );
-      }
+            $game->types()->attach( $request->input( 'types' ) );
+        }
 
-      if( $request->exists( 'agerestriction' ) )
-      {
-          $game->agerestricton()->detach();
+    		$series->save();
 
-          $game->agerestricton()->attach( $request->input( 'agerestriction' ) );
-      }
+        flashy()->success( 'Series was updated successfully.' );
 
-  		$series->save();
-
-      flashy()->success( 'Series was updated successfully.' );
-
-  		return redirect( 'admin/series' );
+    		return redirect( 'admin/series' );
     }
 
     /**

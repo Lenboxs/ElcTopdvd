@@ -1,4 +1,4 @@
-@extends( 'templates.main' )
+@extends( 'templates.full-width' )
 
 @section( 'content' )
 @component( 'templates.one-column' )

@@ -26,8 +26,6 @@
                 <thead>
                 <tr>
                   <th>Name</th>
-                  <th>Email</th>
-                  <th>Contact Number</th>
                   <th>Action</th>
                 </tr>
                 </thead>
@@ -38,11 +36,8 @@
 
                       <tr>
                         <td>{{ ( !empty( $branch ) && !empty($branch->name ) ) ? $branch->name : '' }}</td>
-                        <td>{{ ( !empty( $branch ) && !empty($branch->email ) ) ? $branch->email : '' }}</td>
-                        <td>{{ ( !empty( $branch ) && !empty($branch->contact_number ) ) ? $branch->contact_number : '' }}</td>
                         <td>
-                          <a href="{{ url( 'admin/edit-branch/' . $branch->id ) }}" class="btn btn-warning btn-sm">Edit</a>
-                          <a href="{{ url( 'admin/delete-branch/' . $branch->id ) }}" class="btn btn-sm btn-danger">Delete</a>
+                          <a href="{{ url( 'admin/manage-branch/' . $branch->id ) }}" class="btn btn-warning btn-sm">Manage</a>
                         </td>
                       </tr>
 
@@ -53,8 +48,6 @@
                 <tfoot>
                 <tr>
                   <th>Name</th>
-                  <th>Email</th>
-                  <th>Contact Number</th>
                   <th>Action</th>
                 </tr>
                 </tfoot>
@@ -80,10 +73,6 @@
 <script src="{{ asset( 'bower_components/jquery-slimscroll/jquery.slimscroll.min.js' ) }}"></script>
 <!-- FastClick -->
 <script src="{{ asset( 'bower_components/fastclick/lib/fastclick.js' ) }}"></script>
-<!-- AdminLTE App -->
-<script src="{{ asset( 'dist/js/adminlte.min.js' ) }}"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="{{ asset( 'dist/js/demo.js' ) }}"></script>
 @endpush
 
 @push( 'custom-scripts' )
