@@ -3,7 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use App\Helpers\Impl\UploadServiceImpl;
+use App\Services\UploadService\UploadService;
 
 class UploadServiceProvider extends ServiceProvider
 {
@@ -25,9 +25,9 @@ class UploadServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind( 'App\Helpers\UploadService', function(){
+        $this->app->bind( 'App\Services\UploadService\Contracts\UploadInterface', function(){
 
-            return new UploadServiceImpl();
+            return new UploadService();
 
         });
     }
@@ -39,6 +39,6 @@ class UploadServiceProvider extends ServiceProvider
      */
     public function provides()
     {
-        return ['App\Helpers\UploadService'];
+        return ['App\Services\UploadService\Contracts\UploadInterface'];
     }
 }

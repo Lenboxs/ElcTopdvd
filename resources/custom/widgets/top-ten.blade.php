@@ -4,8 +4,6 @@
         Top Ten Movies
     @endslot
 
-    <div class="row">
-
       <div class="col-12">
           @component( 'sections.alert' )
             Here follows a list of the top ten movies.
@@ -18,7 +16,7 @@
               <div class="top-dvd">
                 <h2 class="font-bold m-3">{{ $key + 1 }}. {{ $movie->name }} </h2>
                 <div class="row top-ten-dvd">
-                <div class="col-md-4">
+                <div class="col-md-3">
                     @component( 'sections.dvd' )
 
                         @slot('link')
@@ -33,14 +31,14 @@
 
                     @endcomponent
                 </div>
-                <div class="col-md-8">
+                <div class="col-md-9">
                   <p class="lead top-ten-description">{{ $movie->description }}</p>
+                  <a href="{{ url( 'movie/' . $movie->slug ) }}" class="btn btn-success">Find out more</a>
                 </div>
               </div>
               </div>
             @endforeach
           @endif
       </div>
-    </div>
 
 @endcomponent

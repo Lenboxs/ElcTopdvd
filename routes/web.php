@@ -45,6 +45,10 @@ Route::get( '/admin/sort', 'Admin\TopTenController@sort' )->name( 'sort-top-ten-
 
 Route::post( '/admin/update-topten', 'Admin\TopTenController@update' )->name( 'update-topten' );
 
+Route::get( '/admin/about-us', 'Admin\HomeController@aboutUs' )->name( 'about-us' );
+
+Route::post( '/admin/update-about-us', 'Admin\HomeController@updateAboutUs' )->name( 'update-about-us' );
+
 //adminmovies
 
 Route::get( '/admin/movies', 'Admin\MovieController@index' )->name( 'movies' );
@@ -118,6 +122,20 @@ Route::get( '/admin/edit-slide/{id}', 'Admin\SlideController@edit' )->name( 'edi
 Route::post( '/admin/update-slide','Admin\SlideController@update' )->name( 'update-slide' );
 
 Route::get( '/admin/delete-slide/{id}', 'Admin\SlideController@destroy' )->name( 'delete-slide' );
+
+//adminteam
+
+Route::get( '/admin/team', 'Admin\StaffController@index' )->name( 'team' );
+
+Route::get( '/admin/add-team-member', 'Admin\StaffController@create' )->name( 'add-team-member' );
+
+Route::post('/admin/store-team-member','Admin\StaffController@store')->name( 'store-team-member' );
+
+Route::get( '/admin/edit-team-member/{id}', 'Admin\StaffController@edit' )->name( 'edit-team-member' );
+
+Route::post('/admin/update-team-member','Admin\StaffController@update')->name( 'update-team-member' );
+
+Route::get( '/admin/delete-team-member/{id}', 'Admin\StaffController@destroy' )->name( 'delete-team-member' );
 
 //adminusers
 
@@ -245,6 +263,7 @@ Route::get( '/old-movies', 'MovieController@old' )->name( 'old-movies' );
 Route::get( '/kiddies-budget', 'MovieController@kiddies' )->name( 'kiddies-budget' );
 
 //series
+
 Route::get( '/series', 'SeriesController@allSeries' )->name( 'all-series' );
 
 Route::get( '/series/{name}', 'SeriesController@series' )->name( 'series' );

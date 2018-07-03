@@ -9,6 +9,10 @@
     </div>
   @endif
   <div class="box-body">
-    {{ $slot }}
+    <div class="container-fluid">
+      <div class="row">
+        {{ $slot }}
+      </div>
+    </div>
   </div>
 </div>

@@ -46,6 +46,7 @@
           <ul class="treeview-menu">
             <li class="@if( Request::is( '*admin/home-page*' ) ) active @endif"><a href="{{ url( 'admin/home-page' ) }}"><i class="fa fa-circle-o"></i> Home Page</a></li>
             <li class="@if( Request::is( '*admin/top-ten*' ) ) active @endif"><a href="{{ url( 'admin/top-ten' ) }}"><i class="fa fa-circle-o"></i> Top Ten</a></li>
+            <li class="@if( Request::is( '*admin/about-us*' ) ) active @endif"><a href="{{ url( 'admin/about-us' ) }}"><i class="fa fa-circle-o"></i> About Us</a></li>
             <!--li class="@if( Request::is( '*admin/top-rated*' ) ) active @endif"><a href="{{ url( 'admin/top-rated' ) }}"><i class="fa fa-circle-o"></i> Top Rated</a></li-->
           </ul>
         </li>
@@ -106,6 +107,19 @@
             <i class="fa fa-folder"></i>
             <span>Manage Branches</span>
           </a>
+        </li>
+        <li class="@if( Request::is( '*team*' ) ) active @endif treeview">
+          <a href="#">
+            <i class="fa fa-users"></i>
+            <span>Team</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li class="@if( Request::is( '*admin/add-team-member*' ) ) active @endif"><a href="{{ url( 'admin/add-team-member' ) }}"><i class="fa fa-circle-o"></i> Add New Member</a></li>
+            <li class="@if( Request::is( '*admin/team*' ) ) active @endif"><a href="{{ url( 'admin/team' ) }}"><i class="fa fa-circle-o"></i> Manage Team</a></li>
+          </ul>
         </li>
         <li class="@if( Request::is( '*user*' ) ) active @endif">
           <a href="{{ url( 'admin/users' ) }}">

@@ -12,6 +12,7 @@ use App\Movie;
 use App\Series;
 use App\HomePage;
 use App\Slider;
+use App\Page;
 
 class HomeController extends Controller
 {
@@ -84,5 +85,36 @@ class HomeController extends Controller
         flashy()->success( 'Home page was updated successfully.' );
 
         return redirect( 'admin/home-page' );
+    }
+
+    public function aboutUS()
+    {
+        $title = "Manage About Us Page";
+
+        $page = Page::find(1);
+
+        return view( 'admin.pages.about-us', [
+          'title' => $title,
+          'page' => $page
+        ]);
+    }
+
+    public function updateAboutUs( Request $request )
+    {
+        $page = Page::find(1);
+
+        $page->active= !empty( $request->input( 'active' ) ) ? 1 : 2;
+
+        $page->heading = !empty( $request->input( 'heading' ) ) ? $request->input( 'heading' ) : '';
+
+        $page->slug = !empty( $request->input( 'heading' ) ) ? str_slug( $request->input( 'heading' ) ) : '';
+
+        $page->body = !empty( $request->input( 'body' ) ) ? $request->input( 'body' ) : '';
+
+        $page->save();
+
+        flashy()->success( 'About Us page was updated successfully.' );
+
+        return redirect( 'admin/about-us' );
     }
 }

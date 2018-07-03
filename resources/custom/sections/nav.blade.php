@@ -14,9 +14,9 @@
 
 				  </button>
 
-				  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-
-				    <ul class="navbar-nav mr-auto">
+				  <div class="row collapse navbar-collapse" id="navbarSupportedContent">
+						<div class="col-lg-8">
+				    <ul class="navbar-nav">
 
 							<li class="nav-item {{ Request::is( '/' ) ? 'active' : '' }}">
 
@@ -38,15 +38,15 @@
 
 				        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
 
-				          	<a class="dropdown-item" href="{{ url( 'movies' ) }}">Movies</a>
+				          	<a class="dropdown-item {{ ( Request::is( 'movies' ) ) ? 'active' : '' }}" href="{{ url( 'movies' ) }}">Movies</a>
 
-				          	<a class="dropdown-item" href="{{ url( 'series' ) }}">Series</a>
+				          	<a class="dropdown-item {{ ( Request::is( 'series' ) ) ? 'active' : '' }}" href="{{ url( 'series' ) }}">Series</a>
 
-										<a class="dropdown-item" href="{{ url( 'games' ) }}">Games</a>
+										<a class="dropdown-item {{ ( Request::is( 'games' ) ) ? 'active' : '' }}" href="{{ url( 'games' ) }}">Games</a>
 
-										<a class="dropdown-item" href="{{ url( 'old-movies' ) }}">We Sell Old Movies</a>
+										<a class="dropdown-item {{ ( Request::is( 'old-movies' ) ) ? 'active' : '' }}" href="{{ url( 'old-movies' ) }}">We Sell Old Movies</a>
 
-										<a class="dropdown-item" href="{{ url( 'kiddies-budget' ) }}">Kiddies Budget</a>
+										<a class="dropdown-item {{ ( Request::is( 'kiddies-budget' ) ) ? 'active' : '' }}" href="{{ url( 'kiddies-budget' ) }}">Kiddies Budget</a>
 
 				        </div>
 
@@ -90,12 +90,12 @@
 							</li>
 
 				    </ul>
+					</div>
+				    <form class="form-inline my-2 my-lg-0 justify-content-end col-lg-4" method="get" action="{{ url( 'search' ) }}">
 
-				    <form class="form-inline my-2 my-lg-0 justify-content-end" method="get" action="{{ url( 'search' ) }}">
+					      		<input class="search form-control rounded col-md-8" type="search" placeholder="Search" aria-label="Search" name="search" >
 
-					      <input class="form-control mr-sm-2 rounded" type="search" placeholder="Search" aria-label="Search" name="search" >
-
-					      <button class="btn btn-light my-2 my-sm-0 col-xs-12 col-md-3" type="submit">Search</button>
+					      		<button class="search-btn btn col-xs-12 col-md-4" type="submit">Search</button>
 
 				    </form>
 

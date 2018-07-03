@@ -4,6 +4,8 @@
 
   @includeif( 'widgets.contact-us' )
 
+  @includeif( 'widgets.contact-details' )
+
 @endsection
 
 @push( 'scripts' )

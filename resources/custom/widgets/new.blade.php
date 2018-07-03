@@ -6,16 +6,19 @@
         @endif
     @endslot
 
-    <div class="row">
         <div class="col-md-12">
             @includeif( 'alerts.new-releases' )
         </div>
         @foreach( $movies as $key => $movie )
 
             @if( $key == 0 || $key == 5 )
+            
                 <div class="col-md-4 col-md-4-5">
+
             @elseif( $key == 2 )
-                  <div class="col-md-3 col-md-3-0">
+
+                <div class="col-md-3 col-md-3-0">
+
             @endif
 
                 @component( 'sections.new-release' )
@@ -41,5 +44,5 @@
             @endif
 
         @endforeach
-    </div>
+
 @endcomponent

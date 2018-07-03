@@ -193,7 +193,7 @@
 
             </div>
             <!-- /.box-body -->
-            <div class="box-footer">
+              <div class="box-footer">
                 <button type="submit" class="btn btn-info">Save</button>
               </div>
           </div>

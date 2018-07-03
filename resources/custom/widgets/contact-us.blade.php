@@ -1,11 +1,10 @@
 @component( 'sections.box' )
 
     @slot('title')
-        Contact Us
+        Get in Touch
     @endslot
 
-    <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-12">
 
           <div class="well well-sm">
 
@@ -73,7 +72,7 @@
               </div>
               @if( !empty( config( 'settings.public_key' ) ) )
                 <div>
-                    <div class="g-recaptcha" data-sitekey="{{ config( 'settings.public_key' ) }}"></div>
+                    <div class="g-recaptcha text-center" data-sitekey="{{ config( 'settings.public_key' ) }}"></div>
                 </div>
                 <br/>
               @endif
@@ -89,22 +88,5 @@
           </div>
 
         </div>
-
-        <div class="col-md-6">
-
-            <strong>Contact Details:</strong>
-            <div class="tel">Tel: 083 410 1808</div>
-            <div class="email">Email: topdvdgeorge@gmail.com</div>
-            <div class="operational-hours">Operational Hours: 8:00 AM - 9:00 PM</div>
-            <br/>
-            <strong>Main Branch:</strong>
-            <div class="street">38 Courtenay Street</div>
-            <div class="city">George</div>
-            <div class="province">Western Cape</div>
-            <div class="postal_code">6529</div>
-
-        </div>
-
-    </div>
 
 @endcomponent

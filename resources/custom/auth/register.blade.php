@@ -3,42 +3,42 @@
     @slot('title')
         Sign Up
     @endslot
-
+<div class="col-md-12">
     <form class="form-horizontal" method="POST" action="{{ route('register') }}">
         {{ csrf_field() }}
 
-        <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-            <label for="name" class="control-label">Name</label>
+        <div class="form-group{{ $errors->has('register-name') ? ' has-error' : '' }}">
+            <label for="register-name" class="control-label">Name</label>
 
-            <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus>
+            <input id="register-name" type="text" class="form-control" name="register-name" value="{{ old('register-name') }}" required autofocus>
 
-            @if ($errors->has('name'))
+            @if ($errors->has('register-name'))
                 <span class="help-block">
-                    <strong>{{ $errors->first('name') }}</strong>
+                    <strong>{{ $errors->first('register-name') }}</strong>
                 </span>
             @endif
         </div>
 
-        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-            <label for="email" class="control-label">Email</label>
+        <div class="form-group{{ $errors->has('register-email') ? ' has-error' : '' }}">
+            <label for="register-email" class="control-label">Email</label>
 
-            <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
+            <input id="register-email" type="email" class="form-control" name="register-email" value="{{ old('register-email') }}" required>
 
-            @if ($errors->has('email'))
+            @if ($errors->has('register-email'))
                 <span class="help-block">
-                    <strong>{{ $errors->first('email') }}</strong>
+                    <strong>{{ $errors->first('register-email') }}</strong>
                 </span>
             @endif
         </div>
 
-        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-            <label for="password" class="control-label">Password</label>
+        <div class="form-group{{ $errors->has('register-password') ? ' has-error' : '' }}">
+            <label for="register-password" class="control-label">Password</label>
 
-            <input id="password" type="password" class="form-control" name="password" required>
+            <input id="register-password" type="password" class="form-control" name="register-password" required>
 
-            @if ($errors->has('password'))
+            @if ($errors->has('register-password'))
                 <span class="help-block">
-                    <strong>{{ $errors->first('password') }}</strong>
+                    <strong>{{ $errors->first('register-password') }}</strong>
                 </span>
             @endif
         </div>
@@ -58,4 +58,5 @@
             </button>
         </div>
     </form>
+    </div>
 @endcomponent

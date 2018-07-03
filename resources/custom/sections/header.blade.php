@@ -13,7 +13,7 @@
 
 				<div class="col-md-6 text-right d-none d-lg-block">
 						@if( Auth::check() )
-								<a href="{{ route('logout') }}" class="register col-md-4 text-center d-inline-block" onclick="event.preventDefault();
+								<a href="{{ route('logout') }}" class="register col-md-4 text-center d-inline-block py-2" onclick="event.preventDefault();
 														 document.getElementById('logout-form').submit();">
 										Sign out
 								</a>
@@ -21,7 +21,7 @@
 										{{ csrf_field() }}
 								</form>
 						@else
-								<a href="{{ route('sign-in') }}" class="register col-md-4 text-center d-inline-block">Sign In</a>
+								<a href="{{ route('sign-in') }}" class="register col-md-4 text-center d-inline-block py-2">Sign In</a>
 						@endif
 				</div>
 
